@@ -1,0 +1,149 @@
+/* Center .contact-form with modern minimalist styling */
+.contact {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Full screen height */
+  padding: 20px;
+}
+
+body{
+  background-image: url('C:/Users/stefa/react-app/src/images/pexels-cottonbro-9665178.jpg');
+}
+
+/* Modern Form Styling */
+.contact-form {
+  background: #101010; /* Sleek dark background */
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0px 5px 15px rgba(11, 11, 11, 0.05); /* Soft glow */
+  width: 100%;
+  max-width: 450px; /* Keeps it compact */
+  color: #f0f0f5; /* Light text */
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Subtle interaction effect */
+.contact-form:hover {
+  transform: translateY(-3px);
+  box-shadow: 0px 8px 20px rgba(255, 255, 255, 0.08);
+}
+
+/* Minimalist Header */
+h2 {
+  font-size: 1.8rem;
+  color: #ffffff;
+  margin-bottom: 1rem;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+}
+
+/* Input Field Container */
+.input-box {
+  margin-bottom: 1.2rem;
+  text-align: left;
+}
+
+/* Labels */
+.input-box label {
+  font-size: 1rem;
+  color: #b0b0b0; /* Softer contrast */
+  display: block;
+  margin-bottom: 0.3rem;
+  font-weight: 500;
+}
+
+/* Inputs & Textareas */
+.input-box input,
+.input-box textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: none; /* No visible border */
+  background-color: #222222; /* Subtle dark background */
+  color: #ffffff; /* White text */
+  font-size: 1rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Focused Input Style */
+.input-box input:focus,
+.input-box textarea:focus {
+  outline: none;
+  background-color: #292929; /* Slightly lighter */
+  transform: scale(1.02); /* Slight zoom effect */
+}
+
+/* Message Box Styling */
+.field-message {
+  height: 120px;
+  resize: none; /* Disable resizing */
+}
+
+/* Submit Button - Modern Minimalist */
+button[type="submit"] {
+  background: linear-gradient(to right, #292929, #1e1e1e);
+  color: #ffffff;
+  border: none;
+  padding: 12px 20px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  text-transform: uppercase;
+}
+
+/* Hover & Active Effect */
+button[type="submit"]:hover {
+  background: linear-gradient(to right, #303030, #242424);
+  transform: translateY(-2px);
+}
+
+button[type="submit"]:active {
+  background: #151515;
+  transform: scale(0.98);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .contact-form {
+    padding: 1.5rem;
+    max-width: 90%;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  .input-box input,
+  .input-box textarea {
+    padding: 10px;
+  }
+
+  button[type="submit"] {
+    padding: 10px 18px;
+    font-size: 1rem;
+  }
+}
+
+.about-us-content{
+  width: 600px;
+  color: white;
+  margin-left: 30px;
+}
+
+.center-container {
+  text-align: center; /* Centers inline-block elements inside */
+}
+
+.linkedin-link {
+  display: inline-block; /* Ensures transform works correctly */
+  transition: transform 0.3s ease-out;
+}
+
+.linkedin-link:hover {
+  transform: scale(1.2); /* Enlarges text smoothly */
+}

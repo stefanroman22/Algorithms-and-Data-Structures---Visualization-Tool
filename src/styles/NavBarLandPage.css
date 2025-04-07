@@ -1,0 +1,32 @@
+/* Navbar Container */
+.navbar {
+  top: 0;
+  left: 0;
+  width: 100%; /* Full width */
+  display: flex; /* Ensures horizontal alignment */
+  justify-content: center; /* Centers the buttons */
+  align-items: center; /* Aligns items */
+  gap: 10px; /* Space between buttons */
+  padding: 10px; /* Small padding for aesthetics */
+  background-color: transparent; /* No background */
+  position: fixed; /* Fix at the top */
+  white-space: nowrap; /* Prevents wrapping of buttons */
+}
+
+
+/* Button Styles */
+.nav-button {
+  background-color: transparent; /* No background */
+  color: white; /* White text */
+  padding: 10px 15px;
+  font-size: 14px;
+  font-family: "Arial", sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+  border: none;
+}
+
+.nav-button:hover {
+  color: #818181; /* Change text color on hover */
+}

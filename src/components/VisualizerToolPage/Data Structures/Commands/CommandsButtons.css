@@ -1,0 +1,44 @@
+
+
+.data-structures-commands-container {
+    /* Use the same width and margin-top as .graph-inputs */
+    width: 300px;
+    margin-top: 55px;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+
+
+.button-visualizer{
+    width: 100px;
+    padding: 8px 20px;
+    /* Adds spacing inside the button */
+    border: none;
+    /* Removes default border */
+    cursor: pointer;
+    /* Changes cursor to pointer on hover */
+    background-color: #0f1115;
+    /* Sets the button background color */
+    color: white;
+    /* Sets the text color to white */
+    border-radius: 5px;
+    /* Adds rounded corners */
+    font-size: 16px;
+    /* Sets font size */
+    font-weight: bold;
+    /* Makes the text bold */
+    transition: background-color 0.3s ease, transform 0.4s ease;
+    /* Smooth hover effect */
+}
+
+.button-visualizer:hover{
+    background-color: #1c222d;
+    /* Slightly darker shade for hover */
+    transform: scale(1.05);
+    /* Slightly enlarges button on hover */
+    color: #e2e8f0;
+    /* Change text color on hover (optional) */
+}

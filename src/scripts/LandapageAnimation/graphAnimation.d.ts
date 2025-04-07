@@ -1,0 +1,1 @@
+export function initGraphAnimation(containerId: string): void;

@@ -1,0 +1,28 @@
+/* Navbar Container */
+.navbar-visualizer-tool {
+  left: 0px;
+  top: 0px;
+  gap: 10px; /* Space between buttons */
+  padding: 10px; /* Small padding for aesthetics */
+  background-color: transparent; /* No background */
+  position: fixed; /* Fix at the top */
+  white-space: nowrap; /* Prevents wrapping of buttons */
+}
+
+
+/* Button Styles */
+.nav-button-visualizer-tool {
+  background-color: transparent; /* No background */
+  color: white; /* White text */
+  padding: 10px 15px;
+  font-size: 14px;
+  font-family: "Arial", sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+  border: none;
+}
+
+.nav-button-visualizer-tool:hover {
+  color: #818181; /* Change text color on hover */
+}

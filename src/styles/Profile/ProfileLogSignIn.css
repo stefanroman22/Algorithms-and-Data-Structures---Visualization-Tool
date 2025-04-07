@@ -1,0 +1,275 @@
+.container-log-sign-in {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #101010;
+    /* Sleek dark background */
+    box-shadow: 0px 8px 24px rgba(11, 11, 11, 0.1);
+    /* Slightly stronger, modern shadow */
+    border-radius: 20px;
+    /* Slightly reduced for a cleaner look */
+    padding: 30px;
+    /* Increased padding for breathing room */
+    transition: all 0.3s ease;
+    width: 550px;
+    /* Fixed width */
+}
+
+.form-box.login {
+    width: 100%;
+    padding: 0 15px;
+    /* Slightly reduced padding for balance */
+    box-sizing: border-box;
+}
+
+.form-box.login h1 {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 25px;
+    /* More space for a cleaner hierarchy */
+    color: #ffffff;
+    /* Pure white for contrast */
+    font-size: 2rem;
+    /* Larger, modern typography */
+    font-weight: 700;
+    /* Bold for emphasis */
+    letter-spacing: 0.5px;
+    /* Subtle spacing for readability */
+}
+
+.form-box.login .input-box {
+    width: 100%;
+    position: relative;
+    margin-bottom: 20px;
+    /* Increased spacing for a cleaner look */
+}
+
+.form-box.login .input-box input {
+    width: 100%;
+    padding: 12px 40px 12px 12px;
+    /* Uniform padding, slightly larger */
+    box-sizing: border-box;
+    border: none;
+    /* Remove border for a flatter, modern look */
+    background: #1a1a1a;
+    /* Slightly lighter than container for depth */
+    border-radius: 8px;
+    /* Softer, modern corners */
+    font-size: 1rem;
+    /* Clean, readable size */
+    color: #ffffff;
+    /* White text for contrast */
+    transition: background 0.2s ease;
+}
+
+.form-box.login .input-box input:focus {
+    background: #222222;
+    /* Subtle highlight on focus */
+    outline: none;
+    /* Remove default outline */
+    box-shadow: 0 4px 12px rgba(2, 2, 2, 0.1);
+    /* Modern focus ring (Google blue) */
+}
+
+.form-box.login .input-box i {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #a0a0a0;
+    /* Light gray for a subtle, modern icon */
+    font-size: 1.1rem;
+    /* Slightly larger for visibility */
+}
+
+/* Existing styles remain unchanged until .forgot-link */
+.form-box.login .forgot-link {
+    text-align: right;
+    /* Aligns text to the right */
+    margin-bottom: 0;
+    /* Remove margin-bottom since .links-row handles spacing */
+}
+
+.form-box.login .forgot-link a {
+    color: #a0a0a0;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.2s ease;
+}
+
+.form-box.login .forgot-link a:hover {
+    color: #ffffff;
+}
+
+/* New styles for .links-row and .sign-up-link */
+.form-box.login .links-row {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    /* Pushes sign-up left, forgot right */
+    align-items: center;
+    /* Vertically centers both links */
+    margin-bottom: 20px;
+    /* Same spacing as before */
+}
+
+.form-box.login .sign-up-link {
+    text-align: left;
+    /* Aligns text to the left */
+}
+
+.form-box.login .sign-up-link a {
+    color: #a0a0a0;
+    /* Matches forgot-link */
+    text-decoration: none;
+    font-size: 0.9rem;
+    /* Consistent sizing */
+    transition: color 0.2s ease;
+}
+
+.form-box.login .sign-up-link a:hover {
+    color: #ffffff;
+    /* Matches forgot-link hover */
+}
+
+/* Rest of the styles remain unchanged */
+button[type="submit"] {
+    background: linear-gradient(to right, #292929, #1e1e1e);
+    color: #ffffff;
+    border: none;
+    padding: 14px 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ...rest of your CSS... */
+button[type="submit"]:hover {
+    background: linear-gradient(to right, #303030, #242424);
+    transform: translateY(-2px);
+    /* Lift effect */
+    color: white;
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+    /* Subtle white glow */
+}
+
+button[type="submit"]:active {
+    background: #151515;
+    transform: scale(0.98);
+    box-shadow: none;
+    /* Remove shadow on press */
+}
+button[type="submit"]:disabled {
+    opacity: 0.6;  /* Reduce opacity instead of hiding text */
+    cursor: not-allowed; /* Show disabled cursor */
+    color: white; /* Keep text visible */
+    background-color: #444; /* Keep it slightly darker */
+}
+
+.form-box.login p {
+    width: 100%;
+    text-align: center;
+    margin: 20px 0;
+    /* More spacing */
+    color: #a0a0a0;
+    /* Light gray for a clean, secondary text */
+    font-size: 0.95rem;
+    /* Slightly smaller for hierarchy */
+}
+
+.form-box.login .social-icons {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    /* Slightly larger gap for a cleaner spread */
+}
+
+.form-box.login .social-icons a {
+    color: #a0a0a0;
+    /* Default gray for icons */
+    transition: color 0.2s ease;
+}
+
+.form-box.login .social-icons a:hover {
+    color: #ffffff;
+    /* Brighten on hover for interactivity */
+}
+
+/* Wrapper for the Username field to control its appearance */
+.username-wrapper {
+    overflow: hidden;
+    transition: max-height 0.5s ease, opacity 0.5s ease;
+}
+
+/* Hidden state: collapsed and transparent */
+.username-wrapper.hidden {
+    max-height: 0;
+    opacity: 0;
+}
+
+/* Visible state: expanded and fully visible */
+.username-wrapper.visible {
+    max-height: 100px;
+    /* Set larger than the input-box height, e.g., 50px */
+    opacity: 1;
+}
+
+.fa-lock, .fa-unlock{
+    cursor: pointer;
+}
+
+.error-popup {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #1c1c1c; /* Dark grey with good contrast */
+    color: #ff5c5c; /* Soft red for error text */
+    padding: 12px 20px;
+    border-radius: 6px;
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+    opacity: 0.6;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    width: auto;
+    min-width: 280px;
+    max-width: 400px;
+    opacity: 0;
+    animation: fadeInOut 3.5s ease-in-out forwards;
+  }
+  
+  /* Title styling */
+  .error-popup h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #b30e0e; /* Slightly lighter red for contrast */
+  }
+  
+  /* Message styling */
+  .error-popup p {
+    margin: 8px 0 0;
+    font-size: 13px;
+    color: #f0f0f0; /* Light grey for readability */
+    font-weight: bold;
+  }
+  
+  /* Fade-in and fade-out animation */
+  @keyframes fadeInOut {
+    0% { opacity: 0; transform: translate(-50%, -10px); }
+    10% { opacity: 1; transform: translate(-50%, 0); }
+    80% { opacity: 1; transform: translate(-50%, 0); }
+    100% { opacity: 0; transform: translate(-50%, -10px); }
+  }
+  

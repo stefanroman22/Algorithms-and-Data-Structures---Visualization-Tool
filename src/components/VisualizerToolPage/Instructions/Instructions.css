@@ -1,0 +1,40 @@
+
+.instructions {
+    font-size: 14px; /* Smaller font for subtlety */
+    color: #cccccc; /* Light gray for text */
+    margin-bottom: 10px; /* Space below instructions */
+    line-height: 1.6; /* Line height for better readability */
+    margin-top: 55px;
+    margin-left: 15px;
+    width: 300px;
+    margin-right: 20px;
+  }
+  
+  .instructions ul {
+    margin-top: 5px;
+    padding-left: 20px; /* Indent list for better hierarchy */
+  }
+  
+  .instructions li {
+    margin-bottom: 8px; /* Space between list items */
+  }
+  
+  .instructions code {
+    background-color: #1e1e1e; /* Slightly dark background for inline code */
+    color: #ffffff; /* White text for better contrast */
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-family: monospace; /* Monospace font for inline code */
+    font-size: 13px;
+  }
+  
+  .instructions pre {
+    background-color: #1c1c1c; /* Darker background for examples */
+    color: #ffffff; /* White text for examples */
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 13px;
+    font-family: monospace; /* Monospace font for code examples */
+    overflow-x: auto; /* Handle long lines gracefully */
+    margin-top: 10px; /* Add space above the example */
+  }

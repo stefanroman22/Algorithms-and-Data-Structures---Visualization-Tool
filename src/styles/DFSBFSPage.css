@@ -1,0 +1,59 @@
+
+.visualization-container {
+  position: relative;
+}
+
+.visusaltion-api {
+  display: flex; /* Enables flexible layout */
+  flex-direction: column; /* Arrange elements (box and buttons) vertically */
+  align-items: flex-start; /* Align items to the left */
+  margin-left: 20px; /* Start 20px from the left of the page */
+  margin-top: 4vw; /* Add some space from the top of the page */
+  width: calc(
+    100% - 600px
+  ); /* Ensure the block doesn't exceed the remaining width */
+  height: auto;
+}
+
+
+.visualization-box {
+  flex-grow: 0;
+  height: 75.6vh;
+  width: 100%;
+  background-color: #343434;
+  margin-bottom: 10px;
+}
+
+.visualizer-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.button-visualizer,
+.parse-graph-button {
+  padding: 8px 20px; /* Adds spacing inside the button */
+  border: none; /* Removes default border */
+  cursor: pointer; /* Changes cursor to pointer on hover */
+  background-color: #0f1115; /* Sets the button background color */
+  color: white; /* Sets the text color to white */
+  border-radius: 5px; /* Adds rounded corners */
+  font-size: 16px; /* Sets font size */
+  font-weight: bold; /* Makes the text bold */
+  transition: background-color 0.3s ease, transform 0.4s ease; /* Smooth hover effect */
+}
+
+.button-visualizer:hover,
+.parse-graph-button:hover {
+  background-color: #1c222d; /* Slightly darker shade for hover */
+  transform: scale(1.05); /* Slightly enlarges button on hover */
+  color: #e2e8f0; /* Change text color on hover (optional) */
+}
+
+.visualization-container {
+  margin-top: 20px; /* Adjust based on navbar height */
+  display: flex;
+  margin-left: 20px;
+}
+
+
+

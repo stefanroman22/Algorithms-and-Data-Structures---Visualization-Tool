@@ -1,0 +1,11 @@
+.node-discovered-bellman-ford {
+    background-color: aqua;
+}
+
+.edge-relaxed{
+    background-color: #ff6700;
+}
+
+.edge-member-shortest-path{
+    background-color: #ff3300;
+}

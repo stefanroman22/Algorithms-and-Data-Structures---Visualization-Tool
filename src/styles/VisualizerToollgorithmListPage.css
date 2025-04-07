@@ -1,0 +1,174 @@
+
+
+/* Positioning for go-back button */
+.go-back {
+  position: absolute; /* Ensure it's positioned relative to the page */
+  top: 10px; /* Adjust as needed */
+  left: 2px; /* Adjust as needed */
+  z-index: 1001; /* Layer it above most elements */
+}
+
+@media (max-width: 768px) {
+  .go-back {
+    top: 5px;
+    left: 5px;
+  }
+}
+
+.go-back-button {
+  background-color: transparent; /* Transparent background */
+  color: #fff; /* White text */
+  border: none; /* No border */
+  padding: 10px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease; /* Smooth hover effect */
+  text-align: center;
+  font-family: "Arial", sans-serif;
+  font-weight: 600; /* Bold text */
+}
+
+.go-back-button:hover {
+  color: #818181; /* Change text color on hover */
+}
+
+.go-back-button:focus {
+  outline: none; /* Remove outline on focus */
+}
+
+.visualizer-main {
+  font-family: Arial, sans-serif;
+}
+
+.algorithm-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: left;
+  padding: 20px;
+  padding-left: 100px;
+}
+
+@media (max-width: 1200px) {
+  .algorithm-list {
+    justify-content: center;
+    padding-left: 20px; /* Reduce padding */
+  }
+}
+
+
+.algorithm-card {
+  background-image: url("C:\Users\stefa\react-app\src\images\stars-background-blue-starry-sky-600nw-2471332615.webp"); /* Dark gray */
+  color: white; /* Text color */
+
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 18vw; /* Use viewport width for scalability */
+  min-width: 160px;
+  max-width: 220px;
+  padding: 15px;
+  width: 200px; /* Reduced width */
+  height: 150px; /* Reduced height */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Push description to the bottom */
+  align-items: center; /* Center-align title */
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .algorithm-card {
+    width: 90%; /* Make them take full width on small screens */
+  }
+}
+
+.algorithm-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.algorithm-title {
+  font-size: 16px; /* Adjusted size */
+  font-weight: bold;
+  color: #d5cbcb;
+}
+
+.algorithm-description {
+  font-size: 12px; /* Smaller text size */
+  color: #c6c2c2;
+  margin: 0; /* Remove top margin to fit within the smaller card */
+}
+
+/* Filter Container */
+.filter-container {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  padding: 20px;
+}
+
+/* Common Styles for Input, Select, and Button */
+.search-bar,
+.category-dropdown,
+.random-button {
+  padding: 10px;
+  font-size: 14px;
+  background-color: #011a2c; /* Dark blue background */
+  color: white; /* White text */
+  border: none; /* Remove border for consistency */
+  border-radius: 5px; /* Rounded corners */
+  outline: none; /* Remove focus outline */
+  transition: background-color 0.3s; /* Smooth hover effect */
+}
+
+.search-bar::placeholder {
+  color: #bbbbbb; /* Lighter placeholder text color */
+}
+
+/* Hover Effect for All Elements */
+.search-bar:hover,
+.category-dropdown:hover,
+.random-button:hover {
+  background-color: #03385e; /* Slightly lighter shade on hover */
+}
+
+/* Focus Effect for Search Bar and Dropdown */
+.search-bar:focus,
+.category-dropdown:focus {
+  background-color: #03385e; /* Highlight background on focus */
+}
+
+/* Additional Hover Effect for Button */
+.random-button {
+  cursor: pointer; /* Pointer cursor for buttons */
+}
+
+.random-button:hover {
+  background-color: #003050;
+}
+
+/* Highlighted Card */
+.algorithm-card.highlighted {
+  border: 3px solid gold;
+  box-shadow: 0 6px 12px rgba(255, 215, 0, 0.6);
+}
+
+.visualizer-main {
+  font-family: Arial, sans-serif;
+  background-image: url("../images/pexels-cottonbro-9665178.jpg");
+  background-size: cover; /* Ensures the image covers the entire area */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  background-attachment: fixed; /* Makes the background stay fixed during scrolling */
+  background-position: center; /* Centers the background image */
+  min-height: 100vh; /* Ensures the section always takes at least the full viewport height */
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 768px) {
+  .visualizer-main {
+    background-size: contain; /* Prevents zoom-in on smaller screens */
+  }
+}

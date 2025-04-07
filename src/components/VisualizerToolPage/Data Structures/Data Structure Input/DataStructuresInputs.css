@@ -1,0 +1,76 @@
+.visualization-and-inputs-data-structures {
+    margin-top: 55px;
+    display: flex;
+    flex-direction: column;
+    /* Stack children vertically */
+    margin-left: 15px;
+    margin-bottom: 10px;
+}
+
+/* Full-Width Visualization Box */
+.visualization-box-data-structures {
+    flex-grow: 0;
+    height: 75.6vh;
+    background-color: #343434;
+    margin-bottom: 10px;
+    width: 120vh/* Same calculation */
+}
+
+
+
+/* Input and Button Container */
+.input-container {
+    display: flex;
+    /* Enables Flexbox */
+    align-items: center;
+    /* Aligns items vertically */
+    justify-content: space-between;
+    /* Distributes space evenly */
+    gap: 10px;
+    /* Adds spacing between input and button */
+    width: 100%;
+    /* Takes full width of the parent */
+}
+
+/* Input Field */
+.input-text-area{
+    flex: 1;
+    /* Makes input take up all available space */
+    padding: 8px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    height: 36px;
+    /* Consistent height with the button */
+    box-sizing: border-box;
+    /* Ensures padding doesn’t affect width */
+    padding: 10px;
+    font-size: 14px;
+    resize: none;
+    background-color: #202020;
+    color: white;
+    border: none;
+    outline: none;
+
+}
+
+.button-visualizer-data-structures {
+    padding: 8px 20px;
+    border: none;
+    cursor: pointer;
+    background-color: #0f1115;
+    color: white;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.4s ease;
+}
+
+.button-visualizer-data-structures:hover {
+    background-color: #1c222d;
+    /* Slightly darker shade for hover */
+    transform: scale(1.05);
+    /* Slightly enlarges button on hover */
+    color: #e2e8f0;
+    /* Change text color on hover (optional) */
+}

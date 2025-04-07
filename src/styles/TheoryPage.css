@@ -1,0 +1,135 @@
+body {
+  background-color: black !important; /* Force the background color */
+}
+
+.sidebar-theory-page {
+  height: 100vh; /* Ensures it fills the entire viewport height */
+  width: 200px; /* Width of the sidebar */
+  background-color: #1c1a18; /* Sidebar's background color */
+  position: fixed; /* Fixes the sidebar to the left */
+  top: 0;
+  left: 0;
+}
+
+.markdown-content {
+  max-height: 100vh; /* Limit the height to 80% of the viewport */
+  overflow-y: auto; /* Enable vertical scrolling when content overflows */
+  color: white; /* Ensure the text is readable on a black background */
+  font-family: Arial, sans-serif; /* Use a clean, readable font */
+  line-height: 1.6; /* Improve text spacing */
+  background-color: #000000; /* Slightly lighter background for contrast */
+  border-radius: 8px; /* Optional: Rounded corners */
+  width: 86%; /* Adjust width for responsiveness */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Add a subtle shadow */
+  position: fixed;
+  left: 215px;
+  top: 10px;
+}
+
+.markdown-content img {
+  max-width: 50%; /* Makes the image responsive */
+  height: 50vh; /* Adjust the height to fit the viewport */
+  display: block; /* Centers the image */
+  background-color: #222; /* Adds a subtle background to blend with black */
+  border: 2px solid #444; /* Adds a border with a slightly lighter black */
+  border-radius: 8px; /* Rounds the corners for a softer look */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7); /* Adds a shadow for depth */
+}
+
+.graph-properties-animation-container {
+  display: flex; /* Ensures the buttons and animation box are side by side */
+  height: 300px;
+  width: 600px;
+  background-color: #343434;
+  margin-bottom: 10px;
+}
+
+.graph-properties-buttons {
+  display: flex;
+  flex-direction: column; /* Arrange buttons vertically */
+  gap: 10px; /* Space between each checkbox */
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+.graph-properties-buttons label {
+  display: flex;
+  align-items: center; /* Align checkbox and text vertically */
+  gap: 5px; /* Space between checkbox and label text */
+  font-size: 16px; /* Adjust text size */
+}
+
+.graph-properties-buttons input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.graph-animation-box {
+  height: 100%; /* Set the height to match the parent container */
+  width: 100%; /* Keep the fixed width */
+  background-color: #1a1a1a;
+  margin-left: 10px; /* Add some spacing from the buttons */
+}
+
+.markdown-content table {
+  border-collapse: collapse;
+  margin: 20px 0;
+  width: 200px;
+}
+
+.markdown-content th, 
+.markdown-content td {
+  border: 1px solid #161616;
+  padding: 8px;
+  text-align: center;
+}
+
+.visualization-route-buttons{
+  display: flex;
+  gap: 15px;
+  bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.visualization-route-button{
+  padding: 8px 20px; /* Adds spacing inside the button */
+  border: none; /* Removes default border */
+  cursor: pointer; /* Changes cursor to pointer on hover */
+  background-color: #0f1115; /* Sets the button background color */
+  color: white; /* Sets the text color to white */
+  border-radius: 5px; /* Adds rounded corners */
+  font-size: 16px; /* Sets font size */
+  font-weight: bold; /* Makes the text bold */
+  transition: background-color 0.3s ease, transform 0.4s ease; /* Smooth hover effect */
+}
+
+.visualization-route-button:hover{
+  background-color: #1c222d; /* Slightly darker shade for hover */
+  transform: scale(1.05); /* Slightly enlarges button on hover */
+  color: #e2e8f0; /* Change text color on hover (optional) */
+}
+
+.graph-properties-animation-container{
+  height: 300px;
+  width: 600px;
+  background-color: white;
+  border: 3px solid #252525;
+
+}
+
+.graph-properties-animation-buttons-container{
+  display: flex;
+  height: auto;
+  width: 150px;
+  background-color: #464646;
+}
+
+.graph-properties-animation-graphic-container {
+  height: 100%;
+  width: calc(100% - 150px); /* Adjusts for the button container */
+  background-color: #343434;
+}
+
+
+

@@ -1,0 +1,121 @@
+/* General styles for the body */
+.landpage-container {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh; /* Allows scrolling if necessary */
+  height: 100vh; /* Full viewport height */
+  background-color: #121212; /* Dark background */
+  background-image: url('C:/Users/stefa/react-app/src/images/pexels-cottonbro-9665178.jpg');
+  background-size: cover; /* Ensure the background covers the whole page */
+  background-position: center; /* Center the image */
+  font-family: 'Arial', sans-serif;
+  overflow: hidden; /* Prevent scrolling */
+}
+
+
+.animation-container {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  opacity: 0.6;
+}
+
+
+/* Text container style */
+.text-landpage {
+  display: flex;                 /* Use flexbox */
+  flex-direction: column;        /* Stack elements vertically */
+  justify-content: center;       /* Center content vertically */
+  align-items: center;           /* Center content horizontally */
+  text-align: center;            /* Center text inside elements */
+  height: 100vh;                 /* Full viewport height */
+  width: 100%;                   /* Ensure the container takes up full width */
+  position: relative;            /* Ensure the text container doesn't overlap the navbar */
+  z-index: 0;                    /* Ensure it stays behind the navbar */
+}
+
+/* Main title style */
+.main-text-landpage {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  color: #fff; /* White text */
+  margin-bottom: 20px; /* Space below the main title */
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); /* Light shadow effect */
+}
+
+/* Subtitle style */
+.sub-text-landpage {
+  font-size: clamp(1rem, 3vw, 1.5rem);
+  font-weight: 600;
+  color: #ddd; /* Lighter gray text */
+  margin-top: 0;
+  letter-spacing: 0.5px;
+  line-height: 1.5; /* Make the subtitle more readable */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); /* Light shadow effect */
+}
+
+.easterEgg-container{
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  display: inline-block;
+}
+
+
+.easterEgg-icon {
+  color: aqua;
+}
+
+.easterEgg-icon:hover {
+  color: #008080; /* Change color on hover */
+  transition: color 0.3s ease-in-out;
+}
+
+.easter-egg-message {
+  position: absolute;
+  bottom: 125%; /* Moves the text above the icon */
+  left: 50%;
+  transform: translateX(-90%);
+  width: 220px; /* Fixed width */
+  background-color: rgba(0, 168, 168, 0.582); /* Teal background */
+  color: white;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out, background-color 0.3s ease-in-out;
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+/* Tooltip Arrow */
+.easter-egg-message::after {
+  content: "";
+  position: absolute;
+  top: 100%; /* Places it right below the tooltip box */
+  left: 94%;
+  transform: translateX(-90%);
+  border-width: 10px;
+  border-style: solid;
+  border-color: rgba(0, 168, 168, 0.582) transparent transparent transparent; /* Creates a triangle pointing down */
+  
+}
+
+/* Show message when hovering */
+.easterEgg-container:hover .easter-egg-message {
+  visibility: visible;
+  opacity: 1;
+}
+
+
+/* Easter Egg Icon on Hover */
+.easterEgg-container:hover .easterEgg-icon {
+  color: #008080;
+}

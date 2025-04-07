@@ -1,0 +1,26 @@
+/* 🔹 Adjustments for Medium-Sized Screens */
+@media (max-width: 1200px) {
+  .legend {
+      left: 15vw; /* Moves closer to the left */
+      font-size: 1.2vw;
+      max-width: 220px;
+  }
+}
+
+/* 🔹 Adjustments for Smaller Screens */
+@media (max-width: 900px) {
+  .legend {
+      left: 10vw; /* Moves even closer */
+      top: 6vh;
+      font-size: 1.4vw;
+      max-width: 200px;
+  }
+}
+
+/* 🔹 Adjustments for Very Large Screens */
+@media (min-width: 1600px) {
+  .legend {
+      left: 25vw; /* Push it slightly more right */
+      font-size: 0.9vw; /* Prevent text from getting too large */
+  }
+}

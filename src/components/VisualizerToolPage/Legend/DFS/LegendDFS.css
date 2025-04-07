@@ -1,0 +1,155 @@
+.legend-container {
+  position: fixed;
+  top: 90px;
+  left: 340px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* ⬅️ creates the 10px space between legends */
+  z-index: 1000;
+}
+
+
+/* Shared layout and box styling */
+.legend,
+.legend-color-blind {
+  position: static !important;
+  top: auto !important;
+  left: auto !important;
+  width: 170px;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: 650;
+  line-height: 1.5;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.legend-color-blind{
+  background-color: #f5f5f5; /* Solid light background for strong contrast */
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  color: #111;
+}
+
+.legend,
+.legend-color-blind {
+  width: 170px; /* or whatever fits your layout */
+}
+
+
+.legend div, .legend-color-blind div {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.legend div:last-child, .legend-color-blind div:last-child {
+  margin-bottom: 0;
+}
+
+.legend span, .legend-color-blind span{
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  border-radius: 3px;
+}
+
+.legend div:last-child, .legend-color-blind div:last-child{
+  margin-bottom: 0;
+}
+
+.node-undiscovered {
+  background-color: #9b9696;
+}
+
+.node-undiscovered-color-blind {
+  display: inline-block;
+  width: 20px !important;
+  height: 20px !important;
+  border-radius: 50% !important;
+  background-color: #9b9696;
+  border: 1.5px solid #121212;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+
+.node-discovered {
+  background-color: #ff9a00;
+}
+
+.node-discovered-color-blind {
+  display: inline-block;
+  width: 20px !important;
+  height: 20px !important;
+  border-radius: 50% !important;
+  background-color: #9b9696;
+  border: 3px solid #121212;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+.node-explored {
+  background-color: #d00000;
+}
+
+.node-explored-color-blind {
+  display: inline-block;
+  width: 20px !important;
+  height: 20px !important;
+  border-radius: 50% !important;
+  background-color: #9b9696;
+  border: 4.5px solid #121212;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+.edge-tree {
+  background-color: #317256;
+}
+
+.edge-tree-color-blind {
+  display: inline-block;
+  width:  20px !important;
+  height: 0px !important;
+  border-top: 1.5px solid #999;
+  vertical-align: middle;
+}
+
+.edge-forward {
+  background-color: #dd1717;
+}
+
+.edge-forward-color-blind {
+  display: inline-block;
+  width:  20px !important;
+  height: 0px !important;
+  border-top: 3px solid #999;
+  vertical-align: middle;
+}
+
+.edge-back {
+  background-color: rgb(7, 130, 179);
+}
+
+.edge-back-color-blind {
+  display: inline-block;
+  width:  20px !important;
+  height: 0px !important;
+  border-top: 1.5px dashed #999;
+  vertical-align: middle;
+}
+
+.edge-cross {
+  background-color: black;
+}
+
+.edge-cross-color-blind {
+  display: inline-block;
+  width:  20px !important;
+  height: 0px !important;
+  border-top: 3px dashed #999;
+  vertical-align: middle;
+}
+

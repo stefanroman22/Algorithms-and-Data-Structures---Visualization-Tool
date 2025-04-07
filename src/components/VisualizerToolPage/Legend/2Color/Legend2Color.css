@@ -1,0 +1,53 @@
+.legend {
+  position: fixed; /* Positions the legend relative to the visualization-box */
+  top: 90px;
+  left: 340px;
+  background-color: rgba(24, 24, 24, 0.8); /* Same color with 80% opacity */
+  border: 1px solid rgba(52, 52, 52, 0.8); /* Semi-transparent border */
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: 650;
+  line-height: 1.5;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.legend div {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.legend div:last-child {
+  margin-bottom: 0;
+}
+
+.legend span {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  margin-right: 8px;
+  border-radius: 3px;
+}
+
+.legend div:last-child {
+  margin-bottom: 0;
+}
+
+.node-undiscovered {
+  background-color: #9b9696;
+}
+
+.node-discovered-red {
+  background-color: #d00000;
+}
+
+.node-discovered-blue {
+  background-color: #005b96;
+}
+
+.edge-processed{
+  background-color: 	#ff6700;
+}

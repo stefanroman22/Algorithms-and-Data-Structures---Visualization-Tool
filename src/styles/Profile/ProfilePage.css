@@ -1,0 +1,118 @@
+.profile-container {
+    display: flex;
+    flex-wrap: wrap; /* Ensures adaptability on smaller screens */
+    margin: 60px 20px 20px 20px; /* Top, Right, Bottom, Left */
+    width: calc(100% - 40px); /* Ensures full width minus left/right margins */
+    height: calc(100vh - 80px); /* 100% of viewport height minus top/bottom margins */
+    max-width: 100%; /* Prevents overflow */
+    background-color: aliceblue;
+    font-family: "Arial", sans-serif;
+    font-weight: bold;
+}
+
+.profile-left {
+    width: 25%; /* Narrower column */
+    background-color: #111010; /* Dark background */
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Circular Profile Image */
+.profile-image-container {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin-bottom: 15px;
+}
+
+.profile-image {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%; /* Makes the image circular */
+    object-fit: cover; /* Ensures the image fills the circle */
+    border: 3px solid white; /* Adds a white border for contrast */
+}
+
+/* Edit Icon (Pen) */
+.edit-image-button {
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 5px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* Editable Username */
+.username {
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+.username-edit input {
+    font-size: 18px;
+    padding: 5px;
+    width: 100%;
+    text-align: center;
+}
+
+.edit-username-button {
+    margin-left: 8px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+}
+
+/* Stats (Points & Rank) */
+.stats {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.points {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+/* Rank Colors */
+.rank span {
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+/* Bronze Rank */
+.rank .bronze {
+    background-color: #cd7f32;
+    color: white;
+}
+
+/* Silver Rank */
+.rank .silver {
+    background-color: #c0c0c0;
+    color: black;
+}
+
+/* Gold Rank */
+.rank .gold {
+    background-color: #ffd700;
+    color: black;
+}
+
+.profile-right {
+    width: 75%; /* Wider column */
+    background-color: #202020; /* Light background */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
