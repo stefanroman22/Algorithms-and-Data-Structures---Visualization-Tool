@@ -7,18 +7,27 @@
   display: flex; /* Enables flexible layout */
   flex-direction: column; /* Arrange elements (box and buttons) vertically */
   align-items: flex-start; /* Align items to the left */
-  margin-left: 20px; /* Start 20px from the left of the page */
-  margin-top: 4vw; /* Add some space from the top of the page */
+  margin-left: 1.2vw; /* Start 20px from the left of the page */
+  margin-top: 3.5vw; /* Add some space from the top of the page */
   width: calc(
     100% - 600px
   ); /* Ensure the block doesn't exceed the remaining width */
   height: auto;
 }
 
+/* Side-by-side wrapper */
+.visualization-content {
+  display: flex;
+  width: 100%;
+  height: 76.6vh; /* shared height for both sides */
+  gap: 2rem;
+}
+
+
 
 .visualization-box {
   flex-grow: 0;
-  height: 75.6vh;
+  height: 76.6vh;
   width: 100%;
   background-color: #343434;
   margin-bottom: 10px;
@@ -54,6 +63,40 @@
   display: flex;
   margin-left: 20px;
 }
+
+
+
+@media (width: 1920px) and (height: 1080px) {
+  .visualization-box {
+    height: 75.3vh;
+  }
+}
+
+@media (width: 1536px) and (height: 864px) {
+  .visualization-box {
+    height: 75.9vh;
+  }
+}
+
+@media (width: 1366px) and (height: 768px) {
+  .visualization-box {
+    height: 71.6vh; /* Not 7.1vh */
+  }
+}
+
+@media (width: 1440px) and (height: 900px) {
+  .visualization-box {
+    height: 75.8vh; /* Not 7.1vh */
+  }
+}
+
+@media (width: 2560px) and (height: 1440px) {
+  .visualization-box {
+    height: 74.6vh; /* Not 7.1vh */
+  }
+}
+
+  
 
 
 

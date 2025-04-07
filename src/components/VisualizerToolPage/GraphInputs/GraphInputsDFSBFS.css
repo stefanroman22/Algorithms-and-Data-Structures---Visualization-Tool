@@ -1,10 +1,6 @@
 .graph-inputs {
   width: 20vw;
   /* 20% of the viewport width */
-  max-width: 300px;
-  /* Prevents it from growing too large */
-  min-width: 220px;
-  /* Prevents it from becoming too small */
   margin-top: 3.5vw;
   /* Scales margin relative to screen */
 }
@@ -35,10 +31,10 @@
 
 .input-and-button {
   display: flex;
+  justify-content: space-between; /* Pushes items to left & right ends */
+  align-items: center;            /* Vertically center them */
   margin-top: 0.2vw;
-  /* Scales with screen */
-  gap: 1.5vw;
-  /* Dynamic spacing */
+  width: 100%;                    /* Ensures it spans full container */
 }
 
 
@@ -109,3 +105,44 @@
     width: 55%;
   }
 }
+
+
+@media (width: 1366px) {
+  .input-and-button {
+    flex-direction: row;          /* Keep them side by side */
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .input-and-button button {
+    width: 47%;                  /* Slightly smaller to fit within container */
+  }
+}
+
+
+@media (width: 1366px) {
+  .input-and-button {
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    gap: 1rem !important;
+  }
+
+  .input-and-button button {
+    width: 47% !important;
+  }
+}
+
+@media (width: 1280px) {
+  .input-and-button {
+    flex-direction: row;          /* Keep them side by side */
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .input-and-button button {
+    width: 47%;                  /* Slightly smaller to fit within container */
+  }
+}
+

@@ -1,7 +1,7 @@
 .legend-container {
   position: fixed;
-  top: 90px;
-  left: 340px;
+  margin-top: 1.5vh;
+  margin-left: 1.5vh;
   display: flex;
   flex-direction: column;
   gap: 10px; /* ⬅️ creates the 10px space between legends */
