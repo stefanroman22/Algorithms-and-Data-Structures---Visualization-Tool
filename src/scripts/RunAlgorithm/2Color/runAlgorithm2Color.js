@@ -16,12 +16,13 @@ export const run2Color = async (
   const nodeColors = new Map(); // To track colors of nodes
   const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
   const delay = 800;
-  const colors = ["#d00000", "#005b96"]; // Red and Blue
+  const colors = ["#ff4d4d", "#3399ff"]; // Red and Blue
 
   let bipartiteConflict = false; // Flag to avoid multiple alerts
 
   const getReversedColor = (nodeColor) =>
     nodeColor === colors[0] ? colors[1] : colors[0];
+
 
   const validateAndColorNode = async (nodeId, color) => {
     if (!checkSimulationId(currentSimulationId, getSimulationIdRef)) return;
@@ -42,12 +43,16 @@ export const run2Color = async (
 
     // Assign color to the node
     nodeColors.set(nodeId, color);
+    let strokeWidthValue = 3;
+    if(color === "#3399ff")
+        strokeWidthValue = 4.5
     svg
       .selectAll(".node")
       .filter((d) => d.id === nodeId)
       .transition()
       .duration(delay)
-      .style("fill", color);
+      .style("fill", color)
+      .attr("stroke-width", strokeWidthValue); 
 
     visitedNodes.set(nodeId, "discovered");
     await sleep(delay);
@@ -91,7 +96,9 @@ export const run2Color = async (
           )
           .transition()
           .duration(delay)
-          .attr("stroke", "#ff6700"); // Change link color
+          .attr("stroke", "#ff6700") // Change link color
+          .attr("stroke-width", 3)           // Increase thickness
+         .attr("stroke-dasharray", "5,5"); 
 
         console.log(`Edge Processed: ${nodeId} <-> ${neighborId}`);
         await sleep(delay);

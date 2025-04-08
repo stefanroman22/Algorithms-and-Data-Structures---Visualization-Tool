@@ -63,7 +63,7 @@
   background-color: #9b9696;
 }
 
-.node-undiscovered-color-blind {
+.node-undiscovered-color-blind{
   display: inline-block;
   width: 20px !important;
   height: 20px !important;
@@ -79,7 +79,7 @@
   background-color: #ff9a00;
 }
 
-.node-discovered-color-blind {
+.node-discovered-color-blind, .node-discovered-red-color-blind{
   display: inline-block;
   width: 20px !important;
   height: 20px !important;
@@ -91,10 +91,10 @@
 }
 
 .node-explored {
-  background-color: #d00000;
+  background-color: #ff4d4d;
 }
 
-.node-explored-color-blind {
+.node-explored-color-blind, .node-discovered-blue-color-blind, .node-member-color-blind{
   display: inline-block;
   width: 20px !important;
   height: 20px !important;
@@ -133,7 +133,7 @@
   background-color: rgb(7, 130, 179);
 }
 
-.edge-back-color-blind {
+.edge-back-color-blind, .edge-relaxed-color-blind{
   display: inline-block;
   width:  20px !important;
   height: 0px !important;
@@ -142,10 +142,10 @@
 }
 
 .edge-cross {
-  background-color: black;
+  background-color: rgb(220, 220, 24);
 }
 
-.edge-cross-color-blind {
+.edge-cross-color-blind, .edge-processed-color-blind, .edge-member-shortest-path-color-blind, .edge-member-color-blind{
   display: inline-block;
   width:  20px !important;
   height: 0px !important;

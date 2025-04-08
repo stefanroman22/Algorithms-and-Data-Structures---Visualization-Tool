@@ -169,7 +169,8 @@ export const runDijkstra = async (
       .filter((d) => d.id === currentNode)
       .transition()
       .duration(delay)
-      .style("fill", "#ff9a00");
+      .style("fill", "#ff9a00")
+      .attr("stroke-width", 3);
     await waitForResume(getPausedRef);
     await sleep(delay);
 
@@ -203,7 +204,8 @@ export const runDijkstra = async (
           .filter((d) => d.id === neighborId)
           .transition()
           .duration(delay)
-          .style("fill", "#ff9a00");
+          .style("fill", "#ff9a00")
+          .attr("stroke-width", 3);
         visited.set(neighborId, "discovered");
       }
 
@@ -227,7 +229,8 @@ export const runDijkstra = async (
       .filter((d) => d.id === currentNode)
       .transition()
       .duration(delay)
-      .style("fill", "#d00000");
+      .style("fill", "#ff4d4d")
+      .attr("stroke-width", 4.5);
     visited.set(currentNode, "explored");
   }
 
@@ -301,7 +304,8 @@ export const runBellmanFord = async (
           .filter((d) => d.id === link.source)
           .transition()
           .duration(delay)
-          .style("fill", "#00FFFF");
+          .style("fill", "#ff9a00")
+          .attr("stroke-width", 3);
         await sleep(delay);
         if (!checkSimulationId(currentSimulationId, getSimulationIdRef)) return;
         await waitForResume(getPausedRef);
@@ -311,7 +315,7 @@ export const runBellmanFord = async (
           svg,
           link.source,
           link.target,
-          "#ff6700",
+          "#ff6701",
           customMarkerId,
           delay
         );
@@ -361,6 +365,19 @@ export const runBellmanFord = async (
     }
   }
 
+  graph.nodes.forEach((node) => {
+    const dist = distances.get(node.id);
+    if (dist !== Infinity) {
+      svg
+        .selectAll(".node")
+        .filter((d) => d.id === node.id)
+        .transition()
+        .duration(600)
+        .style("fill", "#ff9a00") // final color to indicate discovered
+        .attr("stroke-width", 3);
+    }
+  });
+
   //Check for presence of negative cycle
   for (const link of graph.links) {
     if (!checkSimulationId(currentSimulationId, getSimulationIdRef)) return;
@@ -370,7 +387,7 @@ export const runBellmanFord = async (
       distances.get(link.target)
     ) {
       
-      alert("Negative cycle detected! Please a parse a different graph for finding the shortest path distances");
+      alert("Negative cycle detected! Please a parse a different graph for finding the shortest path distances!");
       return;
     }
   }

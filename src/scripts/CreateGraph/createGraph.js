@@ -16,6 +16,7 @@ import { runKruskal, runPrim } from "../RunAlgorithm/SpanTree/spantree";
 export const parseGraphInput = (graphInputContent, algorithmName) => {
   const nodes = new Set();
   const links = [];
+  const seenLinks = new Set(); // Track unique link identifiers
   const errors = [];
   const lines = graphInputContent.split("\n");
 
@@ -23,48 +24,58 @@ export const parseGraphInput = (graphInputContent, algorithmName) => {
     if (!line.trim()) continue;
 
     const [startNode, edgesString] = line.split(":").map((part) => part.trim());
-    nodes.add(startNode); // Add the start node
+    if (startNode) nodes.add(startNode);
 
     if (edgesString) {
       const edges = edgesString.split(",").map((edge) => edge.trim());
-      const heuristicsAlgorithms = ["Dijkstra", "Prim", "Kruskal", "Bellman-Ford"]
-      if (heuristicsAlgorithms.includes(algorithmName)) {
-        edges.forEach((edge) => {
+      const isWeighted = ["Dijkstra", "Prim", "Kruskal", "Bellman-Ford"].includes(algorithmName);
+
+      edges.forEach((edge) => {
+        if (isWeighted) {
           const match = edge.match(/^(\w+)\((-?\d+)\)$/);
           if (match) {
-            const [_, endNode, distance] = match;
-            nodes.add(endNode); // Add end node
-            links.push({
-              source: startNode,
-              target: endNode,
-              weight: Number(distance),
-            });
+            const [_, endNode, weight] = match;
+            nodes.add(endNode);
+            const key = `${startNode}->${endNode}(${weight})`;
+            if (!seenLinks.has(key)) {
+              seenLinks.add(key);
+              links.push({
+                source: startNode,
+                target: endNode,
+                weight: Number(weight),
+              });
+            }
           } else {
             errors.push(
-              `Invalid edge format for line: "${line}". Each edge must specify a node and distance as node(distance).`
+              `Invalid edge format: "${line}". Use node(distance) format.`
             );
           }
-        });
-      } else {
-        // Parsing for BFS and DFS (unweighted edges)
-        edges.forEach((endNode) => {
-          nodes.add(endNode); // Add end nodes
-          links.push({ source: startNode, target: endNode }); // Create a link
-        });
-      }
+        } else {
+          // For unweighted edges
+          nodes.add(edge);
+          const key = `${startNode}->${edge}`;
+          if (!seenLinks.has(key)) {
+            seenLinks.add(key);
+            links.push({
+              source: startNode,
+              target: edge,
+            });
+          }
+        }
+      });
     }
   }
 
-  // Alert the user for errors
   if (errors.length > 0) {
     alert(errors.join("\n"));
   }
 
   return {
-    nodes: Array.from(nodes).map((id) => ({ id })), // Convert to D3 node format
-    links, 
+    nodes: Array.from(nodes).map((id) => ({ id })),
+    links,
   };
 };
+
 
 /**
  * Updates the content of the visualization box element with a D3 force-directed graph.
@@ -172,7 +183,7 @@ const createD3GraphBasic = (container, graph) => {
     .attr("markerUnits", "userSpaceOnUse") // prevents scaling
     .append("path")
     .attr("d", "M0,-5L10,0L0,5") // Path for the arrowhead
-    .attr("fill", "#999"); // Arrowhead color
+    .attr("fill", "#bbbbbb"); // Arrowhead color
 
   const link = svg
     .selectAll(".link")
@@ -181,7 +192,7 @@ const createD3GraphBasic = (container, graph) => {
     .append("path")
     .attr("class", "link")
     .attr("fill", "none")
-    .attr("stroke", "#999")
+    .attr("stroke", "#bbbbbb")
     .attr("stroke-width", 1.5)
     .attr("marker-end", "url(#arrowhead)");
 
@@ -192,7 +203,7 @@ const createD3GraphBasic = (container, graph) => {
     .append("circle")
     .attr("class", "node")
     .attr("r", 20)
-    .attr("fill", "#9b9696")
+    .attr("fill", "#bbbbbb")
     .attr("stroke", "#121212")
     .attr("stroke-width", 1.5)
     .call(
@@ -285,12 +296,13 @@ const createD3GraphHeuristics = (container, graph) => {
     .attr("viewBox", "0 -5 10 10") // Define the coordinate system for the marker
     .attr("refX", 26) // Position the arrowhead relative to the end of the line
     .attr("refY", -2)
-    .attr("markerWidth", 8) // Width of the marker
-    .attr("markerHeight", 8) // Height of the marker
+    .attr("markerWidth", 12) // Width of the marker
+    .attr("markerHeight", 12) // Height of the marker
     .attr("orient", "auto") // Orient the arrowhead automatically based on the link direction
+    .attr("markerUnits", "userSpaceOnUse") // prevents scaling
     .append("path")
     .attr("d", "M0,-5L10,0L0,5") // Path for the arrowhead
-    .attr("fill", "#999"); // Arrowhead color
+    .attr("fill", "#bbbbbb"); // Arrowhead color
 
   const link = svg
     .selectAll(".link")
@@ -299,7 +311,7 @@ const createD3GraphHeuristics = (container, graph) => {
     .append("path")
     .attr("class", "link")
     .attr("fill", "none")
-    .attr("stroke", "#999")
+    .attr("stroke", "#bbbbbb")
     .attr("stroke-width", 1.5)
     .attr("marker-end", "url(#arrowhead)");
 
@@ -311,7 +323,7 @@ const createD3GraphHeuristics = (container, graph) => {
     .attr("class", "edge-label")
     .attr("dy", (d) => (d.isBidirectional ? -10 : 10)) // Move the label downward (increase the value for more distance)
     .attr("text-anchor", "middle") // Keep the label centered
-    .attr("fill", "#999") // Same color as the edge
+    .attr("fill", "#bbbbbb") // Same color as the edge
     .style("pointer-events", "none") // Prevent interference with interactions
     .style("font-weight", "bold") // Make the text bold
     .style("font-size", "18px") // Optionally increase the font size
@@ -324,7 +336,7 @@ const createD3GraphHeuristics = (container, graph) => {
     .append("circle")
     .attr("class", "node")
     .attr("r", 20)
-    .attr("fill", "#9b9696")
+    .attr("fill", "#bbbbbb")
     .attr("stroke", "#1f1f1f")
     .attr("stroke-width", 1.5)
     .call(
@@ -370,7 +382,7 @@ const createD3GraphHeuristics = (container, graph) => {
     .attr("dx", 15) // Slightly to the right of the node
     .attr("dy", 0) // Vertically aligned with the node
     .style("pointer-events", "none")
-    .attr("fill", "#9b9696") // Same color as the node
+    .attr("fill", "#bbbbbb") // Same color as the node
     .style("font-weight", "bold") // Make the text bold
     .style("font-size", "18px") // Optionally increase the font size
     .text(() => "∞"); // Initial distance set to "∞"
@@ -440,7 +452,7 @@ const createGraphBidirectional = (container, graph, algorithmName) => {
     .append("path")
     .attr("class", "link")
     .attr("fill", "none")
-    .attr("stroke", "#999")
+    .attr("stroke", "#bbbbbb")
     .attr("stroke-width", 1.5)
     .attr("marker-end", "url(#arrowhead)");
 
@@ -454,7 +466,7 @@ const createGraphBidirectional = (container, graph, algorithmName) => {
       .attr("class", "edge-label")
       .attr("dy", 10)
       .attr("text-anchor", "middle")
-      .attr("fill", "#999")
+      .attr("fill", "#bbbbbb")
       .style("pointer-events", "none")
       .style("font-weight", "bold")
       .style("font-size", "18px")
@@ -468,7 +480,7 @@ const createGraphBidirectional = (container, graph, algorithmName) => {
     .append("circle")
     .attr("class", "node")
     .attr("r", 20)
-    .attr("fill", "#9b9696")
+    .attr("fill", "#bbbbbb")
     .attr("stroke", "#1f1f1f")
     .attr("stroke-width", 1.5)
     .call(

@@ -29,7 +29,7 @@ export const colorLink = (
       .attr("markerUnits", "userSpaceOnUse") // Add this line
       .append("path")
       .attr("d", "M0,-5L10,0L0,5") // Arrowhead shape
-      .attr("fill", "#999"); // Default marker color
+      .attr("fill", "#bbbbbb"); // Default marker color
   }
 
   // Colour the specific link and assign the unique marker
@@ -42,14 +42,16 @@ export const colorLink = (
     case "#dd1717": // Forward edge
       edgeWidth = 3;
       break;
-    case "rgb(7, 130, 179)": // Back edge
-      dashArray = "3,3";
+    case "rgb(7, 130, 179)": //Back edge
+    case "#ff6701":            //Edge Relaxed Bellman Ford 
+      dashArray = 5,5;
       break;
-    case "black": // Cross edge
+    case "rgb(220, 220, 24)": // Cross edge
+    case "#ff6700":
+    case "#ff3300": 
       edgeWidth = 3;
-      dashArray = "3,3";
+      dashArray = 5,5;
       break;
-    // Tree edge (#317256) remains default
   }
   svg
     .selectAll(".link")
@@ -187,7 +189,7 @@ export const runDFS = async (
           colorLink(svg, nodeId, neighborId, "#dd1717", customMarkerId, delay); // Forward edge red
         } else {
           console.log(`Cross edge detected: ${nodeId} -> ${neighborId}`);
-          colorLink(svg, nodeId, neighborId, "black", customMarkerId, delay); // Cross edge black
+          colorLink(svg, nodeId, neighborId, "rgb(220, 220, 24)", customMarkerId, delay); // Cross edge black
         }
         if (!checkSimulationId(currentSimulationId, getSimulationIdRef)) return;
         await sleep(delay);
@@ -203,7 +205,7 @@ export const runDFS = async (
       .filter((d) => d.id === nodeId) // Find the specific node by ID
       .transition()
       .duration(delay)
-      .style("fill", "#d00000")
+      .style("fill", "#ff4d4d")
       .attr("stroke-width", 4.5);
 
     visited.set(nodeId, "explored");
@@ -302,7 +304,7 @@ export const runBFS = async (
         const parentOfNode = parent.get(nodeId);
         if (parentOfNode && parentOfNode !== neighborId) {
           console.log(`Cross edge detected: ${nodeId} -> ${neighborId}`);
-          colorLink(svg, nodeId, neighborId, "black", customMarkerId, delay); // Cross edge black
+          colorLink(svg, nodeId, neighborId, "rgb(220, 220, 24)", customMarkerId, delay); // Cross edge black
           await sleep(delay);
         } else {
           console.log(`Back edge detected: ${nodeId} -> ${neighborId}`);
@@ -327,7 +329,7 @@ export const runBFS = async (
       .filter((d) => d.id === nodeId) // Find the specific node by ID
       .transition()
       .duration(delay)
-      .style("fill", "#d00000")
+      .style("fill", "#ff4d4d")
       .attr("stroke-width", 4.5); 
     if (!checkSimulationId(currentSimulationId, getSimulationIdRef)) return;
 

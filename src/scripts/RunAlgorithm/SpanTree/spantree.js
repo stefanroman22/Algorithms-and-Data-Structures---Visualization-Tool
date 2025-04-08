@@ -48,7 +48,8 @@ export const runPrim = async (
       .filter((d) => d.id === startNodeId)
       .transition()
       .duration(delay)
-      .attr("fill", "#ff9a00");
+      .attr("fill", "#ff9a00")
+      .attr("stroke-width", 4.5);
     await sleep(delay);
 
     while (!edgeQueue.isEmpty()) {
@@ -77,9 +78,11 @@ export const runPrim = async (
             (link.source.id === source && link.target.id === target) ||
             (link.source.id === target && link.target.id === source)
         )
+        .attr("stroke-dasharray", 5,5)
         .transition()
         .duration(delay)
-        .attr("stroke", "#ff6f00");
+        .attr("stroke", "#ff6f00")
+        .attr("stroke-width", 3);
       await sleep(delay);
 
       // Highlight the target node
@@ -88,7 +91,8 @@ export const runPrim = async (
         .filter((d) => d.id === target)
         .transition()
         .duration(delay)
-        .attr("fill", "#ff9a00");
+        .attr("fill", "#ff9a00")
+        .attr("stroke-width", 4.5);
       await sleep(delay);
 
       if (!checkSimulationId(currentSimulationId, getSimulationIdRef)) return;
@@ -225,7 +229,8 @@ export const runKruskal = async (
         .filter((d) => d.id === source)
         .transition()
         .duration(delay)
-        .attr("fill", "#ff9a00");
+        .attr("fill", "#ff9a00")
+        .attr("stroke-width", 4.5);
       await sleep(delay);
   
       // Highlight the edge
@@ -236,9 +241,11 @@ export const runKruskal = async (
             (link.source.id === source && link.target.id === target) ||
             (link.source.id === target && link.target.id === source)
         )
+        .attr("stroke-dasharray", 5,5)        
         .transition()
         .duration(delay)
-        .attr("stroke", "#ff6f00");
+        .attr("stroke", "#ff6f00")
+        .attr("stroke-width", 3);
       await sleep(delay);
   
       // Highlight the target node
@@ -247,7 +254,8 @@ export const runKruskal = async (
         .filter((d) => d.id === target)
         .transition()
         .duration(delay)
-        .attr("fill", "#ff9a00");
+        .attr("fill", "#ff9a00")
+        .attr("stroke-width", 4.5);
       await sleep(delay);
   
       if (!checkSimulationId(currentSimulationId, getSimulationIdRef)) return;

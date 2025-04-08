@@ -41,11 +41,11 @@
 }
 
 .node-discovered-red {
-  background-color: #d00000;
+  background-color: #ff4d4d;
 }
 
 .node-discovered-blue {
-  background-color: #005b96;
+  background-color: #3399ff;
 }
 
 .edge-processed{
