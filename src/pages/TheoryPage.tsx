@@ -6,10 +6,17 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { useState } from "react";
 import { createPropertiesGraph } from "../scripts/GraphTypesAnimation/graphTypesAnimation";
+import { createD3GraphBasic, createGraphBidirectional } from "../scripts/CreateGraph/createGraph";
+import AdjacencyMatrixAnimation from "../scripts/GraphRepresentationsAnimation/AdacencyMatrixAnimation";
+
 function TheoryPage() {
   const navigate = useNavigate();
-  const markdownContentGraphs = `
-# Graphs
+  const [currentGeneratedGraph, setCurrentGeneratedGraph] = useState<{
+    nodes: Array<{ id: string }>;
+    links: Array<{ source: string; target: string }>;
+  } | null>(null);
+  const markdownContentWhatisaGraph = `
+# What is a Graph?
 
 A Graph is a non-linear data structure that consists of **vertices (nodes)** and **edges**.  
 
@@ -104,7 +111,7 @@ Below you can find an interactive tool to play it that helps understanding the p
 `;
 
   const markdownContentGraphsRepresentation = `
-## Graph Representations
+## Graph Representation
 
 Graphs can be represented in different ways depending on the specific requirements of the problem. Two common representations are:
 
@@ -224,7 +231,37 @@ D → ∅
 
 ### Summary
 The choice between an adjacency matrix and an adjacency list depends on the graph's density, the operations you need to perform, and the trade-offs between time and space complexity.
+
+Below you can use our interactive tool to play around with the adjacency matrix representation. For adajacency list representation check the graph 
+algorithms visualizations.
 `;
+
+const markdownContentSpecialGraphStructures = `## Special Graph Structures
+
+A **tree** is a connected graph with no cycles. It consists of nodes (vertices) and edges, where there is exactly one path between any two nodes. Trees are fundamental structures used in many algorithms and data structures, such as binary search trees, heaps, and decision trees.
+
+---
+
+### **Minimum Spanning Tree (MST)**
+
+A **Minimum Spanning Tree** is a subset of the edges of a connected, weighted graph that connects all the vertices together, without any cycles, and with the minimum possible total edge weight. The MST is particularly useful for problems that involve connecting points with the least cost, such as network design.
+
+---
+
+### **Why Use MST?**
+
+1. **Network Design**  
+   For laying out a network (e.g., connecting cities with roads), an MST ensures the minimum total length of roads (edges) while maintaining full connectivity between all cities (vertices).
+   
+2. **Clustering**  
+   MSTs are used in clustering algorithms, where the goal is to group similar items together with the least amount of distance or cost between them.
+
+---
+
+
+
+Using the buttons below, you can explore the visualization of Trees compared to Graphs:
+`
 
   const markdownContentWhyAlgorithms = `## Why Algorithms?
 
@@ -407,6 +444,75 @@ Using the button below you can access directly the 2Coloring vizualization tool:
 `;
 
 
+const handleGenerateGraph = (shouldGenerateTree = false) => {
+  const nodeCount = 5;
+  const nodes = Array.from({ length: nodeCount }, (_, i) => ({ id: (i + 1).toString() }));
+
+  const links = [];
+  const parent = [...Array(nodeCount)].map((_, i) => i);
+  const edgeSet = new Set();
+
+  // Union-Find functions for cycle detection
+  const find = (u) => {
+    while (parent[u] !== u) {
+      parent[u] = parent[parent[u]]; // Path compression
+      u = parent[u];
+    }
+    return u;
+  };
+
+  const union = (u, v) => {
+    const pu = find(u);
+    const pv = find(v);
+    if (pu !== pv) {
+      parent[pu] = pv;
+      return true;
+    }
+    return false;
+  };
+
+  if (shouldGenerateTree) {
+    // Generate a guaranteed tree (connected acyclic graph)
+    while (links.length < nodeCount - 1) {
+      const u = Math.floor(Math.random() * nodeCount);
+      const v = Math.floor(Math.random() * nodeCount);
+      if (u === v) continue;
+
+      const key = u < v ? `${u}-${v}` : `${v}-${u}`;
+      if (!edgeSet.has(key) && union(u, v)) {
+        edgeSet.add(key);
+        links.push({
+          source: nodes[u].id,
+          target: nodes[v].id
+        });
+      }
+    }
+  } else {
+    // Generate random graph (may or may not be a tree)
+    const maxEdges = Math.min(nodeCount * 2, (nodeCount * (nodeCount - 1)) / 2);
+    while (links.length < maxEdges) {
+      const u = Math.floor(Math.random() * nodeCount);
+      const v = Math.floor(Math.random() * nodeCount);
+      if (u === v) continue;
+
+      const key = u < v ? `${u}-${v}` : `${v}-${u}`;
+      if (!edgeSet.has(key)) {
+        edgeSet.add(key);
+        links.push({
+          source: nodes[u].id,
+          target: nodes[v].id
+        });
+      }
+    }
+  }
+
+  const graph = { nodes, links };
+  setCurrentGeneratedGraph(graph);
+  const container = document.getElementById("tree-visualizer");
+  createD3GraphBasic(container, graph);
+  console.clear();
+};
+
   const graphPropertiesCheckboxes = () => {
     const [properties, setProperties] = useState({
       weighted: false,
@@ -473,7 +579,7 @@ Using the button below you can access directly the 2Coloring vizualization tool:
         </label>
       ));
     };
-
+    
     return (
       <div
         style={{
@@ -489,7 +595,7 @@ Using the button below you can access directly the 2Coloring vizualization tool:
         </div>
       </div>
     );
-  };
+};
 
   return (
     <div className="sidebar-theory-page">
@@ -501,9 +607,17 @@ Using the button below you can access directly the 2Coloring vizualization tool:
 
       <SideNavBarTheoryPage />
       <div className="markdown-content">
-        <div id="graphs">
-          <ReactMarkdown>{markdownContentGraphs}</ReactMarkdown>
+        <div id="what-is-a-graph?">
+          <ReactMarkdown>{markdownContentWhatisaGraph}</ReactMarkdown>
         </div>
+        <div id="graphs-representation">
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>
+            {markdownContentGraphsRepresentation}
+          </ReactMarkdown>
+        </div>
+            
+        <AdjacencyMatrixAnimation/>
+    
         <div id="graphs-properties">
           <ReactMarkdown>{markdownContentGraphsProperties}</ReactMarkdown>
         </div>
@@ -517,10 +631,44 @@ Using the button below you can access directly the 2Coloring vizualization tool:
             id="graph-properties-animation-graphic-container"
           ></div>
         </div>
-        <div id="graphs-representation">
+        <div id="special-graph-structures">
           <ReactMarkdown remarkPlugins={[remarkGfm]}>
-            {markdownContentGraphsRepresentation}
+            {markdownContentSpecialGraphStructures}
           </ReactMarkdown>
+        </div>
+        <div className="tree-animation-container">
+          <div id="tree-visualizer" className="tree-visualizer " >
+
+          </div>
+
+          <button 
+            id="generate-graph" 
+            className="generate-graph visualization-route-button"
+            onClick={() => handleGenerateGraph(false)} >
+            Generate Graph
+          </button>
+
+          <button 
+            id="generate-tree" 
+            className="generate-tree visualization-route-button"
+            onClick={() => handleGenerateGraph(true)} >
+            Generate Tree
+          </button>
+        </div>
+
+        <div className="visualization-route-buttons">
+          <button
+            className="visualization-route-button"
+            onClick={() => navigate("/prim's-visualizer")}
+          >
+            Prim's
+          </button>
+          <button
+            className="visualization-route-button"
+            onClick={() => navigate("/kruskal-visualizer")}
+          >
+            Kruskal
+          </button>
         </div>
         <div id="why-algorithms?">
           <ReactMarkdown>{markdownContentWhyAlgorithms}</ReactMarkdown>

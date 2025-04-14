@@ -9,9 +9,9 @@ function SideNavBarTheoryPage() {
   const [expandedChapters, setExpandedChapters] = useState<Chapter[]>([]);
 
   const chapters = {
-    "Introduction": ["Graphs", "Graphs Properties", "Graphs Representation"],
+    "Introduction": ["What is a Graph?", "Graphs Representation", "Graphs Properties", "Special Graph Structures"],
+    "Additional Data Structures": ["Array", "Stack", "Queue"],
     "Algorithms": ["Why Algorithms?", "DFS + BFS", "Dijkstra", "2Coloring"],
-    "Chapter 3": ["Subchapter 3.1", "Subchapter 3.2", "Subchapter 3.3"]
   };
 
   // Function to toggle chapter expansion

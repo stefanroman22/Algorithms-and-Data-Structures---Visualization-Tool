@@ -11,7 +11,38 @@ export function updateVisualizationBox(
   ): void;
   
 
-// src/utils/highlightNode.d.ts
+/**
+ * Creates a D3.js force-directed graph visualization for bidirectional graphs.
+ * @param container - The target container element.
+ * @param graph - The parsed graph object containing nodes and links.
+ * @param algorithmName - The name of the algorithm for visualization purposes.
+ */
+export function createD3GraphBasic(
+  container: HTMLElement | null,
+  graph: {
+    nodes: Array<{ id: string }>,
+    links: Array<{ source: string; target: string; weight?: number }>
+  },
+): void;
+
+/**
+ * Creates a D3.js force-directed graph visualization for bidirectional graphs.
+ * @param container - The target container element.
+ * @param graph - The parsed graph object containing nodes and links.
+ * @param algorithmName - The name of the algorithm for visualization purposes.
+ */
+export function createGraphBidirectional(
+  container: HTMLElement | null,
+  graph: {
+    nodes: Array<{ id: string }>,
+    links: Array<{ source: string; target: string; weight?: number }>
+  },
+  algorithmName: string
+): void;
+
+
+
+
 
 /**
  * Highlights a node in the D3 graph visualization.

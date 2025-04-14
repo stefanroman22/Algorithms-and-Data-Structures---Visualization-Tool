@@ -97,7 +97,7 @@ const createArray = (
     .attr("y", startY)
     .attr("width", boxSize)
     .attr("height", boxSize)
-    .attr("fill", "#bfbfbf")
+    .attr("fill", "#bbbbbb")
     .attr("stroke", "#0e1111")
     .attr("stroke-width", 2)
     .style("opacity", 0) // Start invisible
@@ -116,7 +116,7 @@ const createArray = (
     .attr("y", startY + boxSize / 2 + 5)
     .attr("text-anchor", "middle")
     .attr("font-size", "20px")
-    .attr("fill", "#232b2b")
+    .attr("fill", "#000")
     .style("opacity", 0) // Start invisible
     .text((d) => (d !== null ? d : ""))
     .transition() // Apply transition
@@ -134,7 +134,7 @@ const createArray = (
         .attr("y", startY - 10) // Adjust Y position above rectangles
         .attr("text-anchor", "middle")
         .attr("font-size", "15px")
-        .attr("fill", "rgb(233, 126, 10)")
+        .attr("fill", "#F69228")
         .style("opacity", 0)
         .text((_, i) => i) // Use index instead of value
         .transition()
@@ -158,7 +158,7 @@ const createArray = (
           .attr("y", startY - 10) // Adjust Y position above rectangles
           .attr("text-anchor", "middle")
           .attr("font-size", "15px")
-          .attr("fill", "rgb(233, 126, 10)")
+          .attr("fill", "#F69228")
           .style("opacity", 0)
           .text((_, i) => (i === 0 ? "head" : "tail")) // Label first as "head", last as "tail"
           .transition()

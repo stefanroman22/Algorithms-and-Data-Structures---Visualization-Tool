@@ -90,6 +90,8 @@ body {
   gap: 15px;
   bottom: 10px;
   margin-bottom: 20px;
+  margin-top: 20px;
+  margin-left: 10px;
 }
 
 .visualization-route-button{
@@ -110,13 +112,52 @@ body {
   color: #e2e8f0; /* Change text color on hover (optional) */
 }
 
-.graph-properties-animation-container{
+.graph-properties-animation-container, .tree-animation-container, .adjacency-animation{
   height: 300px;
   width: 600px;
   background-color: white;
   border: 3px solid #252525;
-
 }
+
+.tree-animation-container {
+  position: relative;
+  height: 300px;
+  width: 600px;
+  background-color: white;
+  border: 3px solid #252525;
+  overflow: hidden;
+}
+
+/* Make visualizer fill the container */
+.tree-visualizer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #343434;
+}
+
+/* Style buttons */
+.generate-graph,
+.generate-tree {
+  position: absolute;
+  top: 50%;
+  padding: 10px 14px;
+  opacity: 0.9;
+}
+
+
+/* Position them side-by-side in the center horizontally */
+.generate-graph {
+  top:80%;
+  left: 20%;
+}
+.generate-tree {
+  top: 80%;
+  left: 55%;
+}
+
 
 .graph-properties-animation-buttons-container{
   display: flex;

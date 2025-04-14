@@ -114,7 +114,7 @@ export const createPropertiesGraph = (properties, container) => {
     .enter()
     .append("line")
     .attr("class", "link")
-    .attr("stroke", "#999")
+    .attr("stroke", "#bbbbbb")
     .attr("stroke-width", 1.5)
     .attr("marker-end", properties.directed ? "url(#arrowhead)" : null);
 
@@ -126,7 +126,7 @@ export const createPropertiesGraph = (properties, container) => {
     .append("path") // ✅ Correct - `path` allows curved edges
     .attr("class", "self-loop")
     .attr("fill", "none")
-    .attr("stroke", "#999")
+    .attr("stroke", "#bbbbbb")
     .attr("stroke-width", 1.5)
     .attr("stroke-linecap", "round")
     .attr("marker-end", properties.directed ? "url(#self-loop-arrowhead)" : null);
@@ -139,7 +139,7 @@ export const createPropertiesGraph = (properties, container) => {
     .append("circle")
     .attr("class", "node")
     .attr("r", 20)
-    .attr("fill", "#9b9696")
+    .attr("fill", "#bbbbbb")
     .attr("stroke", "#3a3838")
     .attr("stroke-width", 1.5)
     .call(
@@ -184,7 +184,7 @@ export const createPropertiesGraph = (properties, container) => {
       .attr("class", "weight-label")
       .attr("dy", 0) // Move the label downward (increase the value for more distance)
       .attr("text-anchor", "middle") // Keep the label centered
-      .attr("fill", "#999") // Same color as the edge
+      .attr("fill", "#bbbbbb") // Same color as the edge
       .style("pointer-events", "none") // Prevent interference with interactions
       .style("font-weight", "bold") // Make the text bold
       .style("font-size", "16px") // Optionally increase the font size

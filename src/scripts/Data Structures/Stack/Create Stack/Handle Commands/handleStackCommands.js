@@ -131,25 +131,40 @@ export const popCommand = (
     });
 };
 
-export const topCommand = (
-  stack,
-  svg
-) => {
-  if(stack.length === 0){
+export const topCommand = (stack, svg) => {
+  if (stack.length === 0) {
     alert("The stack is empty. Cannot compute Top.");
     return;
   }
-  const lastIndex = stack.length - 1;
-  const lastRect = svg.selectAll(".rect").filter((d, i) => i === lastIndex);
 
-  // Change the color of the last element temporarily
+  const boxSize = 50;
+  const enlargedSize = boxSize + 10;
+  const lastIndex = stack.length - 1;
+
+  const lastRect = svg.selectAll(".rect").filter((d, i) => i === lastIndex);
+  const lastText = svg.selectAll(".array-value").filter((d, i) => i === lastIndex);
+
+  // Highlight and enlarge the top element
   lastRect.transition()
     .duration(500)
-    .attr("fill", "rgb(255, 142, 22)") // Highlight color
+    .attr("fill", "#F69228")
+    .attr("width", enlargedSize)
+    .attr("height", enlargedSize)
     .transition()
     .duration(600)
-    .attr("fill", "#bfbfbf"); // Reset color
-}
+    .attr("fill", "#bfbfbf")
+    .attr("width", boxSize)
+    .attr("height", boxSize);
+
+  // Enlarge and reset text size (if applicable)
+  lastText.transition()
+    .duration(500)
+    .attr("font-size", "28px")
+    .transition()
+    .duration(600)
+    .attr("font-size", "20px");
+};
+
 
 export const isEmptyCommand = (
   stack

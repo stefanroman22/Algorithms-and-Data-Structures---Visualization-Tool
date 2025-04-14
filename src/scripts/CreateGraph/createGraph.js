@@ -134,7 +134,7 @@ const createGraph = (visualizationBoxElement, graph, algorithmName) => {
  * @param {HTMLElement} container - The target container element.
  * @param {{ nodes: Array<{ id: string }>, links: Array<{ source: string, target: string }> }} graph - The parsed graph.
  */
-const createD3GraphBasic = (container, graph) => {
+export const createD3GraphBasic = (container, graph) => {
   // Clear the container
   container.innerHTML = "";
 
@@ -170,32 +170,63 @@ const createD3GraphBasic = (container, graph) => {
     return { ...link, isBidirectional };
   });
 
-  svg
-    .append("defs")
+  // Append marker definitions for links and self-loops
+  const defs = svg.append("defs");
+
+  // Regular marker for normal edges
+  defs
     .append("marker")
     .attr("id", "arrowhead")
-    .attr("viewBox", "0 -5 10 10") // Define the coordinate system for the marker
-    .attr("refX", 26) // Position the arrowhead relative to the end of the line
-    .attr("refY", -2)
-    .attr("markerWidth", 12) // Width of the marker
-    .attr("markerHeight", 12) // Height of the marker
-    .attr("orient", "auto") // Orient the arrowhead automatically based on the link direction
-    .attr("markerUnits", "userSpaceOnUse") // prevents scaling
+    .attr("viewBox", "0 -5 10 10")
+    .attr("refX", 26) // Default for straight links
+    .attr("refY", -1.5)
+    .attr("markerWidth", 8)
+    .attr("markerHeight", 8)
+    .attr("orient", "auto")
     .append("path")
-    .attr("d", "M0,-5L10,0L0,5") // Path for the arrowhead
-    .attr("fill", "#bbbbbb"); // Arrowhead color
+    .attr("d", "M0,-5L10,0L0,5")
+    .attr("fill", "#999");
 
+  // Special marker for self-loops
+  defs
+    .append("marker")
+    .attr("id", "self-loop-arrowhead")
+    .attr("viewBox", "0 -5 10 10")
+    .attr("refX", 26) // Adjust refX to position correctly for self-loops
+    .attr("refY", -1.5)
+    .attr("markerWidth", 8)
+    .attr("markerHeight", 8)
+    .attr("orient", "auto")
+    .append("path")
+    .attr("d", "M0,-5L10,0L0,5")
+    .attr("fill", "#999");
+
+  // Links (excluding self-loops)
   const link = svg
     .selectAll(".link")
-    .data(linkWithDirection)
+    .data(linkWithDirection.filter((d) => d.source !== d.target)) // Exclude self-loops
     .enter()
     .append("path")
     .attr("class", "link")
     .attr("fill", "none")
     .attr("stroke", "#bbbbbb")
     .attr("stroke-width", 1.5)
-    .attr("marker-end", "url(#arrowhead)");
+    .attr("marker-end", (d) => (d.isBidirectional ? "url(#arrowhead)" : null));
 
+  // Handle self-loops separately
+  const selfLoops = svg
+    .selectAll(".self-loop")
+    .data(linkWithDirection.filter((d) => d.source === d.target)) // Only self-loops
+    .enter()
+    .append("path") // `path` allows curved edges
+    .attr("class", "self-loop")
+    .attr("fill", "none")
+    .attr("stroke", "#bbbbbb")
+    .attr("stroke-width", 1.5)
+    .attr("stroke-linecap", "round")
+    .attr("marker-end", "url(#self-loop-arrowhead)");
+
+  // Create nodes as circles
   const node = svg
     .selectAll(".node")
     .data(graph.nodes)
@@ -237,22 +268,27 @@ const createD3GraphBasic = (container, graph) => {
     .text((d) => d.id);
 
   simulation.on("tick", () => {
-    link.attr("d", (d) => curvedPath(d, d.isBidirectional));
+    link.attr("d", (d) => curvedPath(d, d.isBidirectional)); // Update the path for normal links
 
     node.attr("cx", (d) => d.x).attr("cy", (d) => d.y);
 
     labels.attr("x", (d) => d.x).attr("y", (d) => d.y);
+
+    // Update self-loop paths (curved path)
+    selfLoops.attr("d", (d) => {
+      const r = 60; // Radius of the self-loop
+      return `M ${d.source.x} ${d.source.y}
+                C ${d.source.x - r} ${d.source.y - r * 1.5}, 
+                  ${d.source.x + r} ${d.source.y - r * 1.5}, 
+                  ${d.source.x} ${d.source.y}`;
+    });
   });
+
+  console.log("Graph successfully created.");
 };
 
-/**
- * Creates a D3.js force-directed graph visualization with heuristics additions.
- * @param {HTMLElement} container - The target container element.
- * @param {{
- *   nodes: Array<{ id: string }>,
- *   links: Array<{ source: string, target: string, weight?: number }>
- * }} graph - The parsed graph with weights.
- */
+
+
 const createD3GraphHeuristics = (container, graph) => {
   // Clear the container
   container.innerHTML = "";
@@ -293,20 +329,35 @@ const createD3GraphHeuristics = (container, graph) => {
     .append("defs")
     .append("marker")
     .attr("id", "arrowhead")
-    .attr("viewBox", "0 -5 10 10") // Define the coordinate system for the marker
-    .attr("refX", 26) // Position the arrowhead relative to the end of the line
-    .attr("refY", -2)
-    .attr("markerWidth", 12) // Width of the marker
-    .attr("markerHeight", 12) // Height of the marker
-    .attr("orient", "auto") // Orient the arrowhead automatically based on the link direction
-    .attr("markerUnits", "userSpaceOnUse") // prevents scaling
+    .attr("viewBox", "0 -5 10 10")
+    .attr("refX", 26)
+    .attr("refY", -1.5)
+    .attr("markerWidth", 12)
+    .attr("markerHeight", 12)
+    .attr("orient", "auto")
+    .attr("markerUnits", "userSpaceOnUse")
     .append("path")
-    .attr("d", "M0,-5L10,0L0,5") // Path for the arrowhead
-    .attr("fill", "#bbbbbb"); // Arrowhead color
+    .attr("d", "M0,-5L10,0L0,5")
+    .attr("fill", "#bbbbbb");
 
+  svg
+    .append("defs")
+    .append("marker")
+    .attr("id", "self-loop-arrowhead")
+    .attr("viewBox", "0 -5 10 10")
+    .attr("refX", 26)
+    .attr("refY", -1.5)
+    .attr("markerWidth", 8)
+    .attr("markerHeight", 8)
+    .attr("orient", "auto")
+    .append("path")
+    .attr("d", "M0,-5L10,0L0,5")
+    .attr("fill", "#bbbbbb");
+
+  // Create links (edges), excluding self-loops
   const link = svg
     .selectAll(".link")
-    .data(linkWithDirection)
+    .data(linkWithDirection.filter((d) => d.source !== d.target)) // Exclude self-loops
     .enter()
     .append("path")
     .attr("class", "link")
@@ -315,19 +366,32 @@ const createD3GraphHeuristics = (container, graph) => {
     .attr("stroke-width", 1.5)
     .attr("marker-end", "url(#arrowhead)");
 
+  // Handle self-loops separately
+  const selfLoops = svg
+    .selectAll(".self-loop")
+    .data(linkWithDirection.filter((d) => d.source === d.target)) // Only self-loops
+    .enter()
+    .append("path") // `path` allows curved edges
+    .attr("class", "self-loop")
+    .attr("fill", "none")
+    .attr("stroke", "#bbbbbb")
+    .attr("stroke-width", 1.5)
+    .attr("stroke-linecap", "round")
+    .attr("marker-end", "url(#self-loop-arrowhead)");
+
   const edgeLabels = svg
     .selectAll(".edge-label")
     .data(linkWithDirection)
     .enter()
     .append("text")
     .attr("class", "edge-label")
-    .attr("dy", (d) => (d.isBidirectional ? -10 : 10)) // Move the label downward (increase the value for more distance)
-    .attr("text-anchor", "middle") // Keep the label centered
-    .attr("fill", "#bbbbbb") // Same color as the edge
-    .style("pointer-events", "none") // Prevent interference with interactions
-    .style("font-weight", "bold") // Make the text bold
-    .style("font-size", "18px") // Optionally increase the font size
-    .text((d) => d.weight ?? "not found"); // Use d.weight for the label
+    .attr("dy", (d) => (d.isBidirectional ? -10 : 10)) // Adjust vertical position based on direction
+    .attr("text-anchor", "middle")
+    .attr("fill", "#bbbbbb")
+    .style("pointer-events", "none")
+    .style("font-weight", "bold")
+    .style("font-size", "18px")
+    .text((d) => d.weight ?? "not found");
 
   const node = svg
     .selectAll(".node")
@@ -370,37 +434,66 @@ const createD3GraphHeuristics = (container, graph) => {
     .style("pointer-events", "none")
     .text((d) => d.id);
 
-  // Add distance labels above each node
+  // Preprocess nodes to identify self-loops
+  graph.nodes.forEach((node) => {
+    node.hasSelfLoop = graph.links.some((link) => link.source === node && link.target === node);
+  });
+
   const distanceLabels = svg
     .selectAll(".distance-label")
     .data(graph.nodes)
     .enter()
     .append("text")
     .attr("class", "distance-label")
-    .attr("text-anchor", "middle") // Center the text horizontally with the node
-    .attr("alignment-baseline", "middle") // Center the text vertically with the node
-    .attr("dx", 15) // Slightly to the right of the node
-    .attr("dy", 0) // Vertically aligned with the node
+    .attr("text-anchor", "middle")
+    .attr("alignment-baseline", "middle")
+    .attr("dx", 15)
+    .attr("dy", 0)
     .style("pointer-events", "none")
-    .attr("fill", "#bbbbbb") // Same color as the node
-    .style("font-weight", "bold") // Make the text bold
-    .style("font-size", "18px") // Optionally increase the font size
+    .attr("fill", "#bbbbbb")
+    .style("font-weight", "bold")
+    .style("font-size", "18px")
     .text(() => "∞"); // Initial distance set to "∞"
 
   simulation.on("tick", () => {
     link.attr("d", (d) => curvedPath(d, d.isBidirectional));
 
+    // Update edge labels (adjust position for bidirectional links or self-loops)
     edgeLabels
       .attr("x", (d) => (d.source.x + d.target.x) / 2)
-      .attr("y", (d) => (d.source.y + d.target.y) / 2);
+      .attr("y", (d) => (d.source.y + d.target.y) / 2 - 5)
+      .attr("dy", (d) => {
+        // Adjust vertical position for self-loops
+        if (d.source === d.target) {
+          return -66; // Adjust to fit self-loops correctly
+        }
+        return d.isBidirectional ? -10 : 10; // Regular links adjust slightly
+      });
 
     node.attr("cx", (d) => d.x).attr("cy", (d) => d.y);
 
     labels.attr("x", (d) => d.x).attr("y", (d) => d.y);
 
-    distanceLabels.attr("x", (d) => d.x).attr("y", (d) => d.y - 25);
+    distanceLabels.attr("x", (d) => d.x).attr("y", (d) => {
+      if (d.hasSelfLoop) {
+        return d.y + 25; // Below the node for self-loops
+      }
+      return d.y - 25; // Above the node for regular nodes
+    });
+
+    // Update self-loops path
+    selfLoops.attr("d", (d) => {
+      const r = 60; // Radius of the self-loop
+      return `M ${d.source.x} ${d.source.y}
+              C ${d.source.x - r} ${d.source.y - r * 1.5}, 
+                ${d.source.x + r} ${d.source.y - r * 1.5}, 
+                ${d.source.x} ${d.source.y}`;
+    });
   });
 };
+
+
+
 
 /**
  * Creates a D3.js force-directed graph visualization for bidirectional graphs.
@@ -408,8 +501,7 @@ const createD3GraphHeuristics = (container, graph) => {
  * @param {{ nodes: Array<{ id: string }>, links: Array<{ source: string, target: string }> }} graph - The parsed graph.
  * @param {string} algorithmName
  */
-const createGraphBidirectional = (container, graph, algorithmName) => {
-  // Clear the container
+export const createGraphBidirectional = (container, graph, algorithmName) => {
   // Clear the container
   container.innerHTML = "";
 
@@ -445,9 +537,15 @@ const createGraphBidirectional = (container, graph, algorithmName) => {
     return { ...link, isBidirectional };
   });
 
+  // Handle self-loops separately
+  const selfLoops = linkWithDirection.filter((link) => link.source === link.target);
+
+  // Regular links (excluding self-loops)
+  const regularLinks = linkWithDirection.filter((link) => link.source !== link.target);
+
   const link = svg
     .selectAll(".link")
-    .data(linkWithDirection)
+    .data(regularLinks)
     .enter()
     .append("path")
     .attr("class", "link")
@@ -456,11 +554,24 @@ const createGraphBidirectional = (container, graph, algorithmName) => {
     .attr("stroke-width", 1.5)
     .attr("marker-end", "url(#arrowhead)");
 
+  // Handle self-loops separately
+  const selfLoopPath = svg
+    .selectAll(".self-loop")
+    .data(selfLoops)
+    .enter()
+    .append("path")
+    .attr("class", "self-loop")
+    .attr("fill", "none")
+    .attr("stroke", "#bbbbbb")
+    .attr("stroke-width", 1.5)
+    .attr("stroke-linecap", "round")
+    .attr("marker-end", "url(#self-loop-arrowhead)");
+
   let edgeLabels = null;
   if (algorithmName === "Prim" || algorithmName === "Kruskal") {
     edgeLabels = svg
       .selectAll(".edge-label")
-      .data(linkWithDirection)
+      .data(regularLinks)
       .enter()
       .append("text")
       .attr("class", "edge-label")
@@ -470,8 +581,26 @@ const createGraphBidirectional = (container, graph, algorithmName) => {
       .style("pointer-events", "none")
       .style("font-weight", "bold")
       .style("font-size", "18px")
-      .text((d) => d.weight ?? "not found");
+      .text((d) => d.weight ?? "not found")
+      .attr("x", (d) => (d.source.x + d.target.x) / 2)
+      .attr("y", (d) => (d.source.y + d.target.y) / 2);
   }
+
+  const selfLoopLabels = svg
+    .selectAll(".self-loop-label")
+    .data(selfLoops)
+    .enter()
+    .append("text")
+    .attr("class", "self-loop-label")
+    .attr("dy", -66) // Adjust this to control the label position for self-loops
+    .attr("text-anchor", "middle")
+    .attr("fill", "#bbbbbb")
+    .style("pointer-events", "none")
+    .style("font-weight", "bold")
+    .style("font-size", "16px")
+    .text((d) => d.weight ?? "not found")
+    .attr("x", (d) => d.source.x)
+    .attr("y", (d) => d.source.y);
 
   const node = svg
     .selectAll(".node")
@@ -514,18 +643,38 @@ const createGraphBidirectional = (container, graph, algorithmName) => {
     .text((d) => d.id);
 
   simulation.on("tick", () => {
+    // Update regular links
     link.attr("d", (d) => curvedPath(d, d.isBidirectional));
+
+    // Update self-loops
+    selfLoopPath.attr("d", (d) => {
+      const r = 60; // Radius of the self-loop
+      return `M ${d.source.x} ${d.source.y}
+                C ${d.source.x - r} ${d.source.y - r * 1.5}, 
+                  ${d.source.x + r} ${d.source.y - r * 1.5}, 
+                  ${d.source.x} ${d.source.y}`;
+    });
+
+    // Update edge labels if applicable
     if (edgeLabels && (algorithmName === "Prim" || algorithmName === "Kruskal")) {
       edgeLabels
         .attr("x", (d) => (d.source.x + d.target.x) / 2)
         .attr("y", (d) => (d.source.y + d.target.y) / 2);
     }
 
+    // Update self-loop labels
+    selfLoopLabels.attr("x", (d) => (d.source.x + d.target.x) / 2)
+    .attr("y", (d) => (d.source.y + d.target.y) / 2 - 5);
+
+    // Update node positions
     node.attr("cx", (d) => d.x).attr("cy", (d) => d.y);
 
+    // Update label positions
     labels.attr("x", (d) => d.x).attr("y", (d) => d.y);
   });
 };
+
+
 
 /**
  * Highlights a node in the D3 graph by its ID and starts the algorithm simulation.

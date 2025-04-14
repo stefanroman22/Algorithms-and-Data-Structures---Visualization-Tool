@@ -299,14 +299,19 @@ export const peekHeadCommand = (
     return;
   };
   const firstRect = svg.selectAll(".rect").filter((d, i) => i === 0);
-
+  const boxSize = 50;
+  const enlargedSize = boxSize + 5;
   // Change the color of the last element temporarily
   firstRect.transition()
     .duration(500)
     .attr("fill", "rgb(255, 142, 22)") // Highlight color
+    .attr("width", enlargedSize)
+    .attr("height", enlargedSize)
     .transition()
     .duration(600)
-    .attr("fill", "#bfbfbf"); // Reset color
+    .attr("fill", "#bfbfbf") // Reset color
+    .attr("width", boxSize)
+    .attr("height", boxSize);
 }
 
 export const peekTailCommand = (
@@ -318,12 +323,17 @@ export const peekTailCommand = (
     return;
   };
   const lastRect = svg.selectAll(".rect").filter((d, i) => i === queue.length - 1);
-
+  const boxSize = 50;
+  const enlargedSize = boxSize + 5;
   // Change the color of the last element temporarily
   lastRect.transition()
     .duration(500)
     .attr("fill", "rgb(255, 142, 22)") // Highlight color
+    .attr("width", enlargedSize)
+    .attr("height", enlargedSize)
     .transition()
     .duration(600)
-    .attr("fill", "#bfbfbf"); // Reset color
+    .attr("fill", "#bfbfbf") // Reset color
+    .attr("width", boxSize)
+    .attr("height", boxSize);
 }

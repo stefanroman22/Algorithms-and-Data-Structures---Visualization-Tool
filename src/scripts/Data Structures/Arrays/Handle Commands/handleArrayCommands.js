@@ -337,7 +337,7 @@ export const updateCommand = async (
     .filter((d, i) => i === updateIndex)
     .transition()
     .duration(300)
-    .attr("fill", "rgb(233, 126, 10)") // Pallet Orange
+    .attr("fill", "#F69228") // Pallet Orange
     .transition()
     .delay(1000) // Keep color for 1s
     .duration(500)
@@ -355,53 +355,90 @@ export const updateCommand = async (
 };
 
 export const minCommand = async (array, svg) => {
-  // **Exception Handling**
   if (array.length === 0) {
     alert("The array is empty. Cannot compute Min.");
     return;
   }
 
-  // **Find Min Value & Index**
   const minValue = Math.min(...array);
   const minIndex = array.indexOf(minValue);
+  const boxSize = 50;
+  const enlargedSize = boxSize + 5;
+
   console.log(`Min Value: ${minValue} at Index: ${minIndex}`);
 
-  // **Temporarily highlight the rectangle**
+  // Animate the rectangle
   svg
     .selectAll(".rect")
     .filter((d, i) => i === minIndex)
     .transition()
     .duration(300)
-    .attr("fill", "rgb(233, 126, 10)") // Pallet Orange
+    .attr("fill", "#F69228")
+    .attr("width", enlargedSize)
+    .attr("height", enlargedSize)
     .transition()
-    .delay(1000) // Keep color for 1s
+    .delay(1000)
     .duration(500)
-    .attr("fill", "#bfbfbf"); // Restore original color
+    .attr("fill", "#bfbfbf")
+    .attr("width", boxSize)
+    .attr("height", boxSize)
+
+  // Animate the corresponding text
+  svg
+    .selectAll(".array-value")
+    .filter((d, i) => i === minIndex)
+    .transition()
+    .duration(300)
+    .attr("font-size", "25px")
+    .attr("text-anchor", "middle")
+    .transition()
+    .delay(1000)
+    .duration(500)
+    .attr("font-size", "20px")
 };
 
+
 export const maxCommand = async (array, svg) => {
-  // **Exception Handling**
   if (array.length === 0) {
-    alert("The array is empty. Cannot compute Max.");
+    alert("The array is empty. Cannot compute Min.");
     return;
   }
 
-  // **Find Max Value & Index**
   const maxValue = Math.max(...array);
   const maxIndex = array.indexOf(maxValue);
-  console.log(`Max Value: ${maxValue} at Index: ${maxIndex}`);
+  const boxSize = 50;
+  const enlargedSize = boxSize + 5;
 
-  // **Temporarily highlight the rectangle**
+  console.log(`Min Value: ${maxValue} at Index: ${maxIndex}`);
+
+  // Animate the rectangle
   svg
     .selectAll(".rect")
     .filter((d, i) => i === maxIndex)
     .transition()
     .duration(300)
-    .attr("fill", "rgb(233, 126, 10)") // Pallet Orange
+    .attr("fill", "#F69228")
+    .attr("width", enlargedSize)
+    .attr("height", enlargedSize)
     .transition()
-    .delay(1000) // Keep color for 1s
+    .delay(1000)
     .duration(500)
-    .attr("fill", "#bfbfbf"); // Restore original color
+    .attr("fill", "#bfbfbf")
+    .attr("width", boxSize)
+    .attr("height", boxSize)
+
+  // Animate the corresponding text
+  svg
+    .selectAll(".array-value")
+    .filter((d, i) => i === minIndex)
+    .transition()
+    .duration(300)
+    .attr("font-size", "25px")
+    .attr("text-anchor", "middle")
+    .transition()
+    .delay(1000)
+    .duration(500)
+    .attr("font-size", "20px")
 };
 
 export const searchCommand = async (searchValue, array, svg) => {
@@ -416,31 +453,58 @@ export const searchCommand = async (searchValue, array, svg) => {
   }
 
   let found = false;
+  const boxSize = 50;
+  const enlargedSize = boxSize + 5;
 
   for (let i = 0; i < array.length; i++) {
     let rect = svg.selectAll(".rect").filter((d, index) => index === i);
-    
+    let text = svg.selectAll(".array-value").filter((d, index) => index === i);
+
+    // Highlight and enlarge temporarily
     await rect.transition()
       .duration(300)
-      .attr("fill", "rgb(233, 126, 10)") // Highlight current element
-      .transition()
-      .duration(600)
-      .attr("fill", "#bfbfbf"); // Reset color
+      .attr("fill", "#F69228")
+      .attr("width", enlargedSize)
+      .attr("height", enlargedSize);
 
-    await sleep(800)
+    await text.transition()
+      .duration(300)
+      .attr("font-size", "28px");
+
+    await sleep(800);
 
     if (array[i] === Number(searchValue)) {
+      // Found: keep enlarged and change color
       await rect.transition()
         .duration(300)
-        .attr("fill", "rgb(233, 94, 13)") // Darker orange to indicate found
-        
-      await sleep(2500)
-        rect.transition()
+        .attr("fill", "rgb(233, 94, 13)");
+
+      await sleep(2500);
+
+      // Reset
+      rect.transition()
         .duration(300)
-        .attr("fill", "#bfbfbf"); // Reset color
+        .attr("fill", "#bfbfbf")
+        .attr("width", boxSize)
+        .attr("height", boxSize);
+
+      text.transition()
+        .duration(300)
+        .attr("font-size", "20px");
 
       found = true;
       break;
+    } else {
+      // Not found, reset
+      rect.transition()
+        .duration(300)
+        .attr("fill", "#bfbfbf")
+        .attr("width", boxSize)
+        .attr("height", boxSize);
+
+      text.transition()
+        .duration(300)
+        .attr("font-size", "20px");
     }
   }
 
@@ -448,4 +512,3 @@ export const searchCommand = async (searchValue, array, svg) => {
     alert(`Element ${searchValue} not found in the array.`);
   }
 };
-
