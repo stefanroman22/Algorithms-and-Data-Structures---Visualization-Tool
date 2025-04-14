@@ -191,7 +191,7 @@ https://sweetalert2.github.io/#ajax-request`),bD(p),typeof p.title=="string"&&(p
 
 A Graph is a non-linear data structure that consists of **vertices (nodes)** and **edges**.  
 
-![Graph Example](/public/TheoryImages/TheoryBasicGraph.png)
+![Graph Example](./TheoryImages/TheoryBasicGraph.png)
 
 A **vertex**, also called a **node**, is a point or an object in the Graph, and an **edge** is used to connect two vertices with each other.
 
