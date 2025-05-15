@@ -1,4 +1,5 @@
 import "../Instructions.css"
+import Note from "../Note/Note";
 function InstructionsDFSBFS() {
   return (
     <div className="instructions">
@@ -26,11 +27,11 @@ function InstructionsDFSBFS() {
         3: 4{"\n"}
         5:
       </pre>
-      <small>
-        <strong>Note:</strong> First provide the input graph, then specify the
+      <Note>
+        First provide the input graph, then specify the
         Start Node index. After that, click "Parse Graph" to validate the input,
         and finally, click "Start" to begin the simulation.
-      </small>
+      </Note>
     </div>
   );
 }

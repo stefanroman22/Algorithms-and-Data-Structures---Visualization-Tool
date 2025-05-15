@@ -4,7 +4,7 @@ export function initGraphAnimation(containerId) {
   // Clear any existing SVG in the container
   d3.select(`#${containerId}`).selectAll("*").remove();
 
-  const svgSize = 550; // Define the size of the circular SVG
+  const svgSize = 700; // Define the size of the circular SVG
   let radius = svgSize / 2; // Radius of the circular SVG
 
   // Set up the SVG with a circular clip path

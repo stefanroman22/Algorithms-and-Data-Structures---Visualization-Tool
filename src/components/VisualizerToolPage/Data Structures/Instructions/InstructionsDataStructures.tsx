@@ -37,7 +37,7 @@ function InstructionsDataStructures({ type }: InstructionsDataStructuresProps) {
             <pre>
                 10,20,30{"\n"}
             </pre>
-            <small>
+            <small style={{ fontSize: "14px" }}>
                 <strong>Note:</strong> After parsing the input, use the buttons on the left panel to perform various operations on the data structure, such as insert, delete, or traverse, and observe how it behaves visually.
             </small>
         </div>

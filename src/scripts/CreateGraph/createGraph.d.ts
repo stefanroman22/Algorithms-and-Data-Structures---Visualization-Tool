@@ -11,6 +11,30 @@ export function updateVisualizationBox(
   ): void;
   
 
+export function createGraph(
+  container: HTMLElement | null,
+  graph: {
+    nodes: Array<{ id: string }>,
+    links: Array<{ source: string; target: string; weight?: number }>
+  },
+  algorithmName: string = ""
+): void;
+
+/**
+ * Creates the graph depending on the properties checked by the user.
+ * @param {Object} properties - The properties structure.
+ * @param {boolean} properties.weighted - Whether the graph is weighted.
+ * @param {boolean} properties.connected - Whether the graph is connected.
+ * @param {boolean} properties.directed - Whether the graph is directed.
+ * @param {boolean} properties.cyclic - Whether the graph is cyclic.
+ * @param {boolean} properties.selfLoop - Whether the graph allows self-loops.
+ * @param {HTMLElement | null} container - Where the graph graphic will be stored
+ */
+export function createPropertiesGraph(
+  properties: Object,
+  visualizationBoxElement: HTMLElement | null
+):void 
+
 /**
  * Creates a D3.js force-directed graph visualization for bidirectional graphs.
  * @param container - The target container element.
@@ -20,9 +44,10 @@ export function updateVisualizationBox(
 export function createD3GraphBasic(
   container: HTMLElement | null,
   graph: {
-    nodes: Array<{ id: string }>,
-    links: Array<{ source: string; target: string; weight?: number }>
+    nodes: Array<{ id: string }>;
+    links: Array<{ source: string; target: string; weight?: number }>;
   },
+  shouldGenerateTree: boolean = false // Optional parameter with a default value of false
 ): void;
 
 /**
@@ -37,12 +62,8 @@ export function createGraphBidirectional(
     nodes: Array<{ id: string }>,
     links: Array<{ source: string; target: string; weight?: number }>
   },
-  algorithmName: string
+  algorithmName: string = ""
 ): void;
-
-
-
-
 
 /**
  * Highlights a node in the D3 graph visualization.
@@ -63,4 +84,7 @@ export function startAlgorithmSimulation(
   getSimulationIdRef: () => number,
   algorithmName: string,
 ): void;
+
+
+
 

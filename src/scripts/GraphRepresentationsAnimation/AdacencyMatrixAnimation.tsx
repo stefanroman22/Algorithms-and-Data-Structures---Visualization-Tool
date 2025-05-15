@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { createD3GraphBasic } from "../CreateGraph/createGraph";
+import { createGraph} from "../CreateGraph/createGraph";
 import "../../styles/Animations/AdjacencyMatrixAnimation.css";
 
 const AdjacencyMatrixAnimation: React.FC = () => {
@@ -36,7 +36,7 @@ const AdjacencyMatrixAnimation: React.FC = () => {
     });
 
     if (graphRef.current) {
-      createD3GraphBasic(graphRef.current, { nodes, links });
+      createGraph(graphRef.current, { nodes, links }, "AdjacencyMatrixAnimation");
     }
   }, [matrix]);
 

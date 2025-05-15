@@ -1,3 +1,16 @@
+
+.sidebar-theory-wrapper {
+    width: 200px;
+    background-color: #1c1a18;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  
+  .go-back {
+    position: sticky;
+  }
 .sidebar-container {
     height: auto; /* Ensures it fills the entire viewport height */
     width: 200px; /* Width of the sidebar */
@@ -7,7 +20,12 @@
     justify-content: flex-start; /* Default alignment */
     padding-top: 60px; /* Adjust this value to move buttons lower */
     box-sizing: border-box; /* Includes padding in height calculations */
+    max-height: 100vh; /* Or set a specific height like 600px */
+    overflow-y: auto;
+    scroll-behavior: smooth;
+     overflow-x: hidden; /* prevents horizontal scroll */
 }
+
 
 .chapter-button, .subchapter-button{
     background-color: transparent; /* Button color */

@@ -1,4 +1,5 @@
 import "../Instructions.css"
+import Note from "../Note/Note";
 function InstructionsHeuristics() {
   return (
     <div className="instructions">
@@ -27,11 +28,11 @@ function InstructionsHeuristics() {
         3: 4(8){"\n"}
         5:
       </pre>
-      <small>
-        <strong>Note:</strong> First provide the input graph, then specify the
-        Start Node index. After that, click "Parse Graph" to validate the input,
-        and finally, click "Start" to begin the simulation.
-      </small>
+      <Note>
+        First provide the input graph, then specify the Start Node index. After that,
+        click "Parse Graph" to validate the input, and finally, click "Start" to begin
+        the simulation.
+      </Note>
     </div>
   );
 }

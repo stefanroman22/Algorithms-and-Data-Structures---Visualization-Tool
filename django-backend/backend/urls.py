@@ -18,8 +18,12 @@ from django.contrib import admin
 from django.urls import path, include  # Add 'include' to the import
 from django.conf import settings
 from django.conf.urls.static import static
+from feedback.views import contact_feedback_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/users/', include('users.urls')),
+    path('api/contact-feedback/', contact_feedback_view, name='contact-feedback'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -122,7 +122,7 @@ function VisualizerToollgorithmListPage() {
       <div className="filter-container">
         <input
           type="text"
-          placeholder="Search algorithm..."
+          placeholder="Search..."
           value={search}
           onChange={(e) => setSearch(e.target.value)} // Updates search state
           className="search-bar"

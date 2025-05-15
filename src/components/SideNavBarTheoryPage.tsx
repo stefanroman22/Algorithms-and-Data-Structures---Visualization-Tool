@@ -3,15 +3,17 @@ import "../styles/SideNavBarTheoryPage.css";
 import { VscTriangleRight } from "react-icons/vsc";
 import { VscTriangleDown } from "react-icons/vsc";
 import { GoDotFill } from "react-icons/go";
+import { useNavigate } from "react-router-dom";
 
 function SideNavBarTheoryPage() {
   type Chapter = keyof typeof chapters; // "Introduction" | "Algorithms" | "Chapter 3"
   const [expandedChapters, setExpandedChapters] = useState<Chapter[]>([]);
+  const navigate = useNavigate();
 
   const chapters = {
     "Introduction": ["What is a Graph?", "Graphs Representation", "Graphs Properties", "Special Graph Structures"],
     "Additional Data Structures": ["Array", "Stack", "Queue"],
-    "Algorithms": ["Why Algorithms?", "DFS + BFS", "Dijkstra", "2Coloring"],
+    "Graph Algorithms": ["Why Graph Algorithms?", "DFS + BFS", "Dijkstra + Bellman Ford", "2Coloring", "Prim's + Kruskal"],
   };
 
   // Function to toggle chapter expansion
@@ -35,6 +37,11 @@ function SideNavBarTheoryPage() {
 
   return (
     <div className="sidebar-container">
+      <div className="go-back">
+        <button className="go-back-button" onClick={() => navigate(-1)}>
+          Go Back
+        </button>
+      </div>
       {Object.keys(chapters).map((key, index) => (
         <div key={index}>
           <button

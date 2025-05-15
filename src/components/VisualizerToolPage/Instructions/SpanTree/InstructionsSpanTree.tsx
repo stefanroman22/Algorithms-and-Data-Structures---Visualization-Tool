@@ -1,4 +1,5 @@
 import "../Instructions.css";
+import Note from "../Note/Note";
 function InstructionsSpanTree() {
   return (
     <div className="instructions">
@@ -25,11 +26,11 @@ function InstructionsSpanTree() {
         3: 4(8){"\n"}
         5:
       </pre>
-      <small>
-        <strong>Note:</strong> First provide the input graph, then specify the
-        Start Node index. After that, click "Parse Graph" to validate the input,
-        and finally, click "Start" to begin the algorithm simulation.
-      </small>
+      <Note>
+        First provide the input graph, then specify the Start Node index. After that, 
+        click "Parse Graph" to validate the input, and finally, click "Start" to begin 
+        the algorithm simulation.
+      </Note>
     </div>
   );
 }

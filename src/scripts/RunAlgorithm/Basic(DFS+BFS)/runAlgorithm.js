@@ -54,7 +54,7 @@ export const colorLink = (
       break;
   }
   svg
-    .selectAll(".link")
+    .selectAll(".link, .self-loop")
     .filter((d) => d.source.id === nodeId && d.target.id === neighborId)
     .attr("stroke-dasharray", dashArray) // Apply dash BEFORE transition starts
     .transition()

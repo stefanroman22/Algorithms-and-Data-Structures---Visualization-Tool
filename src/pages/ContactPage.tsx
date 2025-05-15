@@ -1,12 +1,15 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import "../styles/ContactPage.css";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
-import { FaEnvelope, FaArrowLeft } from "react-icons/fa"; // Importing icons
+import { FaEnvelope, FaArrowLeft, FaThumbsUp, FaThumbsDown} from "react-icons/fa"; // Importing icons
 
 function ContactPage() {
-  const [, setResult] = React.useState("");
+  const [, setResult] = useState("");
   const formRef = useRef(null); // Create a reference for the form
+  const [hasVoted, setHasVoted] = useState(!!localStorage.getItem("contact_voted"));
+  const [voteType, setVoteType] = useState(null); // 'like' or 'dislike'
+
 
   const onSubmit = async (event) => {
     event.preventDefault();
@@ -42,6 +45,26 @@ function ContactPage() {
   };
 
   const navigate = useNavigate();
+
+  React.useEffect(() => {
+  if (localStorage.getItem("contact_voted")) {
+    setHasVoted(true);
+  }
+  }, []);
+
+  const handleVote = (type) => {
+    if (hasVoted) return;
+
+    fetch("http://127.0.0.1:8000/api/contact-feedback/", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ vote: type }),
+});
+
+    localStorage.setItem("contact_voted", "true");
+    setHasVoted(true);
+    setVoteType(type);
+  };
 
   return (
     <section className="contact">
@@ -92,13 +115,7 @@ function ContactPage() {
       </form>
       <div className="about-us-content">
         <p>
-          The <strong>GVT Tool</strong> was designed to help students
-          <strong> enhance their knowledge of Graph Algorithms and Data Structures</strong> in an
-          <strong> interactive and engaging way</strong>. We believe that
-          <strong> actively engaging</strong> with concepts enhances
-          understanding and improves long-term retention. Instead of just
-          reading theory, interacting with algorithms makes learning more
-          <strong> effective, fun, and intuitive</strong>.
+          The <strong>GVT Tool</strong> helps students <strong>deepen their understanding of Graph Algorithms and Data Structures</strong> in an <strong>interactive and engaging way</strong>. We believe that <strong>active involvement</strong> boosts comprehension and retention. Rather than just reading theory, interacting with algorithms makes learning more <strong>effective, intuitive, and fun</strong>.
         </p>
 
         <p>
@@ -145,9 +162,32 @@ function ContactPage() {
           even better! 🚀
         </p>
 
-        <p>
-          <strong>Happy Learning & Thank You for Using GVT!</strong> 🎉
-        </p>
+        <div className="feedback-section">
+      <p>Was this page helpful?</p>
+      <div className="feedback-buttons">
+        <button
+  className={`thumb-button like ${
+    hasVoted && voteType === 'like' ? 'voted' : ''
+  } ${hasVoted && voteType !== 'like' ? 'disabled-other' : ''}`}
+  onClick={() => handleVote('like')}
+  disabled={hasVoted}
+>
+  <FaThumbsUp />
+</button>
+
+<button
+  className={`thumb-button dislike ${
+    hasVoted && voteType === 'dislike' ? 'voted' : ''
+  } ${hasVoted && voteType !== 'dislike' ? 'disabled-other' : ''}`}
+  onClick={() => handleVote('dislike')}
+  disabled={hasVoted}
+>
+  <FaThumbsDown />
+</button>
+      </div>
+</div>
+
+
 
         <div className="center-container">
         <a 

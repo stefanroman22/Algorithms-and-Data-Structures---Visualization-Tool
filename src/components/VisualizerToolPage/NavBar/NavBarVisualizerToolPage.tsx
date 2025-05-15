@@ -12,11 +12,11 @@ function NavbarVisualizerToolPage() {
           >
             Go Back
           </button>
+          <button className="nav-button-visualizer-tool" onClick={() => navigate("/")}>Home</button>
           <button className="nav-button-visualizer-tool" onClick={() => navigate("/visualizer-tool")}>Switch Visualization</button> 
           <button className="nav-button-visualizer-tool" onClick={() => navigate("/theory")}>
             Theory
           </button>
-          <button className="nav-button-visualizer-tool" onClick={() => navigate("/profile-log-sign-in")}>Profile</button>
           <button className="nav-button-visualizer-tool">Play</button>
           <button className="nav-button-visualizer-tool" onClick={() => navigate("/contact")}>Contact</button>
     </div>

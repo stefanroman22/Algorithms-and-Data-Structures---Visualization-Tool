@@ -147,3 +147,87 @@ button[type="submit"]:active {
 .linkedin-link:hover {
   transform: scale(1.2); /* Enlarges text smoothly */
 }
+
+.feedback-section {
+  text-align: center;
+  margin-top: 0.8rem;
+}
+
+.feedback-buttons button {
+  font-size: 2rem;
+  margin: 0 1rem;
+  cursor: pointer;
+}
+
+.feedback-buttons button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+
+.feedback-buttons {
+  display: flex;
+  gap: 0.8rem;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+}
+
+/* Base button style */
+.thumb-button {
+  background: transparent;
+  border: 2px solid #ccc;
+  color: #ccc;
+  padding: 1rem;
+  font-size: 2rem;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+/* Hover styles */
+.thumb-button.like:hover:not(:disabled) {
+  background-color: #2a9d8f;
+  border-color: #2a9d8f;
+  color: #fff;
+}
+
+.thumb-button.dislike:hover:not(:disabled) {
+  background-color: #e76f51;
+  border-color: #e76f51;
+  color: #fff;
+}
+
+/* Voted state (after click) */
+
+.thumb-button.like.voted {
+  background-color: rgba(42, 157, 143, 0.1);
+  border-color: #2a9d8f;
+  color: #2a9d8f;
+}
+
+.thumb-button.dislike.voted {
+  background-color: rgba(231, 111, 81, 0.1);
+  border-color: #e76f51;
+  color: #e76f51;
+}
+
+/* Prevent disabled from overriding voted */
+.thumb-button.voted:disabled {
+  opacity: 1 !important;
+  cursor: not-allowed;
+}
+
+/* Disabled buttons look dim ONLY if not voted */
+.thumb-button:disabled:not(.voted) {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.thumb-button.disabled-other {
+  opacity: 1;
+  color: #333;
+  border-color: #333;
+  background-color: rgba(0, 0, 0, 0.05);
+  cursor: not-allowed;
+}

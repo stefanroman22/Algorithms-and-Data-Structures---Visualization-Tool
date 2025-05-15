@@ -97,7 +97,7 @@ const updateDistanceLabel = (nodeId, newDistance, svg) => {
     .transition()
     .duration(800) // Example duration for the fade-in effect
     .style("opacity", 1) // Fade in to fully visible
-    .style("fill", "red"); // Change the color to red
+    .style("fill", "#4ED7F1"); // Change the color to red
 };
 
 /**
@@ -138,8 +138,7 @@ export const runDijkstra = async (
         .selectAll(".distance-label")
         .filter((d) => d.id === startNodeId)
         .text("0") // Set its value to "0"
-        .attr("fill", "red"); // Optionally style it
-
+        .attr("fill", "#4ED7F1"); // Color distance label for starting node 
       visited.set(node.id, "discovered");
     } else {
       distances.set(node.id, Infinity);
@@ -223,6 +222,7 @@ export const runDijkstra = async (
 
     if (!checkSimulationId(currentSimulationId, getSimulationIdRef)) return;
     await waitForResume(getPausedRef);
+    
     // Mark the current node as fully processed (red)
     svg
       .selectAll(".node")
@@ -279,7 +279,7 @@ export const runBellmanFord = async (
         .selectAll(".distance-label")
         .filter((d) => d.id === startNodeId)
         .text("0") // Set its value to "0"
-        .attr("fill", "red"); // Optionally style it
+        .attr("fill", "#4ED7F1"); // Optionally style it
     } else distances.set(node.id, Infinity);
   });
 
