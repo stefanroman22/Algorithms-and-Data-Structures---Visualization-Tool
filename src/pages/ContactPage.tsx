@@ -55,7 +55,7 @@ function ContactPage() {
   const handleVote = (type) => {
     if (hasVoted) return;
 
-    fetch("http://127.0.0.1:8000/api/contact-feedback/", {
+    fetch("https://algorithms-and-data-structures-36wd.onrender.com/api/contact-feedback/", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ vote: type }),
