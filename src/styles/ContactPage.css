@@ -224,6 +224,12 @@ button[type="submit"]:active {
   cursor: not-allowed;
 }
 
+.thumb-button.like.voted:disabled {
+  background-color: rgba(42, 157, 143, 0.1);
+  border-color: #2a9d8f;
+  color: #2a9d8f;
+}
+
 .thumb-button.disabled-other {
   opacity: 1;
   color: #333;
