@@ -1,16 +1,24 @@
 from django.contrib import admin
-
+from django.utils.html import format_html
 from .models import Quiz, Question, QuizQuestion
 
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
-    list_display = ("id", "short_text", "used_in_quizzes", "correct_answer_preview")
+    list_display = ("id", "short_text", "used_in_quizzes", "correct_answer_preview", "has_image")
     search_fields = ("text",)
-    readonly_fields = ("correct_answer_preview",)
+    readonly_fields = ("correct_answer_preview", "image_preview")
 
     fieldsets = (
         (None, {
-            "fields": ("text", "explanation", "options", "correct_index", "correct_answer_preview")
+            "fields": (
+                "text",
+                "image",          # Upload field
+                "image_preview",  # Read-only preview
+                "explanation",
+                "options",
+                "correct_index",
+                "correct_answer_preview",
+            )
         }),
     )
 
@@ -26,8 +34,16 @@ class QuestionAdmin(admin.ModelAdmin):
         return obj.get_correct_option() or "⚠️ Invalid index"
     correct_answer_preview.short_description = "Correct Answer"
 
+    def image_preview(self, obj):
+        if obj.image:
+            return format_html('<img src="{}" width="200" style="border:1px solid #ccc;" />', obj.image.url)
+        return "No image"
+    image_preview.short_description = "Image Preview"
 
-
+    def has_image(self, obj):
+        return bool(obj.image)
+    has_image.boolean = True
+    has_image.short_description = "Has Image"
 
 class QuizQuestionInline(admin.TabularInline):
     model = QuizQuestion
@@ -46,10 +62,5 @@ class QuizAdmin(admin.ModelAdmin):
     search_fields = ("title", "category")
     inlines = [QuizQuestionInline]
 
-    def save_related(self, request, form, formsets, change):
-        super().save_related(request, form, formsets, change)
-        quiz = form.instance
-        if quiz.questions.count() != 10:
-            from django.core.exceptions import ValidationError
-            raise ValidationError("A quiz must have exactly 10 questions.")
+   
 

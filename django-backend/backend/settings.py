@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-rya8p)j5udq6@5*n11ijrqtd=!8slu)i0rdt4g(xw#470s9egm
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['algorithms-and-data-structures-ti60.onrender.com', 'algorithms-and-data-structures-yf1y.onrender.com']
+ALLOWED_HOSTS = ['algorithms-and-data-structures-ti60.onrender.com', 'algorithms-and-data-structures-yf1y.onrender.com', '127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'quizzes.apps.QuizzesConfig',
     'feedback',
+    'rest_framework', 
 ]
 
 MIDDLEWARE = [

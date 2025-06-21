@@ -6,10 +6,14 @@ from django.core.exceptions import ValidationError
 class Question(models.Model):
     text = models.TextField()
     explanation = models.TextField(blank=True)
+    
+    # New field: optional image uploaded with the question
+    image = models.ImageField(upload_to='question_images/', blank=True, null=True)
 
-    # New fields:
-    options = models.JSONField(default=list)  # Stores a list like ["A", "B", "C", "D"]
+    # Multiple choice fields
+    options = models.JSONField(default=list)  # Stores list like ["A", "B", "C", "D"]
     correct_index = models.PositiveIntegerField(default=0)
+
     def clean(self):
         if len(self.options) != 4:
             raise ValidationError("Each question must have exactly 4 options.")
@@ -37,7 +41,6 @@ class QuizQuestion(models.Model):
     order = models.PositiveIntegerField()
 
     class Meta:
-        unique_together = ('quiz', 'question')  # Prevent duplicate assignments
         ordering = ['order']
 
     def __str__(self):
@@ -51,7 +54,6 @@ class Quiz(models.Model):
     ]
 
     title = models.CharField(max_length=200)
-    description = models.TextField(blank=True)
     image = models.ImageField(upload_to='quiz_images/')  # Requires MEDIA config
     category = models.CharField(max_length=100)  # e.g., "Graph Algorithms", "Stacks"
     difficulty = models.CharField(max_length=10, choices=DIFFICULTY_CHOICES)
