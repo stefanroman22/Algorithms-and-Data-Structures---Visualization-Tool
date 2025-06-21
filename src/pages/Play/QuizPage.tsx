@@ -18,7 +18,7 @@ function QuizPage() {
   useEffect(() => {
     async function fetchQuiz() {
       try {
-        const res = await fetch(`http://localhost:8000/api/quiz/${quizId}`);
+        const res = await fetch(`https://algorithms-and-data-structures-yf1y.onrender.com/api/quiz/${quizId}`);
         if (!res.ok) throw new Error("Failed to fetch quiz");
         const data = await res.json();
         setQuiz(data);
