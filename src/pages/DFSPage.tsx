@@ -12,6 +12,8 @@ function DFSPage() {
     HandleVisualizationButtons();
   return (
     <div className="visualization-container">
+
+      <div className="visualizer-label">DFS</div>
       {/* NavBar */}
       <div className="navbar-visualization-page">
         <NavbarVisualizerToolPage />

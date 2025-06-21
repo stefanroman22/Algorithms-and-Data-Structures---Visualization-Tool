@@ -1,0 +1,15 @@
+/* Difficulty colors */
+.difficulty-easy {
+  color: #28a745; /* Green */
+  font-weight: bold;
+}
+
+.difficulty-medium {
+  color: #ff8800; /* Orange/Rogan */
+  font-weight: bold;
+}
+
+.difficulty-hard {
+  color: #dc3545; /* Red */
+  font-weight: bold;
+}

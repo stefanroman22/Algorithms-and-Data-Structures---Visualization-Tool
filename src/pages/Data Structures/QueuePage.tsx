@@ -34,6 +34,7 @@ function QueuePage() {
 
   return (
     <div className="visualization-container">
+      <div className="visualizer-label">Queue</div>
       {/* NavBar */}
       <div className="navbar-visualization-page">
         <NavbarVisualizerToolPage />

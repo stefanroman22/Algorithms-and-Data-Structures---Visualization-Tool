@@ -109,7 +109,7 @@ export const popCommand = (
   svg
 ) => {
   if(stack.length === 0){
-    alert("The stack is empty. Cannot compute Pop.");
+    alert("Cannot compute Pop command since stack is empty.");
     return;
   }
 
@@ -122,8 +122,8 @@ export const popCommand = (
     .duration(300)
     .attr("fill", "#ff4d4d") // Red color to indicate removal
     .on("end", () => {
-      lastRect.transition().duration(300).style("opacity", 0).remove();
-      lastText.transition().duration(300).style("opacity", 0).remove();
+      lastRect.transition().duration(3000).style("opacity", 0).remove();
+      lastText.transition().duration(3000).style("opacity", 0).remove();
       
       // Update state
       const newStack = stack.slice(0, -1);

@@ -133,13 +133,13 @@ export const appendCommand = (
 
   // **Update text values**
   const textValues = svg
-    .selectAll(".array-value")
+    .selectAll(".value")
     .data(newArray, (d, i) => d + "-" + i)
     .join(
       (enter) =>
         enter
           .append("text")
-          .attr("class", "array-value")
+          .attr("class", "value")
           .attr("x", (d, i) => startX + i * (boxSize + spacing) + boxSize / 2)
           .attr("y", startY + boxSize / 2 + 5)
           .attr("text-anchor", "middle")
@@ -160,13 +160,13 @@ export const appendCommand = (
 
   // **Update index labels**
   const textIndexes = svg
-    .selectAll(".array-index")
+    .selectAll(".label")
     .data(newArray, (d, i) => d + "-" + i)
     .join(
       (enter) =>
         enter
           .append("text")
-          .attr("class", "array-index")
+          .attr("class", "label")
           .attr("x", (d, i) => startX + i * (boxSize + spacing) + boxSize / 2)
           .attr("y", startY - 10)
           .attr("text-anchor", "middle")
@@ -227,7 +227,7 @@ export const deleteCommand = async (
   await Promise.all([
     new Promise((resolve) => {
       svg
-        .selectAll(".rect, .array-value, .array-index")
+        .selectAll(".rect, .value, .label")
         .transition()
         .duration(300)
         .style("opacity", 0)
@@ -261,11 +261,11 @@ export const deleteCommand = async (
 
   // Bind data to text elements inside rectangles
   svg
-    .selectAll(".array-value")
+    .selectAll(".value")
     .data(newArray, (d, i) => d + "-" + i)
     .enter()
     .append("text")
-    .attr("class", "array-value")
+    .attr("class", "value")
     .attr("x", (d, i) => startX + i * (boxSize + spacing) + boxSize / 2)
     .attr("y", startY + boxSize / 2 + 5)
     .attr("text-anchor", "middle")
@@ -279,11 +279,11 @@ export const deleteCommand = async (
 
   // Bind data to index labels above rectangles
   svg
-    .selectAll(".array-index")
+    .selectAll(".label")
     .data(newArray)
     .enter()
     .append("text")
-    .attr("class", "array-index")
+    .attr("class", "label")
     .attr("x", (d, i) => startX + i * (boxSize + spacing) + boxSize / 2)
     .attr("y", startY - 10) // Adjust Y position above rectangles
     .attr("text-anchor", "middle")

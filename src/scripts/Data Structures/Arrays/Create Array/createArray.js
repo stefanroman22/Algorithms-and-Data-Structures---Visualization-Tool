@@ -24,7 +24,7 @@ export const handleParseInput = (
   if (arrayInput === "") {
     setArray([]); // Update state
     setParseInputPressed(true);
-    createArray([], visualizationBoxElement);
+    createLinearDataStructure([], visualizationBoxElement, dataStructureName);
     return;
   }
 
@@ -47,141 +47,170 @@ export const handleParseInput = (
   setArray(numberArray);
   setParseInputPressed(true);
 
-  createArray(numberArray, visualizationBoxElement, dataStructureName);
+  createAdditionalDataStructure(numberArray, visualizationBoxElement, dataStructureName);
 };
 
-const createArray = (
-  numberArray,
-  visualizationBoxElement,
-  dataStructureName
-) => {
-  if (!visualizationBoxElement) {
+const createAdditionalDataStructure = (data, container, dataStructureType) => {
+  if (!container) {
     console.error("Visualization container not found!");
     return;
   }
 
   // Clear previous SVG
-  visualizationBoxElement.innerHTML = "";
+  container.innerHTML = "";
 
   const boxSize = 50;
   const spacing = 10;
-  const displayArray = numberArray.length !== 0 ? numberArray : [];
+  const displayData = data.length !== 0 ? data : [];
 
-  // Get container width & height
-  const containerWidth = visualizationBoxElement.clientWidth || 400;
-  const containerHeight = visualizationBoxElement.clientHeight || 100;
+  const containerWidth = container.clientWidth || 600;
+  const containerHeight = container.clientHeight || 400;
 
-  // Recalculate total width of boxes
-  const totalBoxesWidth =
-    displayArray.length * boxSize + (displayArray.length - 1) * spacing;
-
-  // Center the boxes dynamically
-  const startX = (containerWidth - totalBoxesWidth) / 2;
-  const startY = (containerHeight - boxSize) / 2;
-
-  // Create the SVG container
   const svg = d3
-    .select(visualizationBoxElement)
+    .select(container)
     .append("svg")
     .attr("width", containerWidth)
     .attr("height", containerHeight);
 
-  // Bind data to rectangles
-  svg
-    .selectAll(".rect")
-    .data(displayArray, (d, i) => d + "-" + i) // Unique key for smooth transitions
-    .enter()
-    .append("rect")
-    .attr("class", "rect")
-    .attr("x", (d, i) => startX + i * (boxSize + spacing))
-    .attr("y", startY)
-    .attr("width", boxSize)
-    .attr("height", boxSize)
-    .attr("fill", "#bbbbbb")
-    .attr("stroke", "#0e1111")
-    .attr("stroke-width", 2)
-    .style("opacity", 0) // Start invisible
-    .transition() // Apply transition
-    .duration(500) // 0.5s animation
-    .style("opacity", 1); // Fade-in effect
+  if (dataStructureType === "Stack") {
+    // Stack visualization (vertical)
+    const totalHeight = displayData.length * boxSize + (displayData.length - 1) * spacing;
+    const startX = (containerWidth - boxSize) / 2;
+    const startY = containerHeight - totalHeight - 20;
 
-  // Bind data to text elements inside rectangles
-  svg
-    .selectAll(".array-value")
-    .data(displayArray, (d, i) => d + "-" + i)
-    .enter()
-    .append("text")
-    .attr("class", "array-value")
-    .attr("x", (d, i) => startX + i * (boxSize + spacing) + boxSize / 2)
-    .attr("y", startY + boxSize / 2 + 5)
-    .attr("text-anchor", "middle")
-    .attr("font-size", "20px")
-    .attr("fill", "#000")
-    .style("opacity", 0) // Start invisible
-    .text((d) => (d !== null ? d : ""))
-    .transition() // Apply transition
-    .duration(500) // 0.5s animation
-    .style("opacity", 1); // Fade-in effect
+    svg
+      .selectAll(".rect")
+      .data(displayData, (d, i) => d + "-" + i)
+      .enter()
+      .append("rect")
+      .attr("class", "rect")
+      .attr("x", startX)
+      .attr("y", (d, i) => containerHeight - (i + 1) * (boxSize + spacing))
+      .attr("width", boxSize)
+      .attr("height", boxSize)
+      .attr("fill", "#bfbfbf")
+      .attr("stroke", "#0e1111")
+      .attr("stroke-width", 2)
+      .style("opacity", 0)
+      .transition()
+      .duration(500)
+      .style("opacity", 1);
 
-    if (dataStructureName === "Array") {
+    svg
+      .selectAll(".value")
+      .data(displayData, (d, i) => d + "-" + i)
+      .enter()
+      .append("text")
+      .attr("class", "value")
+      .attr("x", startX + boxSize / 2)
+      .attr("y", (d, i) => containerHeight - (i + 1) * (boxSize + spacing) + boxSize / 2 + 5)
+      .attr("text-anchor", "middle")
+      .attr("font-size", "20px")
+      .attr("fill", "#232b2b")
+      .style("opacity", 0)
+      .text((d) => (d !== null ? d : ""))
+      .transition()
+      .duration(500)
+      .style("opacity", 1);
+  } else {
+    // Array or Queue visualization (horizontal)
+    const totalWidth = displayData.length * boxSize + (displayData.length - 1) * spacing;
+    const startX = (containerWidth - totalWidth) / 2;
+    const startY = (containerHeight - boxSize) / 2;
+
+    svg
+      .selectAll(".rect")
+      .data(displayData, (d, i) => d + "-" + i)
+      .enter()
+      .append("rect")
+      .attr("class", "rect")
+      .attr("x", (d, i) => startX + i * (boxSize + spacing))
+      .attr("y", startY)
+      .attr("width", boxSize)
+      .attr("height", boxSize)
+      .attr("fill", "#bbbbbb")
+      .attr("stroke", "#0e1111")
+      .attr("stroke-width", 2)
+      .style("opacity", 0)
+      .transition()
+      .duration(500)
+      .style("opacity", 1);
+
+    svg
+      .selectAll(".value")
+      .data(displayData, (d, i) => d + "-" + i)
+      .enter()
+      .append("text")
+      .attr("class", "value")
+      .attr("x", (d, i) => startX + i * (boxSize + spacing) + boxSize / 2)
+      .attr("y", startY + boxSize / 2 + 5)
+      .attr("text-anchor", "middle")
+      .attr("font-size", "20px")
+      .attr("fill", "#000")
+      .style("opacity", 0)
+      .text((d) => (d !== null ? d : ""))
+      .transition()
+      .duration(500)
+      .style("opacity", 1);
+
+    // Special labels for Array or Queue
+    if (dataStructureType === "Array") {
       svg
-        .selectAll(".array-index")
-        .data(displayArray)
+        .selectAll(".label")
+        .data(displayData)
         .enter()
         .append("text")
-        .attr("class", "array-index")
+        .attr("class", "label")
         .attr("x", (d, i) => startX + i * (boxSize + spacing) + boxSize / 2)
-        .attr("y", startY - 10) // Adjust Y position above rectangles
+        .attr("y", startY - 10)
         .attr("text-anchor", "middle")
         .attr("font-size", "15px")
         .attr("fill", "#F69228")
         .style("opacity", 0)
-        .text((_, i) => i) // Use index instead of value
+        .text((_, i) => i)
         .transition()
         .duration(500)
         .style("opacity", 1);
     } else {
-
-      if (displayArray.length > 1) {
-        // Add index only for the first and last elements (head & tail)
+      // For queues, label head and tail
+      if (displayData.length > 1) {
         svg
-          .selectAll(".array-index")
-          .data([displayArray[0], displayArray[displayArray.length - 1]]) // First & last elements
+          .selectAll(".label")
+          .data([displayData[0], displayData[displayData.length - 1]])
           .enter()
           .append("text")
-          .attr("class", "array-index")
-          .attr("x", (d, i) => 
+          .attr("class", "label")
+          .attr("x", (d, i) =>
             i === 0
-              ? startX + 0 * (boxSize + spacing) + boxSize / 2 // Head
-              : startX + (displayArray.length - 1) * (boxSize + spacing) + boxSize / 2 // Tail
+              ? startX + 0 * (boxSize + spacing) + boxSize / 2
+              : startX + (displayData.length - 1) * (boxSize + spacing) + boxSize / 2
           )
-          .attr("y", startY - 10) // Adjust Y position above rectangles
+          .attr("y", startY - 10)
           .attr("text-anchor", "middle")
           .attr("font-size", "15px")
           .attr("fill", "#F69228")
           .style("opacity", 0)
-          .text((_, i) => (i === 0 ? "head" : "tail")) // Label first as "head", last as "tail"
+          .text((_, i) => (i === 0 ? "head" : "tail"))
           .transition()
           .duration(500)
           .style("opacity", 1);
-      } else if (displayArray.length === 1) {
-        // If only one element, label it as "tail"
+      } else if (displayData.length === 1) {
         svg
           .append("text")
-          .attr("class", "array-index")
+          .attr("class", "label")
           .attr("x", startX + boxSize / 2)
-          .attr("y", startY - 10) // Adjust Y position above rectangles
+          .attr("y", startY - 10)
           .attr("text-anchor", "middle")
           .attr("font-size", "15px")
-          .attr("fill", "rgb(233, 126, 10)")
+          .attr("fill", "#F69228")
           .style("opacity", 0)
-          .text("tail") // Only show "tail"
+          .text("tail")
           .transition()
           .duration(500)
           .style("opacity", 1);
-      }      
+      }
     }
-    
+  }
 
   return svg;
 };

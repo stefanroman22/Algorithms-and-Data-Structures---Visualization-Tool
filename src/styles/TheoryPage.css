@@ -8,7 +8,7 @@ body {
 
 .sidebar-theory-page {
   height: 100vh; /* Ensures it fills the entire viewport height */
-  width: 200px; /* Width of the sidebar */
+  width: 180px; /* Width of the sidebar */
   background-color: #1c1a18; /* Sidebar's background color */
   position: fixed; /* Fixes the sidebar to the left */
   top: 0;
@@ -16,29 +16,55 @@ body {
 }
 
 .markdown-content {
-  max-height: 100vh; /* Limit the height to 80% of the viewport */
-  overflow-y: auto; /* Enable vertical scrolling when content overflows */
-  color: white; /* Ensure the text is readable on a black background */
-  font-family: Arial, sans-serif; /* Use a clean, readable font */
-  line-height: 1.6; /* Improve text spacing */
-  background-color: #000000; /* Slightly lighter background for contrast */
-  border-radius: 8px; /* Optional: Rounded corners */
-  width: 86%; /* Adjust width for responsiveness */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Add a subtle shadow */
+  max-height: 94vh; /* slightly less than full viewport height for some breathing room */
+  overflow-y: auto;
+  color: white;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background-color: #000000;
+  border-radius: 8px;
+  width: 87vw; /* width as percentage of viewport width */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   position: fixed;
-  left: 215px;
-  top: 10px;
+  left: 12vw; /* relative to viewport, moves based on screen size */
+  top: 45px;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .markdown-content img {
-  max-width: 50%; /* Makes the image responsive */
-  height: 50vh; /* Adjust the height to fit the viewport */
-  display: block; /* Centers the image */
-  background-color: #222; /* Adds a subtle background to blend with black */
-  border: 2px solid #444; /* Adds a border with a slightly lighter black */
-  border-radius: 8px; /* Rounds the corners for a softer look */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7); /* Adds a shadow for depth */
+  max-width: 100%; /* images won't overflow container */
+  height: auto; /* maintain aspect ratio */
+  max-height: 35vh; /* limit height to 50% of viewport height */
+  display: block;
+  background-color: #222;
+  border: 2px solid #444;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
 }
+
+.markdown-content code {
+  background-color: rgb(0, 0, 0);
+  color: #0ef; /* Light cyan, or choose any highlight color */
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 500;
+  font-family: 'Courier New', monospace;
+}
+
+/* Optional: responsive adjustments for smaller screens */
+@media (max-width: 600px) {
+  .markdown-content {
+    width: 90vw;
+    left: 5vw;
+    max-width: none;
+    padding: 15px;
+  }
+  .markdown-content img {
+    max-height: 40vh;
+  }
+}
+
 
 .graph-properties-animation-container {
   display: flex; /* Ensures the buttons and animation box are side by side */
@@ -102,7 +128,7 @@ body {
   padding: 8px 20px; /* Adds spacing inside the button */
   border: none; /* Removes default border */
   cursor: pointer; /* Changes cursor to pointer on hover */
-  background-color: #0f1115; /* Sets the button background color */
+  background-color: #112948; /* Sets the button background color */
   color: white; /* Sets the text color to white */
   border-radius: 5px; /* Adds rounded corners */
   font-size: 16px; /* Sets font size */

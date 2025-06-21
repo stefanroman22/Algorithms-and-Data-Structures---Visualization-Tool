@@ -17,6 +17,8 @@ import StackPage from "./pages/Data Structures/StackPage";
 import QueuePage from "./pages/Data Structures/QueuePage";
 import ProfileLogSignIn from "./pages/Profile/ProfileLogSignIn";
 import ProfilePage from "./pages/Profile/ProfilePage";
+import PlayPage from "./pages/Play/PlayPage";
+import QuizPage from "./pages/Play/QuizPage";
 
 /**
  * App component rendering the Landpage by default and allowing navigation to other pages.
@@ -50,8 +52,8 @@ function App() {
         <Route path="/array-visualizer" element={<PageWrapper><ArraysPage /></PageWrapper>} />
         <Route path="/stack-visualizer" element={<PageWrapper><StackPage/></PageWrapper>}/>
         <Route path="/queue-visualizer" element={<PageWrapper><QueuePage/></PageWrapper>}/>
-        <Route path="/profile-log-sign-in" element={<PageWrapper><ProfileLogSignIn/></PageWrapper>}/>
-        <Route path="/profile" element={<PageWrapper><ProfilePage/></PageWrapper>}/>
+        <Route path="/play" element={<PageWrapper><PlayPage/></PageWrapper>}/>
+        <Route path="/quiz/:quizId" element={<PageWrapper><QuizPage/></PageWrapper>}/>
       </Routes>
     </AnimatePresence>
   );

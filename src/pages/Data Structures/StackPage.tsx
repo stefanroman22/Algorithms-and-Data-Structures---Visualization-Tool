@@ -28,6 +28,7 @@ function StackPage() {
     }
     return (
         <div className="visualization-container">
+            <div className="visualizer-label">Stack</div>
             {/* NavBar */}
             <div className="navbar-visualization-page">
                 <NavbarVisualizerToolPage />

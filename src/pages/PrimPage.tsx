@@ -11,6 +11,7 @@ function PrimPage() {
     HandleVisualizationButtons();
   return (
     <div className="visualization-container">
+      <div className="visualizer-label">Prim</div>
       {/* NavBar */}
       <div className="navbar-visualization-page">
         <NavbarVisualizerToolPage />

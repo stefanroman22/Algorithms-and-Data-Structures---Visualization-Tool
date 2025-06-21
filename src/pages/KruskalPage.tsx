@@ -11,6 +11,7 @@ function KruskalPage() {
     HandleVisualizationButtons();
   return (
     <div className="visualization-container">
+      <div className="visualizer-label">Kruskal</div>
       {/* NavBar */}
       <div className="navbar-visualization-page">
         <NavbarVisualizerToolPage />

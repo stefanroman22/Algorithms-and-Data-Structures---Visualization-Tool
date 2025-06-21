@@ -11,6 +11,7 @@ function Color2Page() {
     HandleVisualizationButtons();
   return (
     <div className="visualization-container">
+      <div className="visualizer-label">2Color</div>
       {/* NavBar */}
       <div className="navbar-visualization-page" style={{display: "inline-block"}}>
         <NavbarVisualizerToolPage />

@@ -13,17 +13,33 @@ function SideNavBarTheoryPage() {
   const chapters = {
     "Introduction": ["What is a Graph?", "Graphs Representation", "Graphs Properties", "Special Graph Structures"],
     "Additional Data Structures": ["Array", "Stack", "Queue"],
-    "Graph Algorithms": ["Why Graph Algorithms?", "DFS + BFS", "Dijkstra + Bellman Ford", "2Coloring", "Prim's + Kruskal"],
+    "Graph Algorithms": ["Why Graph Algorithms?", "Traversal Algorithms", "Distance Algorithms", "2Coloring", "MST Algorithms"],
   };
 
   // Function to toggle chapter expansion
   const toggleChapter = (chapter: Chapter) => {
-    setExpandedChapters((prevState) =>
-      prevState.includes(chapter)
-        ? prevState.filter((item) => item !== chapter)
-        : [...prevState, chapter]
-    );
-  };
+  setExpandedChapters((prevState) => {
+    const isExpanding = !prevState.includes(chapter);
+    const newState = isExpanding
+      ? [...prevState, chapter]
+      : prevState.filter((item) => item !== chapter);
+
+    // Scroll only if expanding
+    if (isExpanding) {
+      const chapterId = chapter.toLowerCase().replace(/ /g, "-").replace(/['"]/g, "");
+      const element = document.getElementById(chapterId);
+      if (element) {
+        // Delay scrolling until after the DOM updates
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 100);
+      }
+    }
+
+    return newState;
+  });
+};
+
 
   // Function to handle subchapter click
   const handleSubchapterClick = (subchapter: string) => {
@@ -37,11 +53,6 @@ function SideNavBarTheoryPage() {
 
   return (
     <div className="sidebar-container">
-      <div className="go-back">
-        <button className="go-back-button" onClick={() => navigate(-1)}>
-          Go Back
-        </button>
-      </div>
       {Object.keys(chapters).map((key, index) => (
         <div key={index}>
           <button

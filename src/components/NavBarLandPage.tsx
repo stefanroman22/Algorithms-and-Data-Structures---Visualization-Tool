@@ -11,7 +11,8 @@ function NavBarLandPage() {
       <button 
       className="nav-button"
       onClick={() => navigate("/visualizer-tool")}>Visualizer Tool</button>
-      <button className="nav-button">Play</button>
+      <button className="nav-button"
+      onClick={() => navigate("/play")}>Play</button>
       <button 
       className="nav-button"
       onClick={() => navigate("/contact")}>Contact</button>

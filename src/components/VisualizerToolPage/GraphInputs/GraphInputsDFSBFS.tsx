@@ -1,13 +1,32 @@
 import React from "react";
 import "./GraphInputsDFSBFS.css";
+
 function GraphInputsDFSBFS({ handleParseGraph }) {
+  const handleKeyDown = (e) => {
+    if (e.key === "Tab") {
+      const textarea = e.target;
+
+      if (textarea.value.trim() === "") {
+        e.preventDefault();
+        const sampleGraph = "1: 2, 3\n2: 4\n3: 4\n5:";
+
+        textarea.value = sampleGraph;
+
+        // Move cursor to the end of inserted text
+        const cursorPos = sampleGraph.length;
+        textarea.selectionStart = textarea.selectionEnd = cursorPos;
+      }
+    }
+  };
+
   return (
     <div className="graph-inputs">
       <h3>Input Graph</h3>
       <textarea
         id="graph-input-textarea"
         className="graph-input-textarea"
-        placeholder="Enter adjacency list or matrix, e.g., &#10;1: 2, 3&#10;2: 4&#10;3: 4 &#10;5:"
+        placeholder={`Enter adjacency list or matrix, e.g., \n1: 2, 3\n2: 4\n3: 4\n5:`}
+        onKeyDown={handleKeyDown}
       ></textarea>
       <div className="input-and-button">
         <input

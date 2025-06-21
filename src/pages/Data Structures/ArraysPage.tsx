@@ -54,6 +54,7 @@ function ArraysPage() {
 
   return (
     <div className="visualization-container">
+      <div className="visualizer-label">Array</div>
       {/* NavBar */}
       <div className="navbar-visualization-page">
         <NavbarVisualizerToolPage />

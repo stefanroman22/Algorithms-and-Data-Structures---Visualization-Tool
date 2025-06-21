@@ -13,7 +13,7 @@
   }
 .sidebar-container {
     height: auto; /* Ensures it fills the entire viewport height */
-    width: 200px; /* Width of the sidebar */
+    width: 180px; /* Width of the sidebar */
     background-color: #1c1a18; /* Sidebar's background color */
     display: flex; /* Enables flexbox layout */
     flex-direction: column; /* Stack children vertically */

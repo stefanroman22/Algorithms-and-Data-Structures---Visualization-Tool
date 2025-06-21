@@ -3,6 +3,21 @@
   position: relative;
 }
 
+.visualizer-label {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2vw;
+  color: rgba(201, 20, 20, 0.8); /* Light and semi-transparent */
+  font-weight: 700;
+  pointer-events: none; /* Prevents interaction */
+  z-index: 999;
+  text-align: center;
+  white-space: nowrap;
+}
+
+
 .visusaltion-api {
   display: flex; /* Enables flexible layout */
   flex-direction: column; /* Arrange elements (box and buttons) vertically */

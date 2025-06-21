@@ -12,7 +12,7 @@ function BFSPage() {
   const { handleParseGraph, handleStart, handlePause, handleRestart } = HandleVisualizationButtons();
   return (
     <div className="visualization-container">
-
+      <div className="visualizer-label">BFS</div>
       {/* NavBar */}
       <div className="navbar-visualization-page">
         <NavbarVisualizerToolPage />

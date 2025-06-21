@@ -11,6 +11,7 @@ function BellmanFordPage() {
         HandleVisualizationButtons();
   return (
     <div className="visualization-container">
+      <div className="visualizer-label">Bellman-Ford</div>
     {/* NavBar */}
     <div className="navbar-visualization-page">
       <NavbarVisualizerToolPage />

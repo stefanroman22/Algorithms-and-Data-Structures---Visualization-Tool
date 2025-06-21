@@ -136,7 +136,7 @@ export const createGraph = (container, graph, algorithmName = "") => {
     });
   });
 
-  const link = renderLinks(svg, regularLinks);
+  const linkPath = renderLinks(svg, regularLinks);
   const selfLoopPath = renderSelfLoops(svg, selfLoops);
 
   let edgeLabels = null;
@@ -151,16 +151,16 @@ export const createGraph = (container, graph, algorithmName = "") => {
       i === 0 && isTreeRooted ? "green" : "#bbbbbb"
     );
 
-  const labels = renderNodeLabels(svg, graph.nodes);
+  const nodeLabels = renderNodeLabels(svg, graph.nodes);
   const distanceLabels = isHeuristic ? renderDistanceLabels(svg, graph.nodes) : null;
 
   simulation.on("tick", () => {
-    updateLinkPaths(link);
+    updateLinkPaths(linkPath);
     updateSelfLoopPaths(selfLoopPath);
     if (edgeLabels) updateEdgeLabels(edgeLabels);
     if (selfLoopLabels) updateSelfLoopLabels(selfLoopLabels);
     updateNodePositions(node, width, height);
-    updateLabelPositions(labels);
+    updateNodeLabelPositions(nodeLabels);
     if (distanceLabels) updateDistanceLabels(distanceLabels);
   });
 
@@ -216,7 +216,7 @@ export const createPropertiesGraph = (properties, container) => {
     updateLinkPaths(linkSelection);
     updateSelfLoopPaths(selfLoopSelection);
     updateNodePositions(nodeSelection, width, height);
-    updateLabelPositions(labelSelection);
+    updateNodeLabelPositions(labelSelection);
     if(isWeighted){
       updateEdgeLabels(edgeLabelSelection);
       updateSelfLoopLabels(selfLoopLabelSelection);
@@ -235,7 +235,7 @@ export function createSVG(container, width = 600, height = 400) {
 export function createSimulation(nodes, links, width, height) {
   return d3.forceSimulation(nodes)
     .force("link", d3.forceLink(links).id(d => d.id).distance(100))
-    .force("charge", d3.forceManyBody().strength(-200))
+    .force("charge", d3.forceManyBody().strength(-165))
     .force("center", d3.forceCenter(width / 2, height / 2));
 }
 
@@ -431,7 +431,7 @@ export function updateNodePositions(nodeSelection, width, height) {
     .attr("cy", d => d.y = Math.max(20, Math.min(height - 20, d.y)));
 }
 
-export function updateLabelPositions(labelSelection) {
+export function updateNodeLabelPositions(labelSelection) {
   labelSelection
     .attr("x", d => d.x)
     .attr("y", d => d.y);

@@ -59,7 +59,7 @@ function ContactPage() {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ vote: type }),
-});
+  });
 
     localStorage.setItem("contact_voted", "true");
     setHasVoted(true);
@@ -115,7 +115,9 @@ function ContactPage() {
       </form>
       <div className="about-us-content">
         <p>
-          The <strong>GVT Tool</strong> helps students <strong>deepen their understanding of Graph Algorithms and Data Structures</strong> in an <strong>interactive and engaging way</strong>. We believe that <strong>active involvement</strong> boosts comprehension and retention. Rather than just reading theory, interacting with algorithms makes learning more <strong>effective, intuitive, and fun</strong>.
+          The <strong>GVT Tool</strong> helps students <strong>enhance their understanding of Graph Algorithms and Data Structures</strong> in an <strong>interactive and engaging way</strong>. We believe that <strong>active involvement</strong> boosts learning.
+          Rather than just reading theory, interacting with the content makes learning more <strong>effective, intuitive, 
+          and fun</strong>.
         </p>
 
         <p>
@@ -124,7 +126,7 @@ function ContactPage() {
              target="_blank"
              rel="noopener noreferrer"
              style={{
-              color: "rgba(154, 27, 4, 0.87)",
+              color: "rgba(192, 28, 0, 1)",
               fontWeight: "bold",
               textDecoration: "none"
              }}> 
@@ -143,23 +145,25 @@ function ContactPage() {
              Radboud University
           </a>
           . However, it is
-          <strong> open to everyone</strong> who wants to explore and deepen
-          their understanding of Graph Theory and algorithmic problem-solving.
-          The knowledge and techniques presented here are
-          <strong> universally applicable</strong> and valuable for learners
-          worldwide.
+          <strong> open to everyone</strong> who wants to explore and improve
+          their understanding of Graph Algorithms and Data structures.
         </p>
 
         <p>
-          🎯 We <strong> deeply appreciate</strong> you taking the time to
-          explore and use the GVT Tool! We are constantly striving to{" "}
-          <strong>improve and enhance</strong> your experience. If you have any{" "}
+          We <strong> deeply appreciate</strong> you taking the time to
+          explore and use the GVT Tool! If you have any{" "}
           <strong>
             questions, suggestions for improvement, or if you encounter any bugs
           </strong>
           , please don't hesitate to reach out through the{" "}
           <strong>contact form</strong>. Your feedback helps us make this tool
-          even better! 🚀
+          even better! 
+          Additionaly, if you liked the tool make sure to rate with a thumbs up using the 
+          like button below. 
+        </p>
+
+        <p>
+          Happy learning!
         </p>
 
         <div className="feedback-section">

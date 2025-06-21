@@ -105,13 +105,13 @@ export const enqueueCommand = (
 
   // **Update text values inside queue boxes**
   svg
-    .selectAll(".array-value")
+    .selectAll(".value")
     .data(newQueue, (d, i) => d + "-" + i)
     .join(
       (enter) =>
         enter
           .append("text")
-          .attr("class", "array-value")
+          .attr("class", "value")
           .attr("x", (d, i) => startX + i * (boxSize + spacing) + boxSize / 2)
           .attr("y", startY + boxSize / 2 + 5)
           .attr("text-anchor", "middle")
@@ -131,13 +131,13 @@ export const enqueueCommand = (
     );
 
   // **Update index labels (Only head and tail)**
-  svg.selectAll(".array-index").remove(); // Remove old labels
+  svg.selectAll(".label").remove(); // Remove old labels
 
   if (newQueue.length > 0) {
     // Assign "head" label to new first element
     svg
       .append("text")
-      .attr("class", "array-index")
+      .attr("class", "label")
       .attr("x", startX + boxSize / 2)
       .attr("y", startY - 10)
       .attr("text-anchor", "middle")
@@ -153,7 +153,7 @@ export const enqueueCommand = (
     if (newQueue.length > 1) {
       svg
         .append("text")
-        .attr("class", "array-index")
+        .attr("class", "label")
         .attr(
           "x",
           startX + (newQueue.length - 1) * (boxSize + spacing) + boxSize / 2
@@ -186,8 +186,8 @@ export const dequeueCommand = async (
 
   const firstIndex = 0; // The first element (head)
   const firstRect = svg.selectAll(".rect").filter((_, i) => i === firstIndex);
-  const firstText = svg.selectAll(".array-value").filter((_, i) => i === firstIndex);
-  const headIndex = svg.selectAll(".array-index").filter((_, i) => i === firstIndex);
+  const firstText = svg.selectAll(".value").filter((_, i) => i === firstIndex);
+  const headIndex = svg.selectAll(".label").filter((_, i) => i === firstIndex);
 
   const containerWidth = visualizationBoxElement.clientWidth || 400;
   const containerHeight = visualizationBoxElement.clientHeight || 100;
@@ -238,7 +238,7 @@ export const dequeueCommand = async (
     .attr("x", (d, i) => startX + i * (boxSize + spacing));
 
   svg
-    .selectAll(".array-value")
+    .selectAll(".value")
     .filter((_, i) => i !== firstIndex) // Exclude the first element
     .transition()
     .duration(300)
@@ -249,13 +249,13 @@ export const dequeueCommand = async (
     setQueue(newQueue); // Update queue state
 
     // **Remove all previous head/tail labels before reassigning**
-    svg.selectAll(".array-index").remove();
+    svg.selectAll(".label").remove();
 
     // **Reassign "head" to the new first element**
     if (newQueue.length > 0) {
       svg
         .append("text")
-        .attr("class", "array-index")
+        .attr("class", "label")
         .attr("x", startX + boxSize / 2)
         .attr("y", startY - 10)
         .attr("text-anchor", "middle")
@@ -271,7 +271,7 @@ export const dequeueCommand = async (
       if (newQueue.length > 1) {
         svg
           .append("text")
-          .attr("class", "array-index")
+          .attr("class", "label")
           .attr(
             "x",
             startX + (newQueue.length - 1) * (boxSize + spacing) + boxSize / 2
