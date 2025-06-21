@@ -59,6 +59,9 @@ CORS_ALLOWED_ORIGINS = [
     "https://stefanroman22.github.io",
 ]
 
+CORS_ALLOW_HEADERS = ["*"]
+CORS_ALLOW_METHODS = ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"]
+
 ROOT_URLCONF = 'backend.urls'
 
 TEMPLATES = [
