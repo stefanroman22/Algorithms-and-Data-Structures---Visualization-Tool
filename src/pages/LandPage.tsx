@@ -58,7 +58,7 @@ function Landpage() {
       <div className="text-landpage">
         <h1 className="main-text-landpage">GVT</h1>
         <h2 className="sub-text-landpage">
-          Learn Graph Algorithms interactively
+          Learn Graph Algorithms and Data Structures interactively
         </h2>
       </div>
 

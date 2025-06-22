@@ -5,6 +5,19 @@ import {
 } from "../Basic(DFS+BFS)/runAlgorithm";
 import { PriorityQueue } from "../Heuristics/runAlgorithmHeuristics";
 
+/**
+ * Runs Prim's algorithm to find the Minimum Spanning Tree (MST) of a graph,
+ * starting from a given node, with animated visualization using D3.js.
+ * Supports pausing and aborting via simulation IDs and pause state.
+ * 
+ * @param {{ nodes: Array<{ id: string }>, links: Array<{ source: string, target: string, weight: number }> }} graph - The graph data.
+ * @param {string} startNodeId - The ID of the node where Prim's algorithm starts.
+ * @param {d3.Selection} svg - The D3 SVG selection for visualization.
+ * @param {() => boolean} getPausedRef - Function that returns true if animation is paused.
+ * @param {number} currentSimulationId - Current simulation ID to allow aborting old simulations.
+ * @param {() => number} getSimulationIdRef - Function returning latest simulation ID for validation.
+ * @returns {Promise<void>} - Resolves when the MST is found or aborted.
+ */
 export const runPrim = async (
   graph,
   startNodeId,
@@ -163,7 +176,18 @@ class UnionFind {
 }
 
 
-
+/**
+ * Runs Kruskal's algorithm to find the Minimum Spanning Tree (MST) of a graph,
+ * with animated visualization of nodes and edges using D3.js.
+ * Supports pausing and aborting via simulation IDs and pause state.
+ * 
+ * @param {{ nodes: Array<{ id: string }>, links: Array<{ source: string, target: string, weight: number }> }} graph - The graph data.
+ * @param {d3.Selection} svg - The D3 SVG selection for visualization.
+ * @param {() => boolean} getPausedRef - Function that returns true if animation is paused.
+ * @param {number} currentSimulationId - Current simulation ID to allow aborting old simulations.
+ * @param {() => number} getSimulationIdRef - Function returning latest simulation ID for validation.
+ * @returns {Promise<void>} - Resolves when the MST is found or aborted.
+ */
 export const runKruskal = async (
   graph,
   svg,

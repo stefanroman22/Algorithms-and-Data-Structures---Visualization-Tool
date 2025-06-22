@@ -259,6 +259,20 @@ export const runDijkstra = async (
   return { distances, previousNodes };
 };
 
+/**
+ * Runs the Bellman-Ford shortest path algorithm on the graph with animated visualization.
+ * Updates distance labels and colors nodes and edges to reflect the algorithm's progress.
+ * Detects negative cycles and alerts the user if found.
+ * Supports pause and abort controls via simulation IDs and pause state.
+ * 
+ * @param {{ nodes: Array<{ id: string }>, links: Array<{ source: string, target: string, weight: number }> }} graph - The graph object with nodes and weighted edges.
+ * @param {string} startNodeId - The ID of the start node for shortest paths.
+ * @param {d3.Selection} svg - The D3 SVG selection for visualization.
+ * @param {() => boolean} getPausedRef - Function returning true if animation is paused.
+ * @param {number} currentSimulationId - Current unique simulation ID to allow safe abort.
+ * @param {() => number} getSimulationIdRef - Function returning latest simulation ID for validation.
+ * @returns {Promise<void>} - Completes when algorithm finishes or aborts.
+ */
 export const runBellmanFord = async (
   graph,
   startNodeId,

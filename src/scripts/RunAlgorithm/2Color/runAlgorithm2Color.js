@@ -3,6 +3,19 @@ import {
   checkSimulationId,
 } from "../Basic(DFS+BFS)/runAlgorithm";
 
+/**
+ * Performs a 2-coloring (bipartite check) on the graph using DFS with animation.
+ * Colors nodes and edges to visualize the bipartite check, handling disconnected components.
+ * Pauses and aborts gracefully based on simulation state.
+ * 
+ * @param {{ nodes: Array<{ id: string }>, links: Array<{ source: string, target: string }> }} graph - The graph object containing nodes and edges.
+ * @param {string} startNodeId - The ID of the node where the 2-color DFS starts.
+ * @param {d3.Selection} svg - The D3 SVG selection for animating nodes and edges.
+ * @param {() => boolean} getPausedRef - Function returning true if the animation is paused.
+ * @param {number} currentSimulationId - Current simulation's unique ID for validation.
+ * @param {() => number} getSimulationIdRef - Function returning the latest simulation ID.
+ * @returns {Promise<boolean>} - Resolves to true if graph is bipartite, otherwise terminates early.
+ */
 export const run2Color = async (
   graph,
   startNodeId,

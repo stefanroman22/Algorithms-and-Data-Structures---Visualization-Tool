@@ -108,6 +108,19 @@ export const updateVisualizationBox = (
   createGraph(visualizationBoxElement, graph, algorithmName);
 };
 
+/**
+ * Renders an interactive graph visualization in a given container using D3.js.
+ *
+ * Based on the provided algorithm name, it adjusts visual behavior such as:
+ * - Showing edge weights (e.g., for Prim, Kruskal)
+ * - Displaying directional arrows
+ * - Coloring root nodes (e.g., for tree visualizations)
+ * - Rendering distance labels (e.g., for Dijkstra, Bellman-Ford)
+ *
+ * @param container - The HTML container element where the graph should be rendered.
+ * @param graph - The graph data structure, containing nodes and links.
+ * @param algorithmName - Optional name of the algorithm to adjust visual behavior.
+ */
 export const createGraph = (container, graph, algorithmName = "") => {
   container.innerHTML = "";
 
@@ -190,7 +203,7 @@ export const createPropertiesGraph = (properties, container) => {
   ];
   if (properties.connected) links.push({ source: 1, target: 5, weight: properties.weighted ? 7 : null });
   if (properties.cyclic) links.push({ source: 4, target: 1, weight: properties.weighted ? 4 : null });
-  if (properties.selfLoop) links.push({ source: 1, target: 1, weight: properties.weighted ? 3 : null });
+  //if (properties.selfLoop) links.push({ source: 1, target: 1, weight: properties.weighted ? 3 : null });
   if (properties.directed) isBidirectional = false;
   if (properties.weighted) isWeighted = true;
 
@@ -225,6 +238,15 @@ export const createPropertiesGraph = (properties, container) => {
   });
 };
 
+
+/**
+ * Creates and appends an SVG element to the specified container.
+ *
+ * @param container - The HTML element to which the SVG will be appended.
+ * @param width - Optional width of the SVG element (default is 600).
+ * @param height - Optional height of the SVG element (default is 400).
+ * @returns The D3 selection of the newly created SVG element.
+ */
 export function createSVG(container, width = 600, height = 400) {
   return d3.select(container)
     .append("svg")
@@ -232,6 +254,20 @@ export function createSVG(container, width = 600, height = 400) {
     .attr("height", height);
 }
 
+/**
+ * Initializes a D3 force simulation for a graph using the provided nodes and links.
+ *
+ * The simulation includes:
+ * - Link force with fixed distance and node identification by ID
+ * - Repelling charge force to prevent node overlap
+ * - Centering force to position the graph in the middle of the SVG area
+ *
+ * @param nodes - Array of graph nodes used in the simulation.
+ * @param links - Array of graph links (edges) connecting the nodes.
+ * @param width - Width of the SVG area for centering the simulation.
+ * @param height - Height of the SVG area for centering the simulation.
+ * @returns A D3 force simulation object configured with nodes and forces.
+ */
 export function createSimulation(nodes, links, width, height) {
   return d3.forceSimulation(nodes)
     .force("link", d3.forceLink(links).id(d => d.id).distance(100))
@@ -239,6 +275,16 @@ export function createSimulation(nodes, links, width, height) {
     .force("center", d3.forceCenter(width / 2, height / 2));
 }
 
+/**
+ * Annotates each link in the graph with a `isBidirectional` flag indicating whether
+ * a reverse link (from target to source) also exists.
+ *
+ * This is useful for determining whether edges should be rendered as bidirectional
+ * (e.g., in undirected graphs or certain algorithm visualizations).
+ *
+ * @param links - Array of link objects, each with `source` and `target` properties.
+ * @returns A new array of link objects with an added `isBidirectional` boolean property.
+ */
 export function annotateBidirectionality(links) {
   const linkMap = new Set(links.map(link => `${link.source}-${link.target}`));
   return links.map(link => ({
@@ -247,12 +293,35 @@ export function annotateBidirectionality(links) {
   }));
 }
 
+/**
+ * Splits a list of graph links into self-loops and regular links.
+ *
+ * A self-loop is a link where the source and target are the same node.
+ * Regular links connect two distinct nodes.
+ *
+ * @param links - Array of link objects with `source` and `target` properties.
+ * @returns An object containing:
+ *   - `selfLoops`: links where source === target
+ *   - `regularLinks`: links where source !== target
+ */
 export function splitLinks(links) {
   const selfLoops = links.filter(d => d.source === d.target);
   const regularLinks = links.filter(d => d.source !== d.target);
   return { selfLoops, regularLinks };
 }
 
+/**
+ * Appends arrow marker definitions to an SVG element for use in graph link rendering.
+ *
+ * This includes:
+ * - A standard arrowhead marker for regular directed edges.
+ * - A smaller arrowhead marker for self-loops.
+ *
+ * These markers are identified by the IDs `arrowhead` and `self-loop-arrowhead`,
+ * and can be referenced in SVG paths using `marker-end="url(#arrowhead)"`, etc.
+ *
+ * @param svg - A D3 selection of the SVG element to which the markers will be appended.
+ */
 export function createArrowMarkers(svg) {
   const defs = svg.append("defs");
 
@@ -281,7 +350,21 @@ export function createArrowMarkers(svg) {
     .attr("d", "M0,-5L10,0L0,5")
     .attr("fill", "#bbbbbb");
 }
-
+/**
+ * Creates a D3 drag behavior to allow interactive repositioning of nodes in the simulation.
+ *
+ * This drag behavior:
+ * - Sets fixed node positions on drag start
+ * - Updates positions during drag while clamping within the viewport
+ * - Releases the fixed positions when the drag ends
+ *
+ * It also restarts the force simulation to allow smooth transitions.
+ *
+ * @param simulation - The D3 force simulation to interact with during drag events.
+ * @param width - Width of the SVG area, used to clamp horizontal movement.
+ * @param height - Height of the SVG area, used to clamp vertical movement.
+ * @returns A D3 drag behavior object that can be applied to node elements.
+ */
 export function createDrag(simulation, width, height) {
   return d3.drag()
     .on("start", (event, d) => {
@@ -299,6 +382,23 @@ export function createDrag(simulation, width, height) {
       d.fy = null;
     });
 }
+
+
+/**
+ * Rendering functions for graph visualization components using D3.js.
+ *
+ * These functions append SVG elements to visually represent the graph structure:
+ *
+ * - `renderLinks`: Draws curved paths for regular (non-self-loop) links.
+ * - `renderSelfLoops`: Draws paths for self-loop edges.
+ * - `renderNodes`: Renders nodes as draggable circles.
+ * - `renderNodeLabels`: Places labels (node IDs) centered on each node.
+ * - `renderEdgeLabels`: Adds labels showing edge weights, offset based on directionality.
+ * - `renderSelfLoopLabels`: Adds labels for self-loop edges, positioned above the loop.
+ * - `renderDistanceLabels`: Initializes distance labels for nodes (e.g., used in Dijkstra/Bellman-Ford).
+ *
+ * All rendered elements are styled and assigned appropriate CSS classes for future updates or selection.
+ */
 
 export function renderLinks(svg, regularLinks) {
   return svg.selectAll(".link")
@@ -397,6 +497,22 @@ export function renderDistanceLabels(svg, nodes) {
     .text(() => "∞");
 }
 
+
+/**
+ * Update functions for dynamically adjusting graph visualization elements during simulation ticks.
+ *
+ * These functions modify SVG attributes to reflect current simulation data:
+ *
+ * - `updateLinkPaths`: Updates the "d" attribute for link paths, applying curvature for bidirectional edges.
+ * - `updateSelfLoopPaths`: Updates path for self-loop edges using cubic Bezier curves.
+ * - `updateEdgeLabels`: Repositions edge weight labels between source and target nodes, with offset for self-loops.
+ * - `updateSelfLoopLabels`: Positions labels for self-loop edges.
+ * - `updateNodePositions`: Updates circle node positions, clamping within SVG bounds.
+ * - `updateNodeLabelPositions`: Positions text labels centered on nodes.
+ * - `updateDistanceLabels`: Updates distance label positions with special offset for nodes with self-loops.
+ *
+ * These are called repeatedly during force simulation ticks to animate the graph.
+ */
 export function updateLinkPaths(linkSelection) {
   linkSelection.attr("d", d => curvedPath(d, d.isBidirectional));
 }
@@ -573,6 +689,17 @@ export const startAlgorithmSimulation = (
   }
 };
 
+/**
+ * Generates a curved SVG path string for a link between two nodes.
+ *
+ * Uses an elliptical arc to create a curved edge between source and target coordinates.
+ * Adds an offset to the arc radius when the edge is bidirectional, creating a visible curve
+ * to distinguish it from the opposite directed edge.
+ *
+ * @param d - The link data object containing `source` and `target` nodes with x, y coordinates.
+ * @param isBidirectional - Boolean flag indicating if the edge is bidirectional (affects curvature).
+ * @returns A string representing the SVG path with an elliptical arc from source to target.
+ */
 const curvedPath = (d, isBidirectional) => {
   const dx = d.target.x - d.source.x; // x-distance between source and target
   const dy = d.target.y - d.source.y; // y-distance between source and target

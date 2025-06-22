@@ -73,9 +73,6 @@ export const colorLink = (
     });
 };
 
-
-
-
 /**
  * Waits until the algorithm is resumed if paused.
  * @param {() => boolean} getPausedRef - The function to check if the simulation is paused.

@@ -1,6 +1,15 @@
 import { useRef, useState } from "react";
 import { updateVisualizationBox, startAlgorithmSimulation } from "../CreateGraph/createGraph";
 
+/**
+ * Custom hook managing handlers for graph visualization controls:
+ * parse graph input, start simulation, pause/resume, and restart.
+ * 
+ * Handles state and refs for pause status, parsed state, and simulation ID
+ * to control simulation lifecycle and UI feedback.
+ * 
+ * @returns {object} - Handlers: handleParseGraph, handleStart, handlePause, handleRestart
+ */
 export default function HandleVisualizationButtons() {
   const [pressedParsed, setPressedParsed] = useState(false);
 

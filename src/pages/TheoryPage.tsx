@@ -630,7 +630,6 @@ const graphPropertiesCheckboxes = () => {
       connected: false,
       directed: false,
       cyclic: false,
-      selfLoop: false,
     });
 
 

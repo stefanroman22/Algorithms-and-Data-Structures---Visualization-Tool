@@ -1,5 +1,24 @@
 import * as d3 from "d3";
 
+
+/**
+ * Parses a user input string of numbers separated by commas and updates the visualization accordingly.
+ *
+ * This function:
+ * - Retrieves input and visualization DOM elements by their IDs.
+ * - Clears the console for fresh logs.
+ * - Validates the input format (numbers separated by commas, allowing decimals and negatives).
+ * - Handles empty input gracefully by clearing the visualization.
+ * - Converts the validated input string into a number array.
+ * - Updates state variables to reflect parsing status and the parsed array.
+ * - Calls appropriate functions to create or update the data structure visualization.
+ *
+ * @param inputFieldId - The ID of the input HTML element containing the user's string input.
+ * @param visualizationBoxId - The ID of the container where the visualization will be rendered.
+ * @param setParseInputPressed - Setter function to update the state indicating parsing was attempted.
+ * @param setArray - Setter function to update the state with the parsed number array.
+ * @param dataStructureName - A string indicating which data structure visualization to create/update.
+ */
 export const handleParseInput = (
   inputFieldId,
   visualizationBoxId,
@@ -50,6 +69,22 @@ export const handleParseInput = (
   createAdditionalDataStructure(numberArray, visualizationBoxElement, dataStructureName);
 };
 
+/**
+ * Creates a D3.js visualization of a linear data structure (Stack, Array, or Queue) inside a given container.
+ * 
+ * - Clears any previous visualization from the container.
+ * - Renders the data as SVG rectangles with corresponding values.
+ * - For Stack, displays elements vertically stacked.
+ * - For Array and Queue, displays elements horizontally.
+ * - Adds index labels for Array elements.
+ * - Adds "head" and "tail" labels for Queue elements.
+ * - Uses smooth opacity transitions for appearance.
+ * 
+ * @param data - Array of numbers representing the data structure elements.
+ * @param container - DOM element container where the visualization SVG will be appended.
+ * @param dataStructureType - Type of data structure to visualize: "Stack", "Array", or "Queue".
+ * @returns The D3 selection of the created SVG element.
+ */
 const createAdditionalDataStructure = (data, container, dataStructureType) => {
   if (!container) {
     console.error("Visualization container not found!");

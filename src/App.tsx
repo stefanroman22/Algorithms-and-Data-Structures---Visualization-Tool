@@ -15,8 +15,6 @@ import ArraysPage from "./pages/Data Structures/ArraysPage";
 import { useEffect } from "react";
 import StackPage from "./pages/Data Structures/StackPage";
 import QueuePage from "./pages/Data Structures/QueuePage";
-import ProfileLogSignIn from "./pages/Profile/ProfileLogSignIn";
-import ProfilePage from "./pages/Profile/ProfilePage";
 import PlayPage from "./pages/Play/PlayPage";
 import QuizPage from "./pages/Play/QuizPage";
 
