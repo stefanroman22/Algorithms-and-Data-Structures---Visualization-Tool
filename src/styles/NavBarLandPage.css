@@ -1,16 +1,10 @@
 /* Navbar Container */
 .navbar {
-  top: 0;
-  left: 0;
-  width: 100%; /* Full width */
-  display: flex; /* Ensures horizontal alignment */
-  justify-content: center; /* Centers the buttons */
-  align-items: center; /* Aligns items */
-  gap: 10px; /* Space between buttons */
-  padding: 10px; /* Small padding for aesthetics */
-  background-color: transparent; /* No background */
-  position: fixed; /* Fix at the top */
-  white-space: nowrap; /* Prevents wrapping of buttons */
+  display: flex;
+  justify-content: flex-start;
+  align-items: center; /* vertically center buttons if needed */
+  width: fit-content; /* shrink to content size */
+  padding: 10px;
 }
 
 

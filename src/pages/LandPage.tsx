@@ -51,10 +51,14 @@ function Landpage() {
 
   return (
     <div className="landpage-container">
-      <div className="navBar-container" style={{ display: "inline-block" }}>
+      <section className="navigation-section">
         <NavBarLandPage />
-      </div>
-      <div id="network" className="animation-container"></div>
+      </section>
+
+      <section className="animation">
+        <div id="network" className="animation-container"></div>
+      </section>
+      
       <div className="text-landpage">
         <h1 className="main-text-landpage">GVT</h1>
         <h2 className="sub-text-landpage">

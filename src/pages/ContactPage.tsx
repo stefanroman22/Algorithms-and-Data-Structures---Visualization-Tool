@@ -73,136 +73,83 @@ function ContactPage() {
           Go Back
         </button>
       </div>
+      <div className="contact-form-text">
+        
+        <form onSubmit={onSubmit} className="contact-form" ref={formRef}>
+          <h2 className="contact-title">
+            <FaEnvelope className="contact-icon" /> Contact Us
+          </h2>
+          <div className="input-box">
+            <label>Full Name</label>
+            <input
+              type="text"
+              className="field"
+              placeholder="Enter your full name"
+              name="Name:"
+              required
+            />
+          </div>
 
-      <form onSubmit={onSubmit} className="contact-form" ref={formRef}>
-        <h2 className="contact-title">
-          <FaEnvelope className="contact-icon" /> Contact Us
-        </h2>
-        <div className="input-box">
-          <label>Full Name</label>
-          <input
-            type="text"
-            className="field"
-            placeholder="Enter your full name"
-            name="Name:"
-            required
-          />
+          <div className="input-box">
+            <label>Email Address</label>
+            <input
+              type="email"
+              className="field"
+              placeholder="Enter your email"
+              name="Email:"
+              required
+            />
+          </div>
+
+          <div className="input-box">
+            <label>Message </label>
+            <textarea
+              name="Message:"
+              className="field-message"
+              placeholder="Enter your message"
+              required
+            ></textarea>
+          </div>
+          <button type="submit" className="btn">
+            Send Message
+          </button>
+        </form>
+        <div className="contact-text">
+
+            <div className="feedback-section">
+              <p>Was this page helpful?</p>
+              <div className="feedback-buttons">
+                <button
+                  className={`thumb-button like ${
+                    hasVoted && voteType === 'like' ? 'voted' : ''
+                  } ${hasVoted && voteType !== 'like' ? 'disabled-other' : ''}`}
+                  onClick={() => handleVote('like')}
+                  disabled={hasVoted}
+                >
+                  <FaThumbsUp />
+                </button>
+
+                <button
+                  className={`thumb-button dislike ${
+                    hasVoted && voteType === 'dislike' ? 'voted' : ''
+                  } ${hasVoted && voteType !== 'dislike' ? 'disabled-other' : ''}`}
+                  onClick={() => handleVote('dislike')}
+                  disabled={hasVoted}
+                >
+                  <FaThumbsDown />
+                </button>
+                </div>
+                <a 
+          href="https://nl.linkedin.com/in/stefan-roman-1911a9211?trk=people-guest_people_search-card" target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            color: "rgba(0, 119, 181)",
+            fontWeight: "bold",
+            textDecoration: "none",
+          }} className="linkedin-link">Developed by Stefan Roman</a>
+          </div>
         </div>
 
-        <div className="input-box">
-          <label>Email Address</label>
-          <input
-            type="email"
-            className="field"
-            placeholder="Enter your email"
-            name="Email:"
-            required
-          />
-        </div>
-
-        <div className="input-box">
-          <label>Message </label>
-          <textarea
-            name="Message:"
-            className="field-message"
-            placeholder="Enter your message"
-            required
-          ></textarea>
-        </div>
-        <button type="submit" className="btn">
-          Send Message
-        </button>
-      </form>
-      <div className="about-us-content">
-        <p>
-          The <strong>GVT Tool</strong> helps students <strong>enhance their understanding of Graph Algorithms and Data Structures</strong> in an <strong>interactive and engaging way</strong>. We believe that <strong>active involvement</strong> boosts learning.
-          Rather than just reading theory, interacting with the content makes learning more <strong>effective, intuitive, 
-          and fun</strong>.
-        </p>
-
-        <p>
-          This tool is primarily designed to support students in the {" "}
-          <a href="https://ru.osiris-student.nl/onderwijscatalogus/extern/cursus?collegejaar=huidig&taal=en&cursuscode=NWI-IBC027"
-             target="_blank"
-             rel="noopener noreferrer"
-             style={{
-              color: "rgba(192, 28, 0, 1)",
-              fontWeight: "bold",
-              textDecoration: "none"
-             }}> 
-            Algorithms and Data Structures
-            </a> course at{" "}
-          <a
-            href="https://www.ru.nl/"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              color: "rgba(192, 28, 0, 1)",
-              fontWeight: "bold",
-              textDecoration: "none",
-            }}
-          >
-             Radboud University
-          </a>
-          . However, it is
-          <strong> open to everyone</strong> who wants to explore and improve
-          their understanding of Graph Algorithms and Data structures.
-        </p>
-
-        <p>
-          We <strong> deeply appreciate</strong> you taking the time to
-          explore and use the GVT Tool! If you have any{" "}
-          <strong>
-            questions, suggestions for improvement, or if you encounter any bugs
-          </strong>
-          , please don't hesitate to reach out through the{" "}
-          <strong>contact form</strong>. Your feedback helps us make this tool
-          even better! 
-          Additionaly, if you liked the tool make sure to rate with a thumbs up using the 
-          like button below. 
-        </p>
-
-        <p>
-          Happy learning!
-        </p>
-
-        <div className="feedback-section">
-      <p>Was this page helpful?</p>
-      <div className="feedback-buttons">
-        <button
-  className={`thumb-button like ${
-    hasVoted && voteType === 'like' ? 'voted' : ''
-  } ${hasVoted && voteType !== 'like' ? 'disabled-other' : ''}`}
-  onClick={() => handleVote('like')}
-  disabled={hasVoted}
->
-  <FaThumbsUp />
-</button>
-
-<button
-  className={`thumb-button dislike ${
-    hasVoted && voteType === 'dislike' ? 'voted' : ''
-  } ${hasVoted && voteType !== 'dislike' ? 'disabled-other' : ''}`}
-  onClick={() => handleVote('dislike')}
-  disabled={hasVoted}
->
-  <FaThumbsDown />
-</button>
-      </div>
-</div>
-
-
-
-        <div className="center-container">
-        <a 
-        href="https://nl.linkedin.com/in/stefan-roman-1911a9211?trk=people-guest_people_search-card" target="_blank"
-        rel="noopener noreferrer"
-        style={{
-          color: "rgba(0, 119, 181)",
-          fontWeight: "bold",
-          textDecoration: "none",
-        }} className="linkedin-link">Developed by Stefan Roman</a>
-        </div>
       </div>
     </section>
   );

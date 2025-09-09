@@ -58,7 +58,7 @@
 
 
 .algorithm-card {
-  background-image: url("C:\Users\stefa\react-app\src\images\stars-background-blue-starry-sky-600nw-2471332615.webp"); /* Dark gray */
+  background-image: url("/Algorithms-and-Data-Structures---Visualization-Tool//public//images//stars-background-blue-starry-sky-600nw-2471332615.webp"); /* Dark gray */
   color: white; /* Text color */
 
   border-radius: 10px;
@@ -104,6 +104,7 @@
 /* Filter Container */
 .filter-container {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 15px;
   padding: 20px;
@@ -157,12 +158,11 @@
 
 .visualizer-main {
   font-family: Arial, sans-serif;
-  background-image: url("../images/pexels-cottonbro-9665178.jpg");
+  background-image: url("/public/images/pexels-cottonbro-9665178.jpg");
   background-size: cover; /* Ensures the image covers the entire area */
   background-repeat: no-repeat; /* Prevents the image from repeating */
-  background-attachment: fixed; /* Makes the background stay fixed during scrolling */
   background-position: center; /* Centers the background image */
-  min-height: 100vh; /* Ensures the section always takes at least the full viewport height */
+
   display: flex;
   flex-direction: column;
 }
@@ -170,5 +170,11 @@
 @media (max-width: 768px) {
   .visualizer-main {
     background-size: contain; /* Prevents zoom-in on smaller screens */
+  }
+}
+
+@media (max-width: 900px) {
+  .visualizer-main {
+    background-attachment: scroll; /* allow normal page scroll */
   }
 }

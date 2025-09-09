@@ -1,61 +1,107 @@
 /* General styles for the body */
+
+
 .landpage-container {
-  margin: 0;
-  padding: 0;
-  min-height: 100vh; /* Allows scrolling if necessary */
-  height: 100vh; /* Full viewport height */
   background-color: #121212; /* Dark background */
-  background-image: url('C:/Users/stefa/react-app/src/images/pexels-cottonbro-9665178.jpg');
+  background-image: url('/images/pexels-cottonbro-9665178.jpg');
   background-size: cover; /* Ensure the background covers the whole page */
   background-position: center; /* Center the image */
   font-family: 'Arial', sans-serif;
-  overflow: hidden; /* Prevent scrolling */
 }
 
+.navbar-container{
+  display: flex;
+  justify-content: flex-start;
+}
+
+
+
+/* Parent section should be relative so text can be absolutely positioned */
+.animation {
+  position: relative;  /* Allows absolute children inside */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;       /* Full viewport height */
+  width: 100%;
+}
 
 .animation-container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1;
-  opacity: 0.6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  transition: width 0.3s ease, height 0.3s ease;
+}
+
+/* ====== MEDIA QUERIES ====== */
+
+/* For tablets and medium screens */
+@media (max-width: 768px) {
+  .animation-container {
+    width: min(80vw, 300px); /* Slightly smaller on tablets */
+  }
+}
+
+/* For very small phones */
+@media (max-width: 480px) {
+  .animation-container {
+    width: min(90vw, 250px); /* Keep it fitting nicely on small phones */
+    border-radius: 6px;
+  }
 }
 
 
-/* Text container style */
+
+/* Text overlay container */
 .text-landpage {
-  display: flex;                 /* Use flexbox */
-  flex-direction: column;        /* Stack elements vertically */
-  justify-content: center;       /* Center content vertically */
-  align-items: center;           /* Center content horizontally */
-  text-align: center;            /* Center text inside elements */
-  height: 100vh;                 /* Full viewport height */
-  width: 100%;                   /* Ensure the container takes up full width */
-  position: relative;            /* Ensure the text container doesn't overlap the navbar */
-  z-index: 0;                    /* Ensure it stays behind the navbar */
+  position: absolute;      /* Position on top of the animation */
+  top: 50%;                /* Center vertically */
+  left: 50%;               /* Center horizontally */
+  transform: translate(-50%, -50%); /* Perfect centering */
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 15px;         /* Add padding for small screens */
+  z-index: 2;              /* Keep it above animation */
+  width: 90%;              /* Prevent text overflowing on small screens */
+  max-width: 800px;        /* Optional: limit width for large screens */
 }
 
-/* Main title style */
+/* Main title */
 .main-text-landpage {
-  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-size: clamp(1.8rem, 5vw, 3.5rem);  /* Responsive scaling */
   font-weight: 700;
-  color: #fff; /* White text */
-  margin-bottom: 20px; /* Space below the main title */
+  color: #fff;
+  margin-bottom: 15px;
   letter-spacing: 1px;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); /* Light shadow effect */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
 
-/* Subtitle style */
+/* Subtitle */
 .sub-text-landpage {
-  font-size: clamp(1rem, 3vw, 1.5rem);
+  font-size: clamp(1rem, 3vw, 1.5rem);    /* Responsive scaling */
   font-weight: 600;
-  color: #ddd; /* Lighter gray text */
+  color: #bcb5b5;
   margin-top: 0;
   letter-spacing: 0.5px;
-  line-height: 1.5; /* Make the subtitle more readable */
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); /* Light shadow effect */
+  line-height: 1.5;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
+
+/* For very small screens */
+@media (max-width: 480px) {
+  .main-text-landpage {
+    font-size: clamp(1.5rem, 6vw, 2.2rem);
+  }
+
+  .sub-text-landpage {
+    font-size: clamp(0.9rem, 4vw, 1.2rem);
+  }
+}
+
 
 .easterEgg-container{
   position: fixed;

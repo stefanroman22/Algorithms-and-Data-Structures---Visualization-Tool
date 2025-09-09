@@ -1,139 +1,136 @@
-/* Center .contact-form with modern minimalist styling */
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+body {
+  background-image: url('/images/pexels-cottonbro-9665178.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;  /* Add this for fixed effect on large screens */
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  body {
+    background-attachment: scroll; /* Already have this; keeps scrolling enabled on mobile */
+  }
+}
+
 .contact {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh; /* Full screen height */
+  min-height: auto; /* Allow natural height */
   padding: 20px;
+  box-sizing: border-box;
+  overflow-y: auto;
 }
 
-body{
-  background-image: url('C:/Users/stefa/react-app/src/images/pexels-cottonbro-9665178.jpg');
+.contact-form-text {
+  display: grid;
+  grid-template-columns: minmax(380px, 1fr) minmax(380px, 1fr);
+  grid-template-areas: "form text";
+  gap: 2rem;
+  align-items: center;
+  max-width: 1100px;
+  margin: 6% auto;
+  padding: 0;
+  box-sizing: border-box;
+  min-height: auto;
 }
 
-/* Modern Form Styling */
+.contact-form { grid-area: form; }
+.contact-text { 
+  grid-area: text; 
+  color: #fff;
+  max-width: 65ch;
+}
+
+@media (max-width: 900px) {
+  .contact-form-text {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "form"
+      "text";
+    gap: 1.5rem;
+    margin: 24px auto;
+    max-width: 700px;
+  }
+}
+
+@media (max-width: 520px) {
+  .contact {
+    padding: 10px;
+  }
+  .contact-form-text {
+    gap: 1rem;
+  }
+  .contact-text {
+    max-width: 100%;
+    max-height: none; /* Remove max-height to allow full content */
+    padding-right: 4px;
+  }
+}
+
+/* Keep your existing visual styles below */
 .contact-form {
-  background: #101010; /* Sleek dark background */
+  background: #101010;
   padding: 2rem;
   border-radius: 12px;
-  box-shadow: 0px 5px 15px rgba(11, 11, 11, 0.05); /* Soft glow */
-  width: 100%;
-  max-width: 450px; /* Keeps it compact */
-  color: #f0f0f5; /* Light text */
+  box-shadow: 0px 5px 15px rgba(11, 11, 11, 0.05);
+  max-width: 100%;
+  color: #f0f0f5;
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
-/* Subtle interaction effect */
 .contact-form:hover {
   transform: translateY(-3px);
   box-shadow: 0px 8px 20px rgba(255, 255, 255, 0.08);
 }
 
-/* Minimalist Header */
-h2 {
+
+/* Scope the heading so you don't style all h2s globally */
+.contact-form .contact-title {
   font-size: 1.8rem;
-  color: #ffffff;
+  color: #fff;
   margin-bottom: 1rem;
   font-family: 'Inter', sans-serif;
   font-weight: 500;
 }
 
-/* Input Field Container */
-.input-box {
-  margin-bottom: 1.2rem;
-  text-align: left;
-}
-
-/* Labels */
+/* Inputs */
+.input-box { margin-bottom: 1.2rem; text-align: left; }
 .input-box label {
-  font-size: 1rem;
-  color: #b0b0b0; /* Softer contrast */
-  display: block;
-  margin-bottom: 0.3rem;
-  font-weight: 500;
+  font-size: 1rem; color: #b0b0b0; display: block; margin-bottom: 0.3rem; font-weight: 500;
 }
-
-/* Inputs & Textareas */
 .input-box input,
 .input-box textarea {
-  width: 100%;
-  padding: 12px;
-  border-radius: 8px;
-  border: none; /* No visible border */
-  background-color: #222222; /* Subtle dark background */
-  color: #ffffff; /* White text */
-  font-size: 1rem;
+  width: 100%; padding: 12px; border-radius: 8px; border: none;
+  background-color: #222; color: #fff; font-size: 1rem;
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
-
-/* Focused Input Style */
 .input-box input:focus,
 .input-box textarea:focus {
-  outline: none;
-  background-color: #292929; /* Slightly lighter */
-  transform: scale(1.02); /* Slight zoom effect */
+  outline: none; background-color: #292929; transform: scale(1.02);
 }
 
-/* Message Box Styling */
-.field-message {
-  height: 120px;
-  resize: none; /* Disable resizing */
-}
-
-/* Submit Button - Modern Minimalist */
+/* Submit button */
 button[type="submit"] {
   background: linear-gradient(to right, #292929, #1e1e1e);
-  color: #ffffff;
-  border: none;
-  padding: 12px 20px;
-  font-size: 1.1rem;
-  font-weight: 600;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  width: 100%;
-  text-transform: uppercase;
+  color: #fff; border: none; padding: 12px 20px; font-size: 1.1rem; font-weight: 600;
+  border-radius: 8px; cursor: pointer; transition: all 0.3s ease; width: 100%; text-transform: uppercase;
 }
+button[type="submit"]:hover { background: linear-gradient(to right, #303030, #242424); transform: translateY(-2px); }
+button[type="submit"]:active { background: #151515; transform: scale(0.98); }
 
-/* Hover & Active Effect */
-button[type="submit"]:hover {
-  background: linear-gradient(to right, #303030, #242424);
-  transform: translateY(-2px);
-}
-
-button[type="submit"]:active {
-  background: #151515;
-  transform: scale(0.98);
-}
-
-/* Responsive Design */
+/* Form responsiveness */
 @media (max-width: 768px) {
-  .contact-form {
-    padding: 1.5rem;
-    max-width: 90%;
-  }
-
-  h2 {
-    font-size: 1.5rem;
-  }
-
-  .input-box input,
-  .input-box textarea {
-    padding: 10px;
-  }
-
-  button[type="submit"] {
-    padding: 10px 18px;
-    font-size: 1rem;
-  }
+  .contact-form { padding: 1.5rem; }
+  .contact-form .contact-title { font-size: 1.5rem; }
+  .input-box input, .input-box textarea { padding: 10px; }
+  button[type="submit"] { padding: 10px 18px; font-size: 1rem; }
 }
 
-.about-us-content{
-  width: 600px;
-  color: white;
-  margin-left: 30px;
-}
 
 .center-container {
   text-align: center; /* Centers inline-block elements inside */
