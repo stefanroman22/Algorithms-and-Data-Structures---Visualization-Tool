@@ -18,7 +18,7 @@ function PlayPage() {
     async function fetchQuizzes() {
       try {
         setLoading(true);
-        const response = await fetch("https://algorithms-and-data-structures-yf1y.onrender.com/api/quiz/list");
+        const response = await fetch("http://127.0.0.1:8000/api/quiz/list");
         if (!response.ok) throw new Error("Failed to fetch quizzes");
         const data = await response.json();
         setQuizzes(data);

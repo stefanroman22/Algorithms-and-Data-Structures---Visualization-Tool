@@ -1,1 +1,1 @@
-export function initGraphAnimation(containerId: string): void;
+export function initGraphAnimation(containerId: string, svgSize: number): void;

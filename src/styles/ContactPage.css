@@ -1,236 +1,34 @@
-html, body {
-  height: 100%;
-  margin: 0;
+
+
+.contact{
   overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
 }
-
-body {
-  background-image: url('/images/pexels-cottonbro-9665178.jpg');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;  /* Add this for fixed effect on large screens */
-  margin: 0;
-}
-
-@media (max-width: 900px) {
-  body {
-    background-attachment: scroll; /* Already have this; keeps scrolling enabled on mobile */
-  }
-}
-
-.contact {
-  min-height: auto; /* Allow natural height */
-  padding: 20px;
+.contact-container{ 
+  display: flex;
+  justify-content: center; /* Horizontal center */
+  align-items: center;     /* Vertical center */
+  min-height: 100vh;       /* Full viewport height */
+  width: 100%;             /* Full width */
+  padding: 20px;           /* Optional: some breathing room */
   box-sizing: border-box;
-  overflow-y: auto;
 }
 
 .contact-form-text {
   display: grid;
-  grid-template-columns: minmax(380px, 1fr) minmax(380px, 1fr);
-  grid-template-areas: "form text";
-  gap: 2rem;
-  align-items: center;
-  max-width: 1100px;
-  margin: 6% auto;
-  padding: 0;
-  box-sizing: border-box;
-  min-height: auto;
+  grid-template-columns: 1fr 1fr; /* Two columns by default */
+  align-items: start;             /* Align content at the top */
+  gap: 20px;                       /* Space between form and text */
+  padding: 20px;
+  max-width: 1100px;               /* Prevent it from stretching too wide */
+  width: 100%;
 }
 
-.contact-form { grid-area: form; }
-.contact-text { 
-  grid-area: text; 
-  color: #fff;
-  max-width: 65ch;
-}
-
+/* Collapse to 1 column on smaller screens */
 @media (max-width: 900px) {
   .contact-form-text {
     grid-template-columns: 1fr;
-    grid-template-areas:
-      "form"
-      "text";
-    gap: 1.5rem;
-    margin: 24px auto;
-    max-width: 700px;
   }
 }
 
-@media (max-width: 520px) {
-  .contact {
-    padding: 10px;
-  }
-  .contact-form-text {
-    gap: 1rem;
-  }
-  .contact-text {
-    max-width: 100%;
-    max-height: none; /* Remove max-height to allow full content */
-    padding-right: 4px;
-  }
-}
 
-/* Keep your existing visual styles below */
-.contact-form {
-  background: #101010;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0px 5px 15px rgba(11, 11, 11, 0.05);
-  max-width: 100%;
-  color: #f0f0f5;
-  text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.contact-form:hover {
-  transform: translateY(-3px);
-  box-shadow: 0px 8px 20px rgba(255, 255, 255, 0.08);
-}
-
-
-/* Scope the heading so you don't style all h2s globally */
-.contact-form .contact-title {
-  font-size: 1.8rem;
-  color: #fff;
-  margin-bottom: 1rem;
-  font-family: 'Inter', sans-serif;
-  font-weight: 500;
-}
-
-/* Inputs */
-.input-box { margin-bottom: 1.2rem; text-align: left; }
-.input-box label {
-  font-size: 1rem; color: #b0b0b0; display: block; margin-bottom: 0.3rem; font-weight: 500;
-}
-.input-box input,
-.input-box textarea {
-  width: 100%; padding: 12px; border-radius: 8px; border: none;
-  background-color: #222; color: #fff; font-size: 1rem;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-.input-box input:focus,
-.input-box textarea:focus {
-  outline: none; background-color: #292929; transform: scale(1.02);
-}
-
-/* Submit button */
-button[type="submit"] {
-  background: linear-gradient(to right, #292929, #1e1e1e);
-  color: #fff; border: none; padding: 12px 20px; font-size: 1.1rem; font-weight: 600;
-  border-radius: 8px; cursor: pointer; transition: all 0.3s ease; width: 100%; text-transform: uppercase;
-}
-button[type="submit"]:hover { background: linear-gradient(to right, #303030, #242424); transform: translateY(-2px); }
-button[type="submit"]:active { background: #151515; transform: scale(0.98); }
-
-/* Form responsiveness */
-@media (max-width: 768px) {
-  .contact-form { padding: 1.5rem; }
-  .contact-form .contact-title { font-size: 1.5rem; }
-  .input-box input, .input-box textarea { padding: 10px; }
-  button[type="submit"] { padding: 10px 18px; font-size: 1rem; }
-}
-
-
-.center-container {
-  text-align: center; /* Centers inline-block elements inside */
-}
-
-.linkedin-link {
-  display: inline-block; /* Ensures transform works correctly */
-  transition: transform 0.3s ease-out;
-}
-
-.linkedin-link:hover {
-  transform: scale(1.2); /* Enlarges text smoothly */
-}
-
-.feedback-section {
-  text-align: center;
-  margin-top: 0.8rem;
-}
-
-.feedback-buttons button {
-  font-size: 2rem;
-  margin: 0 1rem;
-  cursor: pointer;
-}
-
-.feedback-buttons button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-
-.feedback-buttons {
-  display: flex;
-  gap: 0.8rem;
-  justify-content: center;
-  align-items: center;
-  padding: 0.5rem;
-}
-
-/* Base button style */
-.thumb-button {
-  background: transparent;
-  border: 2px solid #ccc;
-  color: #ccc;
-  padding: 1rem;
-  font-size: 2rem;
-  border-radius: 30px;
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
-
-/* Hover styles */
-.thumb-button.like:hover:not(:disabled) {
-  background-color: #2a9d8f;
-  border-color: #2a9d8f;
-  color: #fff;
-}
-
-.thumb-button.dislike:hover:not(:disabled) {
-  background-color: #e76f51;
-  border-color: #e76f51;
-  color: #fff;
-}
-
-/* Voted state (after click) */
-
-.thumb-button.like.voted {
-  background-color: rgba(42, 157, 143, 0.1);
-  border-color: #2a9d8f;
-  color: #2a9d8f;
-}
-
-.thumb-button.dislike.voted {
-  background-color: rgba(231, 111, 81, 0.1);
-  border-color: #e76f51;
-  color: #e76f51;
-}
-
-/* Prevent disabled from overriding voted */
-.thumb-button.voted:disabled {
-  opacity: 1 !important;
-  cursor: not-allowed;
-}
-
-/* Disabled buttons look dim ONLY if not voted */
-.thumb-button:disabled:not(.voted) {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.thumb-button.like.voted:disabled {
-  background-color: rgba(42, 157, 143, 0.1);
-  border-color: #2a9d8f;
-  color: #2a9d8f;
-}
-
-.thumb-button.disabled-other {
-  opacity: 1;
-  color: #333;
-  border-color: #333;
-  background-color: rgba(0, 0, 0, 0.05);
-  cursor: not-allowed;
-}
+.contact-form {background: #101010;   padding: 2rem;   border-radius: 12px;   box-shadow: 0px 5px 15px rgba(11, 11, 11, 0.05);   max-width: 100%;   color: #f0f0f5;   text-align: center;   transition: transform 0.3s ease, box-shadow 0.3s ease; } .contact-form:hover {   transform: translateY(-3px);   box-shadow: 0px 8px 20px rgba(255, 255, 255, 0.08); }   /* Scope the heading so you don't style all h2s globally */ .contact-form .contact-title {   font-size: 1.8rem;   color: #fff;   margin-bottom: 1rem;   font-family: 'Inter', sans-serif;   font-weight: 500; }  /* Inputs */ .input-box { margin-bottom: 1.2rem; text-align: left; } .input-box label {   font-size: 1rem; color: #b0b0b0; display: block; margin-bottom: 0.3rem; font-weight: 500; } .input-box input, .input-box textarea {   width: 100%; padding: 12px; border-radius: 8px; border: none;   background-color: #222; color: #fff; font-size: 1rem;   transition: background-color 0.3s ease, transform 0.2s ease; } .input-box input:focus, .input-box textarea:focus {   outline: none; background-color: #292929; transform: scale(1.02); }  /* Submit button */ button[type="submit"] {   background: linear-gradient(to right, #292929, #1e1e1e);   color: #fff; border: none; padding: 12px 20px; font-size: 1.1rem; font-weight: 600;   border-radius: 8px; cursor: pointer; transition: all 0.3s ease; width: 100%; text-transform: uppercase; } button[type="submit"]:hover { background: linear-gradient(to right, #303030, #242424); transform: translateY(-2px); } button[type="submit"]:active { background: #151515; transform: scale(0.98); }  /* Form responsiveness */ @media (max-width: 768px) {   .contact-form { padding: 1.5rem; }   .contact-form .contact-title { font-size: 1.5rem; }   .input-box input, .input-box textarea { padding: 10px; }   button[type="submit"] { padding: 10px 18px; font-size: 1rem; } }   .center-container {   text-align: center; /* Centers inline-block elements inside */ }  .linkedin-link {   display: inline-block; /* Ensures transform works correctly */   transition: transform 0.3s ease-out; }  .linkedin-link:hover {   transform: scale(1.2); /* Enlarges text smoothly */ }  .feedback-section {   text-align: center;   margin-top: 0.8rem; }  .feedback-buttons button {   font-size: 2rem;   margin: 0 1rem;   cursor: pointer; }  .feedback-buttons button:disabled {   opacity: 0.5;   cursor: not-allowed; }   .feedback-buttons {   display: flex;   gap: 0.8rem;   justify-content: center;   align-items: center;   padding: 0.5rem; }  /* Base button style */ .thumb-button {   background: transparent;   border: 2px solid #ccc;   color: #ccc;   padding: 1rem;   font-size: 2rem;   border-radius: 30px;   transition: all 0.3s ease;   cursor: pointer; }  /* Hover styles */ .thumb-button.like:hover:not(:disabled) {   background-color: #2a9d8f;   border-color: #2a9d8f;   color: #fff; }  .thumb-button.dislike:hover:not(:disabled) {   background-color: #e76f51;   border-color: #e76f51;   color: #fff; }  /* Voted state (after click) */  .thumb-button.like.voted {   background-color: rgba(42, 157, 143, 0.1);   border-color: #2a9d8f;   color: #2a9d8f; }  .thumb-button.dislike.voted {   background-color: rgba(231, 111, 81, 0.1);   border-color: #e76f51;   color: #e76f51; }  /* Prevent disabled from overriding voted */ .thumb-button.voted:disabled {   opacity: 1 !important;   cursor: not-allowed; }  /* Disabled buttons look dim ONLY if not voted */ .thumb-button:disabled:not(.voted) {   opacity: 0.5;   cursor: not-allowed; }  .thumb-button.like.voted:disabled {   background-color: rgba(42, 157, 143, 0.1);   border-color: #2a9d8f;   color: #2a9d8f; }  .thumb-button.disabled-other {   opacity: 1;   color: #333;   border-color: #333;   background-color: rgba(0, 0, 0, 0.05);   cursor: not-allowed; }  

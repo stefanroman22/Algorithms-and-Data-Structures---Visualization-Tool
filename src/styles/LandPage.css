@@ -46,7 +46,7 @@
 /* For very small phones */
 @media (max-width: 480px) {
   .animation-container {
-    width: min(90vw, 250px); /* Keep it fitting nicely on small phones */
+    width: min(90vw, 500px); /* Keep it fitting nicely on small phones */
     border-radius: 6px;
   }
 }

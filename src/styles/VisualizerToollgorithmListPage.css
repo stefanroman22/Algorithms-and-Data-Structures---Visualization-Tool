@@ -47,7 +47,46 @@
   justify-content: left;
   padding: 20px;
   padding-left: 100px;
+
+  max-height: calc(100vh - 200px); /* adjust depending on your header/filter size */
+  overflow-y: auto; /* Enables vertical scrolling inside */
 }
+
+/* ===== Custom Scrollbar for Chrome, Edge, Safari ===== */
+.algorithm-list::-webkit-scrollbar {
+  width: 10px; /* Slightly wider for a comfortable drag */
+}
+
+/* Scrollbar track (background area) */
+.algorithm-list::-webkit-scrollbar-track {
+  background: rgba(30, 30, 30, 0.7); /* Dark gray, slightly transparent */
+  border-radius: 10px;
+  margin: 4px 0; /* Adds space so scrollbar doesn't stick to edges */
+}
+
+/* Scrollbar thumb (the draggable part) */
+.algorithm-list::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #444, #222); /* Subtle dark gradient */
+  border-radius: 10px;
+  border: 1px solid #111; /* Gives slight definition */
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+/* Hover effect for thumb */
+.algorithm-list::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #666, #333); /* Slightly lighter when hovered */
+  transform: scaleX(1.05); /* Makes it feel more interactive */
+}
+
+/* ===== Firefox Support ===== */
+.algorithm-list {
+  scrollbar-width: thin; /* Thin scrollbar */
+  scrollbar-color: #444 #1e1e1e; /* thumb color + track color */
+}
+
+
+
+
 
 @media (max-width: 1200px) {
   .algorithm-list {
@@ -157,24 +196,19 @@
 }
 
 .visualizer-main {
-  font-family: Arial, sans-serif;
+  display: block;           /* behave like a normal block layout */
+  min-height: 100vh;        /* always take at least full viewport height */
   background-image: url("/public/images/pexels-cottonbro-9665178.jpg");
-  background-size: cover; /* Ensures the image covers the entire area */
-  background-repeat: no-repeat; /* Prevents the image from repeating */
-  background-position: center; /* Centers the background image */
-
-  display: flex;
-  flex-direction: column;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: scroll; /* always scroll on mobile */
+  overflow-y: auto;          /* allow scrolling when content overflows */
+  box-sizing: border-box;
 }
 
 @media (max-width: 768px) {
   .visualizer-main {
     background-size: contain; /* Prevents zoom-in on smaller screens */
-  }
-}
-
-@media (max-width: 900px) {
-  .visualizer-main {
-    background-attachment: scroll; /* allow normal page scroll */
   }
 }

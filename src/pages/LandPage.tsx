@@ -5,7 +5,10 @@ import NavBarLandPage from "../components/NavBarLandPage";
 import { HiMiniQuestionMarkCircle } from "react-icons/hi2";
 
 function Landpage() {
-  useEffect(() => initGraphAnimation("network"), []);
+  useEffect(() => {
+    const svgSize = document.getElementById("animation-container")?.clientWidth || 500;
+    initGraphAnimation("animation-container", svgSize);
+  }, []);
 
   const interestingFacts = [
     "Did you know? The shortest path algorithm used in Google Maps is based on Dijkstra's Algorithm!",
@@ -56,7 +59,7 @@ function Landpage() {
       </section>
 
       <section className="animation">
-        <div id="network" className="animation-container"></div>
+        <div id="animation-container" className="animation-container"></div>
       </section>
       
       <div className="text-landpage">

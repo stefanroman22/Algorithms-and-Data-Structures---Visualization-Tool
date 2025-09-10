@@ -73,7 +73,9 @@ function ContactPage() {
           Go Back
         </button>
       </div>
-      <div className="contact-form-text">
+
+      <div className="contact-container">
+        <div className="contact-form-text">
         
         <form onSubmit={onSubmit} className="contact-form" ref={formRef}>
           <h2 className="contact-title">
@@ -150,6 +152,7 @@ function ContactPage() {
           </div>
         </div>
 
+      </div>
       </div>
     </section>
   );

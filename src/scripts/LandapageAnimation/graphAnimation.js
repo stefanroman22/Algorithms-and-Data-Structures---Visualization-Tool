@@ -1,10 +1,9 @@
 import * as d3 from "d3";
 
-export function initGraphAnimation(containerId) {
+export function initGraphAnimation(containerId, svgSize = 500) {
   // Clear any existing SVG in the container
   d3.select(`#${containerId}`).selectAll("*").remove();
 
-  const svgSize = 500; // Define the size of the circular SVG
   let radius = svgSize / 2; // Radius of the circular SVG
 
   // Set up the SVG with a circular clip path
@@ -29,7 +28,7 @@ export function initGraphAnimation(containerId) {
   svg.attr("clip-path", "url(#clip-circle)");
 
   // Parameters
-  const numberNodes = 90; // Total number of nodes
+  const numberNodes = 60; // Total number of nodes
   const radiusNode = 10; // Radius of each node
   const minDistance = 20; // Minimum distance between nodes
   const speed = 0.6; // Maximum speed for node movement

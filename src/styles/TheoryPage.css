@@ -5,32 +5,52 @@ body {
 .go-back{
   position: sticky;
 }
-
+/* Sidebar */
 .sidebar-theory-page {
-  height: 100vh; /* Ensures it fills the entire viewport height */
-  width: 180px; /* Width of the sidebar */
-  background-color: #1c1a18; /* Sidebar's background color */
-  position: fixed; /* Fixes the sidebar to the left */
+  height: 100vh;             /* Full viewport height */
+  width: 180px;               /* Fixed sidebar width */
+  background-color: #1c1a18;  /* Sidebar background */
+  position: fixed;            /* Sidebar stays fixed */
   top: 0;
   left: 0;
+  
 }
 
+/* Markdown content */
 .markdown-content {
-  max-height: 94vh; /* slightly less than full viewport height for some breathing room */
-  overflow-y: auto;
+  position: fixed;            /* Stays fixed while scrolling */
+  top: 45px;                   /* Space from top for any header */
+  left: 200px;                 /* Sidebar width + gap */
+
+  width: calc(100vw - 220px); /* Use remaining screen width */
+  min-width: 300px;           /* Prevent it from shrinking too small */
+  max-height: 94vh;           /* Breathing room below */
+
+  overflow-y: auto;           /* Vertical scroll for long content */
+  overflow-x: auto;           /* Horizontal scroll for narrow screens */
+
+  background-color: #000000;
   color: white;
   font-family: Arial, sans-serif;
   line-height: 1.6;
-  background-color: #000000;
   border-radius: 8px;
-  width: 87vw; /* width as percentage of viewport width */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-  position: fixed;
-  left: 12vw; /* relative to viewport, moves based on screen size */
-  top: 45px;
   padding: 20px;
   box-sizing: border-box;
+  white-space: normal;        /* Wrap text by default */
 }
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .markdown-content {
+    width: calc(100vw - 200px); /* Keep space for sidebar */
+    left: 180px;                /* Always start to the right of sidebar */
+    overflow-x: scroll;         /* Allow horizontal scroll when text is wide */
+  }
+}
+
+
+
 
 .markdown-content img {
   max-width: 100%; /* images won't overflow container */
@@ -55,10 +75,11 @@ body {
 /* Optional: responsive adjustments for smaller screens */
 @media (max-width: 600px) {
   .markdown-content {
-    width: 90vw;
-    left: 5vw;
+    width: 100vw;
+    left: 50vw;
     max-width: none;
     padding: 15px;
+    font-size: 10px;
   }
   .markdown-content img {
     max-height: 40vh;
