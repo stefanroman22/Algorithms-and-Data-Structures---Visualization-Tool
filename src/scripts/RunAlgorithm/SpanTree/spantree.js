@@ -4,7 +4,7 @@ import {
   colorLink,
 } from "../Basic(DFS+BFS)/runAlgorithm";
 import { PriorityQueue } from "../Heuristics/runAlgorithmHeuristics";
-
+import { showErrorPopup } from "../../utils/displayAlert";
 /**
  * Runs Prim's algorithm to find the Minimum Spanning Tree (MST) of a graph,
  * starting from a given node, with animated visualization using D3.js.
@@ -118,7 +118,7 @@ export const runPrim = async (
     if (visitedNodes.size < graph.nodes.length) {
       if (!checkSimulationId(currentSimulationId, getSimulationIdRef)) return;
       await waitForResume(getPausedRef);
-      alert(
+      showErrorPopup(
         "MST cannot be computed! Please parse a graph that has no isolated nodes!"
       );
       return;
@@ -290,7 +290,7 @@ export const runKruskal = async (
     if (visitedNodes.size < graph.nodes.length) {
       if (!checkSimulationId(currentSimulationId, getSimulationIdRef)) return;
       await waitForResume(getPausedRef);
-      alert("MST cannot be computed! Please parse a graph that has no isolated nodes!");
+      showErrorPopup("MST cannot be computed! Please parse a graph that has no isolated nodes!");
       return;
     }
   

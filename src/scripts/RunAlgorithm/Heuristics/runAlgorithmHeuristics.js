@@ -3,6 +3,8 @@ import {
   checkSimulationId,
   colorLink,
 } from "../Basic(DFS+BFS)/runAlgorithm";
+
+import { showErrorPopup } from "../../utils/displayAlert";
 //Definiton for Priority Queue
 export class PriorityQueue {
   constructor() {
@@ -401,7 +403,7 @@ export const runBellmanFord = async (
       distances.get(link.target)
     ) {
       
-      alert("Negative cycle detected! Please a parse a different graph for finding the shortest path distances!");
+      showErrorPopup("Negative cycle detected! Please a parse a different graph for finding the shortest path distances!");
       return;
     }
   }

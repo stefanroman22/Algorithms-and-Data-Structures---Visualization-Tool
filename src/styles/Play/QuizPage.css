@@ -140,6 +140,11 @@ label {
   }
 }
 
+.submit-container, .result-container{
+  display: flex;
+  justify-content: center;
+}
+
 .submit-button {
   padding: 10px 20px;
   font-size: 1rem;

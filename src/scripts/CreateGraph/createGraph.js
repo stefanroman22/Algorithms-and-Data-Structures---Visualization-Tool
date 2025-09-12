@@ -3,6 +3,7 @@ import { runDFS, runBFS } from "../RunAlgorithm/Basic(DFS+BFS)/runAlgorithm";
 import { runBellmanFord, runDijkstra } from "../RunAlgorithm/Heuristics/runAlgorithmHeuristics";
 import { run2Color } from "../RunAlgorithm/2Color/runAlgorithm2Color";
 import { runKruskal, runPrim } from "../RunAlgorithm/SpanTree/spantree";
+import { showErrorPopup } from "../utils/displayAlert";
 
 /**
  * Parses the graph input into nodes and links for D3.js.
@@ -603,7 +604,7 @@ export const startAlgorithmSimulation = (
 
   if (!nodeExists && algorithmName !== "Kruskal") {
     console.log(`Node with ID "${startNodeId}" not found in the graph.`);
-    alert(`Node with ID "${startNodeId}" not found in the graph.`);
+    showErrorPopup(`Node with ID "${startNodeId}" not found in the graph.`);
     return;
   }
 

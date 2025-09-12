@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { updateVisualizationBox, startAlgorithmSimulation } from "../CreateGraph/createGraph";
+import { showErrorPopup } from "../utils/displayAlert";
 
 /**
  * Custom hook managing handlers for graph visualization controls:
@@ -41,8 +42,8 @@ export default function HandleVisualizationButtons() {
     console.clear();
     updateGlobalElements();
 
-    if (!graphInputElement) {
-      alert("Please insert a valid graph input!");
+    if (!graphInputElement.value) {
+      showErrorPopup("Please insert a valid graph input!");
       return;
     }
 
@@ -62,7 +63,7 @@ export default function HandleVisualizationButtons() {
     ) {
       const value = startNodeInputElement.value.trim();
       if (value === "") {
-        alert("Please insert a value for the Start Node Index!");
+        showErrorPopup("Please insert a value for the Start Node Index!");
         return null;
       }
       return value;
@@ -72,15 +73,16 @@ export default function HandleVisualizationButtons() {
 
   const handleStart = (algorithmName) => {
     if (!pressedParsed) {
-      alert("Please parse the graph first!");
+      showErrorPopup("Please parse the graph first!");
       return;
     }
 
     updateGlobalElements();
 
+    let startNodeValue = -1;
     if(algorithmName !== "Kruskal"){
-      var startNodeValue = getStartNodeInputValue();
-    }else startNodeValue = -1;
+      startNodeValue = getStartNodeInputValue();
+    }
     
     if (startNodeValue === null) return;
 

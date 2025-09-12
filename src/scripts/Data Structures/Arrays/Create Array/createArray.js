@@ -1,5 +1,5 @@
 import * as d3 from "d3";
-
+import { showErrorPopup } from "../../../utils/displayAlert";
 
 /**
  * Parses a user input string of numbers separated by commas and updates the visualization accordingly.
@@ -54,7 +54,7 @@ export const handleParseInput = (
     console.error(
       "Invalid input format. Please enter numbers separated by commas (e.g., 1,2,3,4)."
     );
-    alert(
+    showErrorPopup(
       "Invalid input format. Please enter numbers separated by commas (e.g., 1,2,3,4)."
     );
     return;

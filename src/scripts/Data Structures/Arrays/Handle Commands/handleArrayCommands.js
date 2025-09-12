@@ -1,5 +1,5 @@
 import * as d3 from "d3";
-
+import { showErrorPopup } from "../../../utils/displayAlert";
 export const handleArrayCommands = (
   command,
   array,
@@ -25,7 +25,7 @@ export const handleArrayCommands = (
   console.log("Command:", command);
 
   if (!parseInputPressed) {
-    alert("Please parse the input before!");
+    showErrorPopup("Please parse the input before!");
     return;
   } else {
     switch (command) {
@@ -85,7 +85,7 @@ export const appendCommand = (
   svg
 ) => {
   if (!appendValue || isNaN(appendValue)) {
-    alert("Please enter a valid number to append.");
+    showErrorPopup("Please enter a valid number to append.");
     return;
   }
 
@@ -196,15 +196,15 @@ export const deleteCommand = async (
   svg
 ) => {
   if (array.length === 0) {
-    alert("The array is empty. Cannot compute Delete.");
+    showErrorPopup("The array is empty. Cannot compute Delete.");
     return;
   }
   if (!deleteIndex || isNaN(deleteIndex)) {
-    alert("Please enter a valid index to delete.");
+    showErrorPopup("Please enter a valid index to delete.");
     return;
   }
   if (deleteIndex < 0 || deleteIndex >= array.length) {
-    alert("Invalid index. Please enter a valid index to delete.");
+    showErrorPopup("Invalid index. Please enter a valid index to delete.");
     return;
   }
 
@@ -308,17 +308,17 @@ export const updateCommand = async (
 ) => {
   // **Exception Handling**
   if (array.length === 0) {
-    alert("The array is empty. Cannot update any element.");
+    showErrorPopup("The array is empty. Cannot update any element.");
     return;
   }
 
   if (updateIndex < 0 || updateIndex >= array.length || isNaN(updateIndex)) {
-    alert("Invalid index. Please enter a valid index within the array range.");
+    showErrorPopup("Invalid index. Please enter a valid index within the array range.");
     return;
   }
 
   if (!updateValue || isNaN(updateValue)) {
-    alert("Invalid update value. Please enter a valid number.");
+    showErrorPopup("Invalid update value. Please enter a valid number.");
     return;
   }
 
@@ -356,7 +356,7 @@ export const updateCommand = async (
 
 export const minCommand = async (array, svg) => {
   if (array.length === 0) {
-    alert("The array is empty. Cannot compute Min.");
+    showErrorPopup("The array is empty. Cannot compute Min.");
     return;
   }
 
@@ -400,7 +400,7 @@ export const minCommand = async (array, svg) => {
 
 export const maxCommand = async (array, svg) => {
   if (array.length === 0) {
-    alert("The array is empty. Cannot compute Min.");
+    showErrorPopup("The array is empty. Cannot compute Min.");
     return;
   }
 
@@ -443,12 +443,12 @@ export const maxCommand = async (array, svg) => {
 
 export const searchCommand = async (searchValue, array, svg) => {
   if (array.length === 0) {
-    alert("The array is empty. Cannot compute Search.");
+    showErrorPopup("The array is empty. Cannot compute Search.");
     return;
   }
 
   if (!searchValue || isNaN(searchValue)) {
-    alert("Please enter a valid number to search.");
+    showErrorPopup("Please enter a valid number to search.");
     return;
   }
 
@@ -509,6 +509,6 @@ export const searchCommand = async (searchValue, array, svg) => {
   }
 
   if (!found) {
-    alert(`Element ${searchValue} not found in the array.`);
+    showErrorPopup(`Element ${searchValue} not found in the array.`);
   }
 };

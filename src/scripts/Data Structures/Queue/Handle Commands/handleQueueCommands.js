@@ -1,6 +1,6 @@
 import * as d3 from "d3";
 import { isEmptyCommand } from "../../Stack/Create Stack/Handle Commands/handleStackCommands";
-
+import { showErrorPopup } from "../../../utils/displayAlert";
 export const handleQueueCommands = (
   command,
   queue,
@@ -22,7 +22,7 @@ export const handleQueueCommands = (
   console.log("Command:", command);
 
   if (!parseInputPressed) {
-    alert("Please parse the input before!");
+    showErrorPopup("Please parse the input before!");
     return;
   } else {
     switch (command) {
@@ -59,7 +59,7 @@ export const enqueueCommand = (
   svg
 ) => {
   if (!enqueueValue || isNaN(enqueueValue)) {
-    alert("Please enter a valid number to enqueue.");
+    showErrorPopup("Please enter a valid number to enqueue.");
     return;
   }
 
@@ -180,7 +180,7 @@ export const dequeueCommand = async (
   svg
 ) => {
   if (queue.length === 0) {
-    alert("The queue is empty. Cannot compute Dequeue.");
+    showErrorPopup("The queue is empty. Cannot compute Dequeue.");
     return;
   }
 
@@ -295,7 +295,7 @@ export const peekHeadCommand = (
   svg
 ) => {
   if(queue.length === 0){
-    alert("The stack is empty. Cannot compute Peek Head.");
+    showErrorPopup("The stack is empty. Cannot compute Peek Head.");
     return;
   };
   const firstRect = svg.selectAll(".rect").filter((d, i) => i === 0);
@@ -319,7 +319,7 @@ export const peekTailCommand = (
   svg
 ) => {
   if(queue.length === 0){
-    alert("The stack is empty. Cannot compute Peek Tail.");
+    showErrorPopup("The queue is empty. Cannot compute Peek Tail.");
     return;
   };
   const lastRect = svg.selectAll(".rect").filter((d, i) => i === queue.length - 1);

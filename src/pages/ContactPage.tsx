@@ -141,14 +141,6 @@ function ContactPage() {
                   <FaThumbsDown />
                 </button>
                 </div>
-                <a 
-          href="https://nl.linkedin.com/in/stefan-roman-1911a9211?trk=people-guest_people_search-card" target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            color: "rgba(0, 119, 181)",
-            fontWeight: "bold",
-            textDecoration: "none",
-          }} className="linkedin-link">Developed by Stefan Roman</a>
           </div>
         </div>
 

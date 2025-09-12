@@ -1,5 +1,5 @@
 import * as d3 from "d3";
-
+import { showErrorPopup } from "../../../../utils/displayAlert";
 export const handleStackCommands = (
   command,
   stack,
@@ -21,7 +21,7 @@ export const handleStackCommands = (
   console.log("Command:", command);
 
   if (!parseInputPressed) {
-    alert("Please parse the input before!");
+    showErrorPopup("Please parse the input before!");
     return;
   } else {
     switch (command) {
@@ -51,7 +51,7 @@ export const pushCommand = (
   svg
 ) => {
   if (!pushValue || isNaN(pushValue)) {
-    alert("Please enter a valid number to append.");
+    showErrorPopup("Please enter a valid number to append.");
     return;
   }
 
@@ -109,7 +109,7 @@ export const popCommand = (
   svg
 ) => {
   if(stack.length === 0){
-    alert("Cannot compute Pop command since stack is empty.");
+    showErrorPopup("Cannot compute Pop command since stack is empty.");
     return;
   }
 
@@ -133,7 +133,7 @@ export const popCommand = (
 
 export const topCommand = (stack, svg) => {
   if (stack.length === 0) {
-    alert("The stack is empty. Cannot compute Top.");
+    showErrorPopup("The stack is empty. Cannot compute Top.");
     return;
   }
 
@@ -170,7 +170,7 @@ export const isEmptyCommand = (
   stack
 ) => {
   if (stack.length === 0) {
-    alert("Stack is empty!");
+    showErrorPopup("Stack is empty!");
     return;
   } else {
     alert(`Stack is not empty, it has ${stack.length} elements, namely: ${stack.slice().reverse().join(", ")}`);

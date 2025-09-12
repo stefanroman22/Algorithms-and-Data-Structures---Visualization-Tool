@@ -1,11 +1,11 @@
 /* General styles for the body */
 
 
+
 .landpage-container {
   background-color: #121212; /* Dark background */
   background-image: url('/images/pexels-cottonbro-9665178.jpg');
-  background-size: cover; /* Ensure the background covers the whole page */
-  background-position: center; /* Center the image */
+
   font-family: 'Arial', sans-serif;
 }
 

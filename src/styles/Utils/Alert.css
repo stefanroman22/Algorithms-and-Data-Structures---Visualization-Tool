@@ -1,0 +1,13 @@
+.swal-confirm-button {
+  background-color: #ff4d4d !important; /* Red button */
+  color: white !important;
+  border: none !important;
+  padding: 8px 20px;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: background 0.2s ease;
+}
+
+.swal-confirm-button:hover {
+  background-color: #e60000 !important; /* Darker red on hover */
+}

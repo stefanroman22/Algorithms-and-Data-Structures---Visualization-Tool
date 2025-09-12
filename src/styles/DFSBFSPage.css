@@ -1,4 +1,9 @@
 
+body{
+  background-image: url('/images/pexels-cottonbro-9665178.jpg');
+
+}
+
 .visualization-container {
   position: relative;
 }

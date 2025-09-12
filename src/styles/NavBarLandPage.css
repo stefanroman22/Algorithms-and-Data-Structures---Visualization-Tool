@@ -19,8 +19,10 @@
   cursor: pointer;
   text-align: center;
   border: none;
+  transition: font-size 0.1s;
 }
 
 .nav-button:hover {
   color: #818181; /* Change text color on hover */
+  font-size: 15px;
 }
