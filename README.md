@@ -4,6 +4,8 @@ This project explores how the teaching of graph algorithms and data structures c
 
 The project was developed as a Bachelor's Thesis project art Radboud University - Nijmegen under the proffesional guidance of Dr. Lucia Cavallaro and Prof. Frits Vaandrager.
 
+Link: [text](https://stefanroman22.github.io/Algorithms-and-Data-Structures---Visualization-Tool/)
+
 
 ---
 
