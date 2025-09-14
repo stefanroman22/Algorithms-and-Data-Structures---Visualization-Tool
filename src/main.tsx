@@ -7,7 +7,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <BrowserRouter basename="/Algorithms-and-Data-Structures---Visualization-Tool">
+    <BrowserRouter>
       <App />
     </BrowserRouter>
   </StrictMode>

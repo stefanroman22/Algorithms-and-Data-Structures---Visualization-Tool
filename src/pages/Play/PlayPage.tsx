@@ -13,12 +13,13 @@ function PlayPage() {
   const [difficulty, setDifficulty] = useState("");
   const [highlighted, setHighlighted] = useState("");
   const timeoutRef = useRef(null);
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;  
 
   useEffect(() => {
     async function fetchQuizzes() {
       try {
         setLoading(true);
-        const response = await fetch("http://127.0.0.1:8000/api/quiz/list");
+        const response = await fetch(`${API_BASE_URL}/quiz/list`);
         if (!response.ok) throw new Error("Failed to fetch quizzes");
         const data = await response.json();
         setQuizzes(data);

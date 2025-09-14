@@ -25,8 +25,8 @@ SECRET_KEY = 'django-insecure-rya8p)j5udq6@5*n11ijrqtd=!8slu)i0rdt4g(xw#470s9egm
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['algorithms-and-data-structures-ti60.onrender.com', 'algorithms-and-data-structures-yf1y.onrender.com', '127.0.0.1', 'localhost']
-
+ALLOWED_HOSTS = ['gvt-learn.online', 'www.gvt-learn.online', '56.228.7.142', '127.0.0.1', 'localhost']
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Application definition
 
@@ -55,13 +55,19 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
+    "http://56.228.7.142",
     "http://localhost:5173",
     "https://stefanroman22.github.io",
+     'https://gvt-learn.online',
+    'https://www.gvt-learn.online'
 ]
 
 CORS_ALLOW_HEADERS = ["*"]
 CORS_ALLOW_METHODS = ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"]
-
+CSRF_TRUSTED_ORIGINS = [
+    'https://gvt-learn.online',
+    'https://www.gvt-learn.online',
+]
 ROOT_URLCONF = 'backend.urls'
 
 TEMPLATES = [
@@ -140,7 +146,10 @@ CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOW_CREDENTIALS = True
 
 
+# Media files (quiz images, etc.)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-
+# Static files (CSS, admin, JS)
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')

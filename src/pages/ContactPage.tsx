@@ -9,7 +9,7 @@ function ContactPage() {
   const formRef = useRef(null); // Create a reference for the form
   const [hasVoted, setHasVoted] = useState(!!localStorage.getItem("contact_voted"));
   const [voteType, setVoteType] = useState(null); // 'like' or 'dislike'
-
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
   const onSubmit = async (event) => {
     event.preventDefault();
@@ -55,7 +55,7 @@ function ContactPage() {
   const handleVote = (type) => {
     if (hasVoted) return;
 
-    fetch("https://algorithms-and-data-structures-yf1y.onrender.com/api/contact-feedback/", {
+    fetch(`${API_BASE_URL}/contact-feedback/`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ vote: type }),

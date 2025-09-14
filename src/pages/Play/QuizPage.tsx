@@ -13,14 +13,14 @@ function QuizPage() {
   const [error, setError] = useState(null);
   const [calculating, setCalculating] = useState(false);
   const [loadingImages, setLoadingImages] = useState({});
-
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const timerRef = useRef(null);
 
   // === Fetch quiz ===
   useEffect(() => {
     const fetchQuiz = async () => {
       try {
-        const res = await fetch(`http://127.0.0.1:8000/api/quiz/${quizId}`);
+        const res = await fetch(`${API_BASE_URL}/quiz/${quizId}`);
         if (!res.ok) throw new Error("Failed to fetch quiz");
 
         const data = await res.json();
