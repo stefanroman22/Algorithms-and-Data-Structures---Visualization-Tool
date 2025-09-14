@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import "../../styles/Play/QuizPage.css";
+import { showErrorPopup } from "../../scripts/utils/displayAlert";
 function QuizPage() {
   const { quizId } = useParams();
 
