@@ -225,4 +225,13 @@ body {
 }
 
 
+@media(max-width: 732px){
+  .markdown-content{
+    left: 5px;
+    top: 10px;
+  }
+
+  
+}
+
 

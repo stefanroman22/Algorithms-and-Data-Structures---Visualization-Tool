@@ -4,11 +4,13 @@ import { VscTriangleRight } from "react-icons/vsc";
 import { VscTriangleDown } from "react-icons/vsc";
 import { GoDotFill } from "react-icons/go";
 import { useNavigate } from "react-router-dom";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 function SideNavBarTheoryPage() {
   type Chapter = keyof typeof chapters; // "Introduction" | "Algorithms" | "Chapter 3"
   const [expandedChapters, setExpandedChapters] = useState<Chapter[]>([]);
   const navigate = useNavigate();
+  const [collapsed, setCollapsed] = useState(false);
 
   const chapters = {
     "Introduction": ["What is a Graph?", "Graphs Representation", "Graphs Properties", "Special Graph Structures"],
@@ -18,27 +20,27 @@ function SideNavBarTheoryPage() {
 
   // Function to toggle chapter expansion
   const toggleChapter = (chapter: Chapter) => {
-  setExpandedChapters((prevState) => {
-    const isExpanding = !prevState.includes(chapter);
-    const newState = isExpanding
-      ? [...prevState, chapter]
-      : prevState.filter((item) => item !== chapter);
+    setExpandedChapters((prevState) => {
+      const isExpanding = !prevState.includes(chapter);
+      const newState = isExpanding
+        ? [...prevState, chapter]
+        : prevState.filter((item) => item !== chapter);
 
-    // Scroll only if expanding
-    if (isExpanding) {
-      const chapterId = chapter.toLowerCase().replace(/ /g, "-").replace(/['"]/g, "");
-      const element = document.getElementById(chapterId);
-      if (element) {
-        // Delay scrolling until after the DOM updates
-        setTimeout(() => {
-          element.scrollIntoView({ behavior: "smooth", block: "start" });
-        }, 100);
+      // Scroll only if expanding
+      if (isExpanding) {
+        const chapterId = chapter.toLowerCase().replace(/ /g, "-").replace(/['"]/g, "");
+        const element = document.getElementById(chapterId);
+        if (element) {
+          // Delay scrolling until after the DOM updates
+          setTimeout(() => {
+            element.scrollIntoView({ behavior: "smooth", block: "start" });
+          }, 100);
+        }
       }
-    }
 
-    return newState;
-  });
-};
+      return newState;
+    });
+  };
 
 
   // Function to handle subchapter click
@@ -51,8 +53,22 @@ function SideNavBarTheoryPage() {
     }
   };
 
+  //Function to handle collapsing menu
+  const handleCollapseMenu = () => {
+    setCollapsed((prev) => !prev);
+    
+  };
+
+
   return (
-    <div className="sidebar-container">
+    <>
+    
+     <button className="collapse-menu" onClick={handleCollapseMenu}>
+        {collapsed ? <FaArrowRight /> : <FaArrowLeft />}
+      </button>
+    <div className={`sidebar-container ${collapsed ? "hide" : ""}`} id="sidebar-container">
+      
+      <div className="content">
       {Object.keys(chapters).map((key, index) => (
         <div key={index}>
           <button
@@ -67,9 +83,8 @@ function SideNavBarTheoryPage() {
             {key}
           </button>
           <div
-            className={`subchapter-container ${
-              expandedChapters.includes(key as Chapter) ? "expanded" : ""
-            }`}
+            className={`subchapter-container ${expandedChapters.includes(key as Chapter) ? "expanded" : ""
+              }`}
           >
             {chapters[key as Chapter].map((subChapter, subIndex) => (
               <button
@@ -85,8 +100,9 @@ function SideNavBarTheoryPage() {
             ))}
           </div>
         </div>
-      ))}
+      ))}</div>
     </div>
+    </>
   );
 }
 

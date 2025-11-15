@@ -709,10 +709,10 @@ const graphPropertiesCheckboxes = () => {
 
   return (
     <div className="theory-page">
-      <div className="sidebar-theory-page">
+      
+      
         <SideNavBarTheoryPage />
-      </div>
-        <NavbarVisualizerToolPage memberTheoryPage={true} />
+        
       <div className="markdown-content">
         <div id="introduction">
           <ReactMarkdown>{markdownContentIntroduction}</ReactMarkdown>

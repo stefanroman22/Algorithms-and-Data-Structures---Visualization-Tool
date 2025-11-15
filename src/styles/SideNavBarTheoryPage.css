@@ -1,78 +1,128 @@
-
-.sidebar-theory-wrapper {
-    width: 200px;
-    background-color: #1c1a18;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-  }
-  
-  .go-back {
-    position: sticky;
-  }
+/* --- BASE SIDEBAR --- */
 .sidebar-container {
-    height: auto; /* Ensures it fills the entire viewport height */
-    width: 180px; /* Width of the sidebar */
-    background-color: #1c1a18; /* Sidebar's background color */
-    display: flex; /* Enables flexbox layout */
-    flex-direction: column; /* Stack children vertically */
-    justify-content: flex-start; /* Default alignment */
-    padding-top: 60px; /* Adjust this value to move buttons lower */
-    box-sizing: border-box; /* Includes padding in height calculations */
-    max-height: 100vh; /* Or set a specific height like 600px */
-    overflow-y: auto;
-    scroll-behavior: smooth;
-     overflow-x: hidden; /* prevents horizontal scroll */
+  width: 180px;
+  background-color: #1c1a18;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  max-height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+  transition: transform 0.4s ease-in-out;
+  z-index: 50;
+  height: 100vh;
+  
 }
 
-
-.chapter-button, .subchapter-button{
-    background-color: transparent; /* Button color */
-    color: white;
-    border: none;
-    padding: 10px;
-    margin-bottom: 8px; /* Space between buttons */
-    text-align: left; /* Align text to the left */
-    cursor: pointer; /* Change cursor on hover */
-    font-size: 15px;
-    border-radius: 5px; /* Optional: make buttons look smoother */
-    width: 90%; /* Ensure buttons don’t take the full width */
-    align-self: center; /* Center the buttons horizontally */
-    font-family: 'Arial', sans-serif;
-    font-weight: 600; /* Bold text */
-    
+.sidebar-container .content{
+    margin-top: 50px;
 }
 
-.chapter-button:hover, .subchapter-button:hover{
-    background-color: #313131; /* Highlight button on hover */
+/* Sidebar hidden state */
+.sidebar-container.hide {
+  transform: translateX(-100%);
 }
 
+/* Go back button */
+.button-go-back {
+  background-color: transparent;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left;
+  font-family: "Arial", sans-serif;
+  font-weight: 600;
+}
+
+.button-go-back:hover {
+  color: #818181;
+}
+
+/* Chapter & subchapter buttons */
+.chapter-button,
+.subchapter-button {
+  background-color: transparent;
+  color: white;
+  border: none;
+  padding: 10px;
+  margin-bottom: 8px;
+  text-align: left;
+  cursor: pointer;
+  font-size: 15px;
+  border-radius: 5px;
+  width: 90%;
+  align-self: center;
+  font-family: "Arial", sans-serif;
+  font-weight: 600;
+}
+
+.chapter-button:hover,
+.subchapter-button:hover {
+  background-color: #313131;
+}
+
+/* Subchapter animation */
 .subchapter-container {
-    margin-left: 38px;
-    width: 90%;
-    max-height: 0; /* Initially hidden */
-    overflow: hidden; /* Prevent content from spilling out */
-    opacity: 0; /* Fully transparent initially */
-    transition: max-height 0.6s ease, opacity 0.3s ease; /* Smooth transition */
+  margin-left: 38px;
+  width: 90%;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.6s ease, opacity 0.3s ease;
 }
 
 .subchapter-container.expanded {
-    max-height: 500px; /* Arbitrary large value to ensure all subchapters fit */
-    transition-duration: 1s;
-    opacity: 1; /* Fully visible */
+  max-height: 500px;
+  opacity: 1;
 }
 
 .subchapter-content {
-    display: flex;
-    align-items: center; /* Aligns dot and text vertically */
-    gap: 4px; /* Space between the dot and text */
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .dot-icon {
-    font-size: 10px; /* Adjust dot size if needed */
-    margin-top: -2px; /* Fine-tune vertical alignment */
-    margin-left: -4px; /* Fine-tune horizontal alignment */
+  font-size: 10px;
+  margin-top: -2px;
+  margin-left: -4px;
 }
 
+/* --- COLLAPSE ARROW BUTTON --- */
+.collapse-menu {
+  display: none;
+}
 
+@media (max-width: 732px) {
+  .collapse-menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed; /* Keep it visible even when sidebar is hidden */
+    top: 15px;
+    left: 10px;
+    z-index: 100;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: none;
+    background-color: rgba(28, 26, 24, 0.8);
+    color: white;
+    cursor: pointer;
+    transition:
+      color 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+      background-color 0.3s ease;
+  }
+
+  .collapse-menu:hover {
+    color: #a3a3a3;
+    transform: scale(1.05);
+    background-color: rgba(49, 49, 49, 0.9);
+  }
+}
