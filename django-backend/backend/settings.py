@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-rya8p)j5udq6@5*n11ijrqtd=!8slu)i0rdt4g(xw#470s9egm
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['gvt-learn.online', 'www.gvt-learn.online', '56.228.7.142', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['gvt-learn.online', 'www.gvt-learn.online', '56.228.7.142', '127.0.0.1', 'localhost', 'gvt-backend-t09g.onrender.com']
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Application definition
