@@ -1,33 +1,47 @@
 body {
-  background-color: black !important; /* Force the background color */
+  background-color: black !important;
+  /* Force the background color */
 }
 
-.go-back{
+.go-back {
   position: sticky;
 }
+
 /* Sidebar */
 .sidebar-theory-page {
-  height: 100vh;             /* Full viewport height */
-  width: 180px;               /* Fixed sidebar width */
-  background-color: #1c1a18;  /* Sidebar background */
-  position: fixed;            /* Sidebar stays fixed */
+  height: 100vh;
+  /* Full viewport height */
+  width: 180px;
+  /* Fixed sidebar width */
+  background-color: #1c1a18;
+  /* Sidebar background */
+  position: fixed;
+  /* Sidebar stays fixed */
   top: 0;
   left: 0;
-  
+
 }
 
 /* Markdown content */
 .markdown-content {
-  position: fixed;            /* Stays fixed while scrolling */
-  top: 45px;                   /* Space from top for any header */
-  left: 200px;                 /* Sidebar width + gap */
+  position: fixed;
+  /* Stays fixed while scrolling */
+  top: 45px;
+  /* Space from top for any header */
+  left: 200px;
+  /* Sidebar width + gap */
 
-  width: calc(100vw - 220px); /* Use remaining screen width */
-  min-width: 300px;           /* Prevent it from shrinking too small */
-  max-height: 94vh;           /* Breathing room below */
+  width: calc(100vw - 220px);
+  /* Use remaining screen width */
+  min-width: 300px;
+  /* Prevent it from shrinking too small */
+  max-height: 94vh;
+  /* Breathing room below */
 
-  overflow-y: auto;           /* Vertical scroll for long content */
-  overflow-x: auto;           /* Horizontal scroll for narrow screens */
+  overflow-y: auto;
+  /* Vertical scroll for long content */
+  overflow-x: auto;
+  /* Horizontal scroll for narrow screens */
 
   background-color: #000000;
   color: white;
@@ -37,15 +51,19 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   padding: 20px;
   box-sizing: border-box;
-  white-space: normal;        /* Wrap text by default */
+  white-space: normal;
+  /* Wrap text by default */
 }
 
 /* Responsive adjustments */
 @media (max-width: 600px) {
   .markdown-content {
-    width: calc(100vw - 200px); /* Keep space for sidebar */
-    left: 180px;                /* Always start to the right of sidebar */
-    overflow-x: scroll;         /* Allow horizontal scroll when text is wide */
+    width: calc(100vw - 200px);
+    /* Keep space for sidebar */
+    left: 180px;
+    /* Always start to the right of sidebar */
+    overflow-x: scroll;
+    /* Allow horizontal scroll when text is wide */
   }
 }
 
@@ -53,9 +71,12 @@ body {
 
 
 .markdown-content img {
-  max-width: 100%; /* images won't overflow container */
-  height: auto; /* maintain aspect ratio */
-  max-height: 35vh; /* limit height to 50% of viewport height */
+  max-width: 100%;
+  /* images won't overflow container */
+  height: auto;
+  /* maintain aspect ratio */
+  max-height: 35vh;
+  /* limit height to 50% of viewport height */
   display: block;
   background-color: #222;
   border: 2px solid #444;
@@ -65,7 +86,8 @@ body {
 
 .markdown-content code {
   background-color: rgb(0, 0, 0);
-  color: #0ef; /* Light cyan, or choose any highlight color */
+  color: #0ef;
+  /* Light cyan, or choose any highlight color */
   padding: 2px 6px;
   border-radius: 4px;
   font-weight: 500;
@@ -81,6 +103,7 @@ body {
     padding: 15px;
     font-size: 10px;
   }
+
   .markdown-content img {
     max-height: 40vh;
   }
@@ -88,7 +111,8 @@ body {
 
 
 .graph-properties-animation-container {
-  display: flex; /* Ensures the buttons and animation box are side by side */
+  display: flex;
+  /* Ensures the buttons and animation box are side by side */
   height: 300px;
   width: 600px;
   background-color: #343434;
@@ -97,17 +121,22 @@ body {
 
 .graph-properties-buttons {
   display: flex;
-  flex-direction: column; /* Arrange buttons vertically */
-  gap: 10px; /* Space between each checkbox */
+  flex-direction: column;
+  /* Arrange buttons vertically */
+  gap: 10px;
+  /* Space between each checkbox */
   margin-left: 10px;
   margin-top: 10px;
 }
 
 .graph-properties-buttons label {
   display: flex;
-  align-items: center; /* Align checkbox and text vertically */
-  gap: 5px; /* Space between checkbox and label text */
-  font-size: 16px; /* Adjust text size */
+  align-items: center;
+  /* Align checkbox and text vertically */
+  gap: 5px;
+  /* Space between checkbox and label text */
+  font-size: 16px;
+  /* Adjust text size */
 }
 
 .graph-properties-buttons input[type="checkbox"] {
@@ -117,10 +146,13 @@ body {
 }
 
 .graph-animation-box {
-  height: 100%; /* Set the height to match the parent container */
-  width: 100%; /* Keep the fixed width */
+  height: 100%;
+  /* Set the height to match the parent container */
+  width: 100%;
+  /* Keep the fixed width */
   background-color: #1a1a1a;
-  margin-left: 10px; /* Add some spacing from the buttons */
+  margin-left: 10px;
+  /* Add some spacing from the buttons */
 }
 
 .markdown-content table {
@@ -129,14 +161,14 @@ body {
   width: 200px;
 }
 
-.markdown-content th, 
+.markdown-content th,
 .markdown-content td {
   border: 1px solid #161616;
   padding: 8px;
   text-align: center;
 }
 
-.visualization-route-buttons{
+.visualization-route-buttons {
   display: flex;
   gap: 15px;
   bottom: 10px;
@@ -145,35 +177,56 @@ body {
   margin-left: 10px;
 }
 
-.visualization-route-button{
-  padding: 8px 20px; /* Adds spacing inside the button */
-  border: none; /* Removes default border */
-  cursor: pointer; /* Changes cursor to pointer on hover */
-  background-color: #112948; /* Sets the button background color */
-  color: white; /* Sets the text color to white */
-  border-radius: 5px; /* Adds rounded corners */
-  font-size: 16px; /* Sets font size */
-  font-weight: bold; /* Makes the text bold */
-  transition: background-color 0.3s ease, transform 0.4s ease; /* Smooth hover effect */
+.visualization-route-button {
+  padding: 8px 20px;
+  /* Adds spacing inside the button */
+  border: none;
+  /* Removes default border */
+  cursor: pointer;
+  /* Changes cursor to pointer on hover */
+  background-color: #112948;
+  /* Sets the button background color */
+  color: white;
+  /* Sets the text color to white */
+  border-radius: 5px;
+  /* Adds rounded corners */
+  font-size: 16px;
+  /* Sets font size */
+  font-weight: bold;
+  /* Makes the text bold */
+  transition: background-color 0.3s ease, transform 0.4s ease;
+  /* Smooth hover effect */
 }
 
-.visualization-route-button:hover{
-  background-color: #1c222d; /* Slightly darker shade for hover */
-  transform: scale(1.05); /* Slightly enlarges button on hover */
-  color: #e2e8f0; /* Change text color on hover (optional) */
+.visualization-route-button:hover {
+  background-color: #1c222d;
+  /* Slightly darker shade for hover */
+  transform: scale(1.05);
+  /* Slightly enlarges button on hover */
+  color: #e2e8f0;
+  /* Change text color on hover (optional) */
 }
 
-.graph-properties-animation-container, .tree-animation-container, .adjacency-animation{
+.graph-properties-animation-container,
+.tree-animation-container,
+.adjacency-animation {
   height: 300px;
   width: 600px;
   background-color: white;
   border: 3px solid #252525;
 }
 
+
+
 .tree-animation-container {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* Push buttons to the bottom */
+  align-items: center;       /* Center horizontally */
   height: 300px;
-  width: 600px;
+  width: 600px;       /* Or set a fixed height */
+  padding-bottom: 10px;      /* Margin from bottom */
   margin-bottom: 10px;
   background-color: white;
   border: 3px solid #252525;
@@ -190,28 +243,9 @@ body {
   background-color: #343434;
 }
 
-/* Style buttons */
-.generate-graph,
-.generate-tree {
-  position: absolute;
-  top: 50%;
-  padding: 10px 14px;
-  opacity: 0.9;
-}
 
 
-/* Position them side-by-side in the center horizontally */
-.generate-graph {
-  top:80%;
-  left: 20%;
-}
-.generate-tree {
-  top: 80%;
-  left: 55%;
-}
-
-
-.graph-properties-animation-buttons-container{
+.graph-properties-animation-buttons-container {
   display: flex;
   height: auto;
   width: 150px;
@@ -220,18 +254,62 @@ body {
 
 .graph-properties-animation-graphic-container {
   height: 100%;
-  width: calc(100% - 150px); /* Adjusts for the button container */
+  width: calc(100% - 150px);
+  /* Adjusts for the button container */
   background-color: #343434;
 }
+.tree-animation-container .buttons {
+    display: flex;
+    gap: 10px;
 
 
-@media(max-width: 732px){
-  .markdown-content{
+   
+}
+.tree-animation-container .buttons button{
+  z-index: 100;
+}
+@media(max-width: 732px) {
+  .markdown-content {
     left: 5px;
     top: 10px;
   }
 
+  .graph-properties-animation-container {
+    margin-left: 5px;
+    margin-right: 5px;
+    width: auto;
+    height: 300px;
+  }
+
+  .tree-animation-container {
+    margin-left: 5px;
+    margin-right: 5px;
+    width: auto;
+    height: 300px;
+  }
+
+  .tree-animation-container .buttons button{
+    font-size: 12px;
+   
+  }
+
+  .tree-animation-container .buttons{
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin: 0 auto;
+  }
+
+  .tree-animation-container .buttons .generate-graph{
+    left: 5px;
+    top: 85%;
+  }
+
+  .tree-animation-container .buttons .generate-tree{
+    right: 5px;
+    top: 85%;
+  }
   
+
+
 }
-
-

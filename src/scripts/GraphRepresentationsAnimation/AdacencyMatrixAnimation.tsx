@@ -41,9 +41,9 @@ const AdjacencyMatrixAnimation: React.FC = () => {
   }, [matrix]);
 
   return (
-    <div style={{ display: "flex", gap: "5px", alignItems: "center" }}>
+    <div style={{ display: "flex", gap: "5px", alignItems: "center" }} className="adjacency-animation-container">
       {/* Matrix */}
-      <div
+      <div className="matrix-container"
         style={{
           backgroundColor: "#1e1e1e",
           padding: "0px",

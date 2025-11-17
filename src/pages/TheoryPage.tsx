@@ -6,9 +6,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { useState } from "react";
 import { createGraph, createPropertiesGraph } from "../scripts/CreateGraph/createGraph";
-import { createD3GraphBasic, createGraphBidirectional,  } from "../scripts/CreateGraph/createGraph";
 import AdjacencyMatrixAnimation from "../scripts/GraphRepresentationsAnimation/AdacencyMatrixAnimation";
-import NavbarVisualizerToolPage from "../components/VisualizerToolPage/NavBar/NavBarVisualizerToolPage";
 
 function TheoryPage() {
   const navigate = useNavigate();
@@ -16,7 +14,7 @@ function TheoryPage() {
     nodes: Array<{ id: string }>;
     links: Array<{ source: string; target: string }>;
   } | null>(null);
-const markdownContentWhatisaGraph = `
+  const markdownContentWhatisaGraph = `
 ## What is a Graph?
 
 A Graph is a data structure that consists of **nodes (also known as vertices)** and **edges**.  
@@ -34,7 +32,7 @@ Graphs are used to represent and solve problems where the data consists of objec
 - **Social Networks**: Each person is a node, and relationships (like friendships) are the edges. Algorithms can suggest potential friends.
 - **Maps and Navigation**: Locations, like a town or bus stops, are stored as vertices, and roads are stored as edges. Algorithms can find the shortest route between two locations when stored as a Graph.
 `;
-const markdownContentGraphsProperties = `
+  const markdownContentGraphsProperties = `
 ## Graph Properties
 
 Graphs are customizable data structures used to represent relationships between objects, where the objects are represented as nodes and the relationships as edges. 
@@ -99,7 +97,7 @@ These properties often coexist in real-world graphs. For example:
 
 Below you can find an interactive tool to play it that helps understanding the properties Graphs have and how they interwine eachother:
 `;
-const markdownContentGraphsRepresentation = `
+  const markdownContentGraphsRepresentation = `
 ## Graph Representation
 
 Graphs can be represented in different ways depending on the specific requirements of the problem. Two common representations are:
@@ -185,7 +183,7 @@ The choice between an adjacency matrix and an adjacency list depends on the grap
 Below you can use our interactive tool to play around with the adjacency matrix representation. For adajacency list representation check the graph 
 algorithms visualizations.
 `;
-const markdownContentSpecialGraphStructures = `## Special Graph Structures
+  const markdownContentSpecialGraphStructures = `## Special Graph Structures
 
 A **tree** is a connected graph with no cycles. It consists of nodes (vertices) and edges, where there is exactly one path between any two nodes. Trees are fundamental structures used in many algorithms and data structures.
 
@@ -214,7 +212,7 @@ avoiding unnecessary redundancy.
 
 Using the buttons below, you can explore the visualization of Trees compared to Graphs:
 `
-const markdownContentArray = `## Array
+  const markdownContentArray = `## Array
 
 An **array** is a linear data structure that stores elements sequentially. Each element can be accessed directly using its index, making arrays efficient for operations that involve positional access. 
 
@@ -253,7 +251,7 @@ Additionally, all additional data structures included in the visualizer tool imp
 
 Using the button below, you can explore visualizations of array operations: see how appending, deleting, updating, and searching behave in real-time to better understand their underlying mechanics.
 `
-const markdownContentQueue = `## Queue
+  const markdownContentQueue = `## Queue
 
 A **queue** is a linear data structure that follows the **First In First Out (FIFO)** principle. This means that the element added earliest is removed first, just like a real-life queue at a checkout line.
 
@@ -280,7 +278,7 @@ Queues support the following core operations:
 
 Use the button below to interact with visualizations of enqueue, dequeue, and peek operations to deepen your understanding of how queues behave.
 `;
-const markdownContentStack = `## Stack
+  const markdownContentStack = `## Stack
 
 A **stack** is a linear data structure that follows the **Last In First Out (LIFO)** principle. The last element added is the first to be removed, similar to a stack of plates.
 
@@ -308,7 +306,7 @@ Stacks support the following operations:
 
 Use the button below to explore push, pop, and peek operations in the stack visualization tool to gain hands-on experience with the LIFO behavior.
 `;
-const markdownContentWhyGraphAlgorithms = `## Why Graph Algorithms?
+  const markdownContentWhyGraphAlgorithms = `## Why Graph Algorithms?
 
 Graph algorithms are tools that help us solve problems involving relationships and connections. They allow us to analyze and work with data in the form of graphs, where items (like people, places, or things) are represented as vertices, and their connections are represented as edges.
 
@@ -350,7 +348,7 @@ Before going into depth with specific algorithms let use define two basic applic
 
 ***Remember the description of these problems, as the corresponding solution will be explained in a later chapter using specific algorithms.***
 `;
-const markdownContentTraversalAlgorithms = `## Traversal Algorithms
+  const markdownContentTraversalAlgorithms = `## Traversal Algorithms
 
 DFS (Depth-First Search) and BFS (Breadth-First Search) are two fundamental graph algorithms that help us navigate through all the nodes and edges in an organized way.
 
@@ -386,7 +384,7 @@ DFS dives deep, while BFS spreads out. In the next chapter, we’ll see how algo
 
 Using the button below you can access directly the DFS/BFS vizualization tool:
 `;
-const markdownContentDistanceAlgorithms = `## Distance Algorithms
+  const markdownContentDistanceAlgorithms = `## Distance Algorithms
 
 In graph theory, distance algorithms determine the shortest path (or distance) between vertices in a graph.
 
@@ -434,7 +432,7 @@ through another node).
 
 Using the button below you can access directly the Dijkstra and Bellman-Ford visualization tools:
 `;
-const markdownContent2Color = `## 2-Coloring: Avoiding Conflicts
+  const markdownContent2Color = `## 2-Coloring: Avoiding Conflicts
 
 2-Coloring is a graph algorithm used to divide the vertices of a graph into two groups in such a way that no two connected vertices share the same group. 
 This is only possible if the graph is **bipartite**.
@@ -477,7 +475,7 @@ A, B, C, are one set while nodes D, E, F make up the other set.
 
 Using the button below you can access directly the 2Coloring vizualization tool:
 `;
-const markdownContentMSTAlgorithms = `## MST Algorithms
+  const markdownContentMSTAlgorithms = `## MST Algorithms
 
 Remember that an MST connects all vertices in the graph with the minimum total edge weight and without creating cycles.
 
@@ -522,7 +520,7 @@ Prim’s focuses on growing a tree from one point outward, while Kruskal’s foc
 
 Using the button below, you can access the Prim's and Kruskal's MST visualization tool:
 `;
-const markdownSources = `--- 
+  const markdownSources = `--- 
 ## **Sources**
 
 - Tim Roughgarden. *Algorithms Illuminated*. Soundlikeyourself Publishing, LLC, New York, NY, first edition, second printing, 2021 edition, 2018. Library of Congress Control Number: 2017914282.
@@ -533,98 +531,98 @@ const markdownSources = `---
 - Darij Grinberg. *An Introduction to Graph Theory*.
 `;
 
-const markdownContentIntroduction = `## Introduction`
-const markdownContentAdditionalDataStructures = `## Additional Data Structures`
-const markdownContentGraphAlgorithms = `## Graph Algorithms`
+  const markdownContentIntroduction = `## Introduction`
+  const markdownContentAdditionalDataStructures = `## Additional Data Structures`
+  const markdownContentGraphAlgorithms = `## Graph Algorithms`
 
-const handleGenerateGraph = (shouldGenerateTree = false) => {
-  const nodeCount = 5;
-  let nodes = Array.from({ length: nodeCount }, (_, i) => ({ id: (i + 1).toString() }));
+  const handleGenerateGraph = (shouldGenerateTree = false) => {
+    const nodeCount = 5;
+    let nodes = Array.from({ length: nodeCount }, (_, i) => ({ id: (i + 1).toString() }));
 
-  let links = [];
-  const parent = [...Array(nodeCount)].map((_, i) => i);
-  const edgeSet = new Set();
-
-  // Union-Find functions for cycle detection
-  const find = (u) => {
-    while (parent[u] !== u) {
-      parent[u] = parent[parent[u]]; // Path compression
-      u = parent[u];
-    }
-    return u;
-  };
-
-  const union = (u, v) => {
-    const pu = find(u);
-    const pv = find(v);
-    if (pu !== pv) {
-      parent[pu] = pv;
-      return true;
-    }
-    return false;
-  };
-
-  if (shouldGenerateTree) {
-    // Fixed tree structure with specific nodes and edges:
-    // Root 1 with edges 1 -> 2, 1 -> 3, 2 -> 4, 4 -> 5
-    const templateEdges = [
-      [0, 1], // 1 -> 2
-      [0, 2], // 1 -> 3
-      [1, 3], // 2 -> 4
-      [1, 4], // 4 -> 5
-    ];
-  
-    // Assign fixed node IDs based on the above edges, starting with node 1
-    const nodeIds = ['1', '2', '3', '4', '5'];
-  
-    // Update nodes and links based on the fixed structure
-    nodes = nodeIds.map((id) => ({ id }));
-    links = templateEdges.map(([from, to]) => ({
-      source: nodeIds[from],
-      target: nodeIds[to],
-    }));
-  }else {
-    const minNodes = 5;
-    const maxNodes = 10;
-    const nodeCount = Math.floor(Math.random() * (maxNodes - minNodes + 1)) + minNodes;
-    nodes = Array.from({ length: nodeCount }, (_, i) => ({ id: (i + 1).toString() }));
-
-    const maxEdges = Math.min(nodeCount * 2, (nodeCount * (nodeCount - 1)) / 2);
-    const minEdges = Math.floor(nodeCount * 1.2);
-    const totalEdges = Math.floor(Math.random() * (maxEdges - minEdges + 1)) + minEdges;
-
+    let links = [];
+    const parent = [...Array(nodeCount)].map((_, i) => i);
     const edgeSet = new Set();
-    links = [];
 
-    while (links.length < totalEdges) {
-      let u = Math.floor(Math.random() * nodeCount);
-      let v = Math.floor(Math.random() * nodeCount);
-      if (u === v) continue;
+    // Union-Find functions for cycle detection
+    const find = (u) => {
+      while (parent[u] !== u) {
+        parent[u] = parent[parent[u]]; // Path compression
+        u = parent[u];
+      }
+      return u;
+    };
 
-      const directed = Math.random() < 0.5; // Randomly decide if edge is u -> v or v -> u
-      const source = directed ? nodes[u].id : nodes[v].id;
-      const target = directed ? nodes[v].id : nodes[u].id;
+    const union = (u, v) => {
+      const pu = find(u);
+      const pv = find(v);
+      if (pu !== pv) {
+        parent[pu] = pv;
+        return true;
+      }
+      return false;
+    };
 
-      const key = `${source}-${target}`;
-      if (!edgeSet.has(key)) {
-        edgeSet.add(key);
-        links.push({ source, target });
+    if (shouldGenerateTree) {
+      // Fixed tree structure with specific nodes and edges:
+      // Root 1 with edges 1 -> 2, 1 -> 3, 2 -> 4, 4 -> 5
+      const templateEdges = [
+        [0, 1], // 1 -> 2
+        [0, 2], // 1 -> 3
+        [1, 3], // 2 -> 4
+        [1, 4], // 4 -> 5
+      ];
+
+      // Assign fixed node IDs based on the above edges, starting with node 1
+      const nodeIds = ['1', '2', '3', '4', '5'];
+
+      // Update nodes and links based on the fixed structure
+      nodes = nodeIds.map((id) => ({ id }));
+      links = templateEdges.map(([from, to]) => ({
+        source: nodeIds[from],
+        target: nodeIds[to],
+      }));
+    } else {
+      const minNodes = 5;
+      const maxNodes = 10;
+      const nodeCount = Math.floor(Math.random() * (maxNodes - minNodes + 1)) + minNodes;
+      nodes = Array.from({ length: nodeCount }, (_, i) => ({ id: (i + 1).toString() }));
+
+      const maxEdges = Math.min(nodeCount * 2, (nodeCount * (nodeCount - 1)) / 2);
+      const minEdges = Math.floor(nodeCount * 1.2);
+      const totalEdges = Math.floor(Math.random() * (maxEdges - minEdges + 1)) + minEdges;
+
+      const edgeSet = new Set();
+      links = [];
+
+      while (links.length < totalEdges) {
+        let u = Math.floor(Math.random() * nodeCount);
+        let v = Math.floor(Math.random() * nodeCount);
+        if (u === v) continue;
+
+        const directed = Math.random() < 0.5; // Randomly decide if edge is u -> v or v -> u
+        const source = directed ? nodes[u].id : nodes[v].id;
+        const target = directed ? nodes[v].id : nodes[u].id;
+
+        const key = `${source}-${target}`;
+        if (!edgeSet.has(key)) {
+          edgeSet.add(key);
+          links.push({ source, target });
+        }
       }
     }
-  }
 
-  const graph = { nodes, links };
-  setCurrentGeneratedGraph(graph);
-  const container = document.getElementById("tree-visualizer");
-  if(shouldGenerateTree)
-    createGraph(container, graph, "Tree"); // This will generate a tree
-  else 
-    createGraph(container, graph);
-  console.clear();
-  
-};
+    const graph = { nodes, links };
+    setCurrentGeneratedGraph(graph);
+    const container = document.getElementById("tree-visualizer");
+    if (shouldGenerateTree)
+      createGraph(container, graph, "Tree"); // This will generate a tree
+    else
+      createGraph(container, graph);
+    console.clear();
 
-const graphPropertiesCheckboxes = () => {
+  };
+
+  const graphPropertiesCheckboxes = () => {
     const [properties, setProperties] = useState({
       weighted: false,
       connected: false,
@@ -638,7 +636,7 @@ const graphPropertiesCheckboxes = () => {
       const { name, checked } = event.target;
       setProperties((prevProperties) => {
         const newProperties = { ...prevProperties, [name]: checked };
-      
+
         const visualizationBox = document.getElementById(
           "graph-properties-animation-graphic-container"
         );
@@ -646,21 +644,21 @@ const graphPropertiesCheckboxes = () => {
           alert("Null container for graphics");
           return prevProperties;
         }
-      
+
         //console.log("Updated properties:", newProperties);
         createPropertiesGraph(newProperties, visualizationBox); // Now uses the updated state
-      
+
         return newProperties;
       });
       const visualizationBox = document.getElementById(
         "graph-properties-animation-graphic-container"
       );
-    
+
       if (!visualizationBox) {
         alert("Null container for graphics");
         return;
       }
-    
+
       console.log(properties);
       createPropertiesGraph(properties, visualizationBox);
     };
@@ -689,7 +687,7 @@ const graphPropertiesCheckboxes = () => {
         </label>
       ));
     };
-    
+
     return (
       <div
         style={{
@@ -705,14 +703,14 @@ const graphPropertiesCheckboxes = () => {
         </div>
       </div>
     );
-};
+  };
 
   return (
     <div className="theory-page">
-      
-      
-        <SideNavBarTheoryPage />
-        
+
+
+      <SideNavBarTheoryPage />
+
       <div className="markdown-content">
         <div id="introduction">
           <ReactMarkdown>{markdownContentIntroduction}</ReactMarkdown>
@@ -725,9 +723,9 @@ const graphPropertiesCheckboxes = () => {
             {markdownContentGraphsRepresentation}
           </ReactMarkdown>
         </div>
-            
-        <AdjacencyMatrixAnimation/>
-    
+
+        <AdjacencyMatrixAnimation />
+
         <div id="graphs-properties">
           <ReactMarkdown>{markdownContentGraphsProperties}</ReactMarkdown>
         </div>
@@ -751,19 +749,21 @@ const graphPropertiesCheckboxes = () => {
 
           </div>
 
-          <button 
-            id="generate-graph" 
-            className="generate-graph visualization-route-button"
-            onClick={() => handleGenerateGraph(false)} >
-            Generate Graph
-          </button>
+          <div className="buttons">
+            <button
+              id="generate-graph"
+              className="generate-graph visualization-route-button"
+              onClick={() => handleGenerateGraph(false)} >
+              Generate Graph
+            </button>
 
-          <button 
-            id="generate-tree" 
-            className="generate-tree visualization-route-button"
-            onClick={() => handleGenerateGraph(true)} >
-            Generate Tree
-          </button>
+            <button
+              id="generate-tree"
+              className="generate-tree visualization-route-button"
+              onClick={() => handleGenerateGraph(true)} >
+              Generate Tree
+            </button>
+          </div>
         </div>
         <div id="additional-data-structures">
           <ReactMarkdown>{markdownContentAdditionalDataStructures}</ReactMarkdown>

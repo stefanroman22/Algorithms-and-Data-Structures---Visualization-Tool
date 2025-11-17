@@ -16,9 +16,7 @@
   
 }
 
-.sidebar-container .content{
-    margin-top: 50px;
-}
+
 
 /* Sidebar hidden state */
 .sidebar-container.hide {
@@ -98,6 +96,10 @@
   display: none;
 }
 
+.sidebar-container .content{
+    margin-top: 10px;
+}
+
 @media (max-width: 732px) {
   .collapse-menu {
     display: flex;
@@ -125,4 +127,8 @@
     transform: scale(1.05);
     background-color: rgba(49, 49, 49, 0.9);
   }
+
+  .sidebar-container .content{
+    margin-top: 55px;
+}
 }

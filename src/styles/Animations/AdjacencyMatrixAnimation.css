@@ -1,3 +1,8 @@
+.adjacency-animation-container{
+  display: flex;
+
+}
+
 .adjacency-animation {
     background-color: #343434;
     border: 3px solid #252525;
@@ -27,4 +32,24 @@
   .matrix-dark button.active {
     background-color: #4caf50;
   }
+
+
+@media (max-width: 732px) {
+  .adjacency-animation-container{
+    flex-direction: column;
+  }
+
+  .matrix-container{
+    margin-left: 10px;
+    margin-right: 10px;
+    width: auto;
+    height: auto;
+  }
+
+  .adjacency-animation {
+    width: calc(100%) !important; 
+    margin: 5px !important;              
+    height: 300px;            
+  }
+}
   
