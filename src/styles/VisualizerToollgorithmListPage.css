@@ -117,9 +117,13 @@
   cursor: pointer;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 732px) {
   .algorithm-card {
     width: 90%; /* Make them take full width on small screens */
+  }
+
+  .filter-container{
+    margin-top: 25px;
   }
 }
 
@@ -147,6 +151,7 @@
   justify-content: center;
   gap: 15px;
   padding: 20px;
+  
 }
 
 /* Common Styles for Input, Select, and Button */
