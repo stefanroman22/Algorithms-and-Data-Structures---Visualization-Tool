@@ -63,9 +63,9 @@ function App() {
 function PageWrapper({ children }: { children: React.ReactNode }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }} // Subtle downward fade-in
+      initial={{ opacity: 0, y: 0 }} // Subtle downward fade-in
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }} // Subtle upward fade-out
+      exit={{ opacity: 0, y: 0 }} // Subtle upward fade-out
       transition={{ duration: 0.5, ease: "easeInOut" }}
       style={{
         position: "relative", // Ensures the layout does not shift
