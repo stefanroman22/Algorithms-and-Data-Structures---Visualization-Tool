@@ -51,3 +51,9 @@
 .edge-processed{
   background-color: 	#ff6700;
 }
+
+@media (max-width: 1200px){
+  .legend-container{
+    display: none;
+  }
+} 

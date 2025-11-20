@@ -39,3 +39,18 @@
     overflow-x: auto; /* Handle long lines gracefully */
     margin-top: 10px; /* Add space above the example */
   }
+
+
+
+@media (max-width: 768px){
+  .instructions{
+    margin-top: 10px;
+    align-self: flex-start;
+    max-width: fit-content;
+        margin-bottom: 25px;
+  }
+
+  .instructions pre{
+    margin-right: 10px;
+  }
+}

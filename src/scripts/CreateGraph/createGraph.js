@@ -1,6 +1,9 @@
 import * as d3 from "d3";
 import { runDFS, runBFS } from "../RunAlgorithm/Basic(DFS+BFS)/runAlgorithm";
-import { runBellmanFord, runDijkstra } from "../RunAlgorithm/Heuristics/runAlgorithmHeuristics";
+import {
+  runBellmanFord,
+  runDijkstra,
+} from "../RunAlgorithm/Heuristics/runAlgorithmHeuristics";
 import { run2Color } from "../RunAlgorithm/2Color/runAlgorithm2Color";
 import { runKruskal, runPrim } from "../RunAlgorithm/SpanTree/spantree";
 import { showErrorPopup } from "../utils/displayAlert";
@@ -29,7 +32,12 @@ export const parseGraphInput = (graphInputContent, algorithmName) => {
 
     if (edgesString) {
       const edges = edgesString.split(",").map((edge) => edge.trim());
-      const isWeighted = ["Dijkstra", "Prim", "Kruskal", "Bellman-Ford"].includes(algorithmName);
+      const isWeighted = [
+        "Dijkstra",
+        "Prim",
+        "Kruskal",
+        "Bellman-Ford",
+      ].includes(algorithmName);
 
       edges.forEach((edge) => {
         if (isWeighted) {
@@ -125,27 +133,52 @@ export const updateVisualizationBox = (
 export const createGraph = (container, graph, algorithmName = "") => {
   container.innerHTML = "";
 
-  const width = container.clientWidth || 600;
-  const height = container.clientHeight || 400;
-  const svg = createSVG(container, width, height);
+  const screenWidth = window.innerWidth;
+  const screenHeight = window.innerHeight;
+
+  // Get container width — fallback to screen width
+  const width = container.clientWidth || screenWidth;
+
+  // For height, use:
+  // - container height if exists
+  // - else 60% of the screen height
+  const height = container.clientHeight || Math.floor(screenHeight * 0.6);
+  const svg = createSVG(container, width - 40, height);
+
+  svg.append("rect")
+  .attr("width", width)
+  .attr("height", height)
+  .attr("fill", "#343434");
 
   // Determine behavior flags based on algorithm
   const isHeuristic = ["Dijkstra", "Bellman-Ford"].includes(algorithmName);
   const showEdgeWeights = ["Prim", "Kruskal"].includes(algorithmName);
-  const isBidirectional = ["2Color", "Prim", "Kruskal", "AdjacencyMatrixAnimation"].includes(algorithmName);
+  const isBidirectional = [
+    "2Color",
+    "Prim",
+    "Kruskal",
+    "AdjacencyMatrixAnimation",
+  ].includes(algorithmName);
   const isTreeRooted = ["Tree"].includes(algorithmName);
 
   if (!isBidirectional) createArrowMarkers(svg);
 
   const linkWithDirection = annotateBidirectionality(graph.links);
   const { selfLoops, regularLinks } = splitLinks(linkWithDirection);
-  const simulation = createSimulation(graph.nodes, linkWithDirection, width, height);
+  const simulation = createSimulation(
+    graph.nodes,
+    linkWithDirection,
+    width,
+    height
+  );
 
   // Annotate nodes with self-loop presence
-  graph.nodes.forEach(node => {
-    node.hasSelfLoop = graph.links.some(link => {
-      const sourceId = typeof link.source === "object" ? link.source.id : link.source;
-      const targetId = typeof link.target === "object" ? link.target.id : link.target;
+  graph.nodes.forEach((node) => {
+    node.hasSelfLoop = graph.links.some((link) => {
+      const sourceId =
+        typeof link.source === "object" ? link.source.id : link.source;
+      const targetId =
+        typeof link.target === "object" ? link.target.id : link.target;
       return sourceId === node.id && targetId === node.id;
     });
   });
@@ -160,13 +193,15 @@ export const createGraph = (container, graph, algorithmName = "") => {
     if (showEdgeWeights) selfLoopLabels = renderSelfLoopLabels(svg, selfLoops);
   }
 
-  const node = renderNodes(svg, graph.nodes, simulation, width, height)
-    .attr("fill", (d, i) =>
-      i === 0 && isTreeRooted ? "green" : "#bbbbbb"
-    );
+  const node = renderNodes(svg, graph.nodes, simulation, width, height).attr(
+    "fill",
+    (d, i) => (i === 0 && isTreeRooted ? "green" : "#bbbbbb")
+  );
 
   const nodeLabels = renderNodeLabels(svg, graph.nodes);
-  const distanceLabels = isHeuristic ? renderDistanceLabels(svg, graph.nodes) : null;
+  const distanceLabels = isHeuristic
+    ? renderDistanceLabels(svg, graph.nodes)
+    : null;
 
   simulation.on("tick", () => {
     updateLinkPaths(linkPath);
@@ -194,7 +229,8 @@ export const createGraph = (container, graph, algorithmName = "") => {
 export const createPropertiesGraph = (properties, container) => {
   container.innerHTML = "";
 
-  let isBidirectional = true, isWeighted = false;
+  let isBidirectional = true,
+    isWeighted = false;
 
   const nodes = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }];
   let links = [
@@ -202,8 +238,18 @@ export const createPropertiesGraph = (properties, container) => {
     { source: 2, target: 3, weight: properties.weighted ? 10 : null },
     { source: 3, target: 4, weight: properties.weighted ? 2 : null },
   ];
-  if (properties.connected) links.push({ source: 1, target: 5, weight: properties.weighted ? 7 : null });
-  if (properties.cyclic) links.push({ source: 4, target: 1, weight: properties.weighted ? 4 : null });
+  if (properties.connected)
+    links.push({
+      source: 1,
+      target: 5,
+      weight: properties.weighted ? 7 : null,
+    });
+  if (properties.cyclic)
+    links.push({
+      source: 4,
+      target: 1,
+      weight: properties.weighted ? 4 : null,
+    });
   //if (properties.selfLoop) links.push({ source: 1, target: 1, weight: properties.weighted ? 3 : null });
   if (properties.directed) isBidirectional = false;
   if (properties.weighted) isWeighted = true;
@@ -222,8 +268,7 @@ export const createPropertiesGraph = (properties, container) => {
   const nodeSelection = renderNodes(svg, nodes, simulation, width, height);
   const labelSelection = renderNodeLabels(svg, nodes);
   let edgeLabelSelection = null;
-  if(isWeighted)
-     edgeLabelSelection = renderEdgeLabels(svg, regularLinks);
+  if (isWeighted) edgeLabelSelection = renderEdgeLabels(svg, regularLinks);
   const selfLoopLabelSelection = renderSelfLoopLabels(svg, selfLoops);
 
   simulation.on("tick", () => {
@@ -231,14 +276,12 @@ export const createPropertiesGraph = (properties, container) => {
     updateSelfLoopPaths(selfLoopSelection);
     updateNodePositions(nodeSelection, width, height);
     updateNodeLabelPositions(labelSelection);
-    if(isWeighted){
+    if (isWeighted) {
       updateEdgeLabels(edgeLabelSelection);
       updateSelfLoopLabels(selfLoopLabelSelection);
     }
-    
   });
 };
-
 
 /**
  * Creates and appends an SVG element to the specified container.
@@ -249,7 +292,8 @@ export const createPropertiesGraph = (properties, container) => {
  * @returns The D3 selection of the newly created SVG element.
  */
 export function createSVG(container, width = 600, height = 400) {
-  return d3.select(container)
+  return d3
+    .select(container)
     .append("svg")
     .attr("width", width)
     .attr("height", height);
@@ -270,8 +314,15 @@ export function createSVG(container, width = 600, height = 400) {
  * @returns A D3 force simulation object configured with nodes and forces.
  */
 export function createSimulation(nodes, links, width, height) {
-  return d3.forceSimulation(nodes)
-    .force("link", d3.forceLink(links).id(d => d.id).distance(100))
+  return d3
+    .forceSimulation(nodes)
+    .force(
+      "link",
+      d3
+        .forceLink(links)
+        .id((d) => d.id)
+        .distance(100)
+    )
     .force("charge", d3.forceManyBody().strength(-165))
     .force("center", d3.forceCenter(width / 2, height / 2));
 }
@@ -287,10 +338,10 @@ export function createSimulation(nodes, links, width, height) {
  * @returns A new array of link objects with an added `isBidirectional` boolean property.
  */
 export function annotateBidirectionality(links) {
-  const linkMap = new Set(links.map(link => `${link.source}-${link.target}`));
-  return links.map(link => ({
+  const linkMap = new Set(links.map((link) => `${link.source}-${link.target}`));
+  return links.map((link) => ({
     ...link,
-    isBidirectional: linkMap.has(`${link.target}-${link.source}`)
+    isBidirectional: linkMap.has(`${link.target}-${link.source}`),
   }));
 }
 
@@ -306,8 +357,8 @@ export function annotateBidirectionality(links) {
  *   - `regularLinks`: links where source !== target
  */
 export function splitLinks(links) {
-  const selfLoops = links.filter(d => d.source === d.target);
-  const regularLinks = links.filter(d => d.source !== d.target);
+  const selfLoops = links.filter((d) => d.source === d.target);
+  const regularLinks = links.filter((d) => d.source !== d.target);
   return { selfLoops, regularLinks };
 }
 
@@ -326,7 +377,8 @@ export function splitLinks(links) {
 export function createArrowMarkers(svg) {
   const defs = svg.append("defs");
 
-  defs.append("marker")
+  defs
+    .append("marker")
     .attr("id", "arrowhead")
     .attr("viewBox", "0 -5 10 10")
     .attr("refX", 26)
@@ -339,7 +391,8 @@ export function createArrowMarkers(svg) {
     .attr("d", "M0,-5L10,0L0,5")
     .attr("fill", "#bbbbbb");
 
-  defs.append("marker")
+  defs
+    .append("marker")
     .attr("id", "self-loop-arrowhead")
     .attr("viewBox", "0 -5 10 10")
     .attr("refX", 26)
@@ -367,7 +420,8 @@ export function createArrowMarkers(svg) {
  * @returns A D3 drag behavior object that can be applied to node elements.
  */
 export function createDrag(simulation, width, height) {
-  return d3.drag()
+  return d3
+    .drag()
     .on("start", (event, d) => {
       if (!event.active) simulation.alphaTarget(0.3).restart();
       d.fx = d.x;
@@ -383,7 +437,6 @@ export function createDrag(simulation, width, height) {
       d.fy = null;
     });
 }
-
 
 /**
  * Rendering functions for graph visualization components using D3.js.
@@ -402,7 +455,8 @@ export function createDrag(simulation, width, height) {
  */
 
 export function renderLinks(svg, regularLinks) {
-  return svg.selectAll(".link")
+  return svg
+    .selectAll(".link")
     .data(regularLinks)
     .enter()
     .append("path")
@@ -414,7 +468,8 @@ export function renderLinks(svg, regularLinks) {
 }
 
 export function renderSelfLoops(svg, selfLoops) {
-  return svg.selectAll(".self-loop")
+  return svg
+    .selectAll(".self-loop")
     .data(selfLoops)
     .enter()
     .append("path")
@@ -427,7 +482,8 @@ export function renderSelfLoops(svg, selfLoops) {
 }
 
 export function renderNodes(svg, nodes, simulation, width, height) {
-  return svg.selectAll(".node")
+  return svg
+    .selectAll(".node")
     .data(nodes)
     .enter()
     .append("circle")
@@ -440,7 +496,8 @@ export function renderNodes(svg, nodes, simulation, width, height) {
 }
 
 export function renderNodeLabels(svg, nodes) {
-  return svg.selectAll(".label")
+  return svg
+    .selectAll(".label")
     .data(nodes)
     .enter()
     .append("text")
@@ -448,26 +505,28 @@ export function renderNodeLabels(svg, nodes) {
     .attr("text-anchor", "middle")
     .attr("alignment-baseline", "middle")
     .style("pointer-events", "none")
-    .text(d => d.id);
+    .text((d) => d.id);
 }
 
 export function renderEdgeLabels(svg, links) {
-  return svg.selectAll(".edge-label")
+  return svg
+    .selectAll(".edge-label")
     .data(links)
     .enter()
     .append("text")
     .attr("class", "edge-label")
-    .attr("dy", d => d.isBidirectional ? -10 : 10)
+    .attr("dy", (d) => (d.isBidirectional ? -10 : 10))
     .attr("text-anchor", "middle")
     .attr("fill", "#bbbbbb")
     .style("pointer-events", "none")
     .style("font-weight", "bold")
     .style("font-size", "18px")
-    .text(d => d.weight ?? "not found");
+    .text((d) => d.weight ?? "not found");
 }
 
 export function renderSelfLoopLabels(svg, selfLoops) {
-  return svg.selectAll(".self-loop-label")
+  return svg
+    .selectAll(".self-loop-label")
     .data(selfLoops)
     .enter()
     .append("text")
@@ -478,11 +537,12 @@ export function renderSelfLoopLabels(svg, selfLoops) {
     .style("pointer-events", "none")
     .style("font-weight", "bold")
     .style("font-size", "16px")
-    .text(d => d.weight ?? "not found");
+    .text((d) => d.weight ?? "not found");
 }
 
 export function renderDistanceLabels(svg, nodes) {
-  return svg.selectAll(".distance-label")
+  return svg
+    .selectAll(".distance-label")
     .data(nodes)
     .enter()
     .append("text")
@@ -497,7 +557,6 @@ export function renderDistanceLabels(svg, nodes) {
     .style("font-size", "18px")
     .text(() => "∞");
 }
-
 
 /**
  * Update functions for dynamically adjusting graph visualization elements during simulation ticks.
@@ -515,22 +574,25 @@ export function renderDistanceLabels(svg, nodes) {
  * These are called repeatedly during force simulation ticks to animate the graph.
  */
 export function updateLinkPaths(linkSelection) {
-  linkSelection.attr("d", d => curvedPath(d, d.isBidirectional));
+  linkSelection.attr("d", (d) => curvedPath(d, d.isBidirectional));
 }
 
 export function updateSelfLoopPaths(selfLoopPath) {
   const r = 60;
-  selfLoopPath.attr("d", d => 
-    `M ${d.source.x} ${d.source.y}
+  selfLoopPath.attr(
+    "d",
+    (d) =>
+      `M ${d.source.x} ${d.source.y}
      C ${d.source.x - r} ${d.source.y - r * 1.5}, 
        ${d.source.x + r} ${d.source.y - r * 1.5}, 
-       ${d.source.x} ${d.source.y}`);
+       ${d.source.x} ${d.source.y}`
+  );
 }
 
 export function updateEdgeLabels(edgeLabels) {
   edgeLabels
-    .attr("x", d => (d.source.x + d.target.x) / 2)
-    .attr("y", d => {
+    .attr("x", (d) => (d.source.x + d.target.x) / 2)
+    .attr("y", (d) => {
       if (d.source === d.target) return d.source.y - 66;
       return (d.source.y + d.target.y) / 2 - 5;
     });
@@ -538,26 +600,24 @@ export function updateEdgeLabels(edgeLabels) {
 
 export function updateSelfLoopLabels(selfLoopLabels) {
   selfLoopLabels
-    .attr("x", d => (d.source.x + d.target.x) / 2)
-    .attr("y", d => (d.source.y + d.target.y) / 2 - 5);
+    .attr("x", (d) => (d.source.x + d.target.x) / 2)
+    .attr("y", (d) => (d.source.y + d.target.y) / 2 - 5);
 }
 
 export function updateNodePositions(nodeSelection, width, height) {
   nodeSelection
-    .attr("cx", d => d.x = Math.max(20, Math.min(width - 20, d.x)))
-    .attr("cy", d => d.y = Math.max(20, Math.min(height - 20, d.y)));
+    .attr("cx", (d) => (d.x = Math.max(20, Math.min(width - 20, d.x))))
+    .attr("cy", (d) => (d.y = Math.max(20, Math.min(height - 20, d.y))));
 }
 
 export function updateNodeLabelPositions(labelSelection) {
-  labelSelection
-    .attr("x", d => d.x)
-    .attr("y", d => d.y);
+  labelSelection.attr("x", (d) => d.x).attr("y", (d) => d.y);
 }
 
 export function updateDistanceLabels(distanceLabels) {
   distanceLabels
-    .attr("x", d => d.hasSelfLoop ? d.x + 16 : d.x)
-    .attr("y", d => d.y - 25);
+    .attr("x", (d) => (d.hasSelfLoop ? d.x + 16 : d.x))
+    .attr("y", (d) => d.y - 25);
 }
 
 /**
@@ -608,7 +668,7 @@ export const startAlgorithmSimulation = (
     return;
   }
 
-  if(algorithmName !==  "Kruskal"){
+  if (algorithmName !== "Kruskal") {
     console.log("Start Node Id:", startNodeId);
   }
 
@@ -679,13 +739,13 @@ export const startAlgorithmSimulation = (
     case "Bellman-Ford":
       runBellmanFord(
         graph,
-        startNodeId, 
+        startNodeId,
         svg,
         getPausedRef,
         currentSimulationId,
         getSimulationIdRef
-      )
-    default:   
+      );
+    default:
       break;
   }
 };

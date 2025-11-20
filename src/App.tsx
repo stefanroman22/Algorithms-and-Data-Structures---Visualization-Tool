@@ -68,12 +68,12 @@ function PageWrapper({ children }: { children: React.ReactNode }) {
       exit={{ opacity: 0, y: -20 }} // Subtle upward fade-out
       transition={{ duration: 0.5, ease: "easeInOut" }}
       style={{
-        position: "fixed", // Ensures the layout does not shift
+        position: "relative", // Ensures the layout does not shift
         top: 0,
         left: 0,
         width: "100%",
         height: "100vh", // Forces consistent height
-        overflow: "hidden", // Prevents any scrollbar appearing
+        overflow: "visible", // Prevents any scrollbar appearing
       }}
     >
       {children}

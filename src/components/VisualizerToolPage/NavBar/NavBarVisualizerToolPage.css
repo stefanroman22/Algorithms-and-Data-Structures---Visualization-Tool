@@ -7,5 +7,31 @@
   background-color: transparent; /* No background */
   position: fixed; /* Fix at the top */
   white-space: nowrap; /* Prevents wrapping of buttons */
+  
+}
+
+@media  (max-width: 768px){
+  .navbar-visualizer-tool{
+    position: sticky;
+  }
+
+  
+}
+
+@media (max-width: 768px) {
+  .navbar-visualizer-tool button {
+    display: none;
+  }
+
+  .navbar-visualizer-tool{
+    padding-left: 0;
+    margin-left: 0;
+  }
+
+  /* Show only the go-back button */
+  .navbar-visualizer-tool .go-back-button {
+    display: inline-block;
+    align-self: flex-start;
+  }
 }
 
