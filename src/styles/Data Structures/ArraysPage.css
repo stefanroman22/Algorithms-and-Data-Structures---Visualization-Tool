@@ -62,3 +62,48 @@
     transform: scale(1.05);
     color: #e2e8f0;
 }
+
+
+/* MOBILE LAYOUT */
+@media (max-width: 768px) {
+
+  .append-form,
+  .delete-form,
+  .update-form,
+  .search-form,
+  .push-form,
+  .enqueue-form,
+  .peek-form {
+    left: 100px;        /* Move forms closer to left edge on mobile */
+  }
+
+  .append-form { top: 120px; }   /* 60 + 30 */
+  .delete-form { top: 170px; }  /* 110 + 30 */
+  .update-form { top: 220px; }  /* 160 + 30 */
+  .peek-form   { top: 220px; }  /* Same as update-form */
+  .search-form { top: 370px; }  /* 310 + 30 */
+  .push-form   { top: 120px; }   /* If needed */
+  .enqueue-form { top: 120px; }  /* If needed */
+
+  /* Input + button adjustments for mobile */
+  .append-form input,
+  .delete-form input,
+  .update-form input,
+  .search-form input,
+  .push-form input,
+  .enqueue-form input {
+    font-size: 13px;
+    height: 28px;
+  }
+
+  .append-form button,
+  .delete-form button,
+  .update-form button,
+  .search-form button,
+  .push-form button,
+  .enqueue-form button,
+  .peek-form button {
+    font-size: 11px;
+    padding: 6px 14px;
+  }
+}

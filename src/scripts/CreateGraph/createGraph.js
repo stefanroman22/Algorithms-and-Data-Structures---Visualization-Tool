@@ -137,18 +137,25 @@ export const createGraph = (container, graph, algorithmName = "") => {
   const screenHeight = window.innerHeight;
 
   // Get container width — fallback to screen width
-  const width = container.clientWidth || screenWidth;
+  let width;
 
-  // For height, use:
-  // - container height if exists
-  // - else 60% of the screen height
+  if (window.innerWidth <= 768) {
+    // Mobile: width = 42vh
+    width = window.innerHeight * 0.42;
+  } else {
+    // Desktop: original width calculation
+    width = container.clientWidth  || screenWidth;
+  }
+
   const height = container.clientHeight || Math.floor(screenHeight * 0.6);
-  const svg = createSVG(container, width - 40, height);
 
-  svg.append("rect")
-  .attr("width", width)
-  .attr("height", height)
-  .attr("fill", "#343434");
+  const svg = createSVG(container, width, height);
+
+  svg
+    .append("rect")
+    .attr("width", width)
+    .attr("height", height)
+    .attr("fill", "#343434");
 
   // Determine behavior flags based on algorithm
   const isHeuristic = ["Dijkstra", "Bellman-Ford"].includes(algorithmName);

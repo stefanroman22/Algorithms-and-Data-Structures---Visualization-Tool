@@ -13,7 +13,8 @@
     height: 75.6vh;
     background-color: #343434;
     margin-bottom: 10px;
-    width: 120vh/* Same calculation */
+    width: 120vh
+        /* Same calculation */
 }
 
 
@@ -33,7 +34,7 @@
 }
 
 /* Input Field */
-.input-text-area{
+.input-text-area {
     flex: 1;
     /* Makes input take up all available space */
     padding: 8px;
@@ -73,4 +74,16 @@
     /* Slightly enlarges button on hover */
     color: #e2e8f0;
     /* Change text color on hover (optional) */
+}
+
+
+@media (max-width: 768px) {
+    .visualization-box-data-structures {
+        flex-grow: 0;
+        height: 75.6vh;
+        background-color: #343434;
+        margin-bottom: 10px;
+        width: 42vh;
+        margin-top: 0;
+    }
 }

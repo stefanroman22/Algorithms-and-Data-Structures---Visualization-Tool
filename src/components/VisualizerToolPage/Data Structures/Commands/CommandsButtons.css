@@ -42,3 +42,9 @@
     color: #e2e8f0;
     /* Change text color on hover (optional) */
 }
+
+@media (max-width: 768px){
+    .data-structures-commands-container{
+        flex-wrap: wrap;
+    }
+}
