@@ -8,6 +8,10 @@
   z-index: 1001; /* Layer it above most elements */
 }
 
+body{
+  background-color: black;
+}
+
 @media (max-width: 768px) {
   .go-back {
     top: 5px;
@@ -203,7 +207,7 @@
 .visualizer-main {
   display: block;           /* behave like a normal block layout */
   min-height: 100vh;        /* always take at least full viewport height */
-  background-image: url("/public/images/pexels-cottonbro-9665178.jpg");
+  background-color: black;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;

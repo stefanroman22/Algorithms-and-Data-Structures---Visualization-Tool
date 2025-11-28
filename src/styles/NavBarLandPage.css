@@ -26,3 +26,58 @@
   color: #818181; /* Change text color on hover */
   font-size: 15px;
 }
+
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    display: none !important;
+  }
+
+  .hamburger {
+    display: block;
+    margin-top: 10px;
+    margin-left: 10px;
+  }
+
+  .mobile-menu {
+    position: fixed;          
+    top: 0;
+    right: 0;
+    align-items: center;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    z-index: 9999;           
+    animation: slideIn 0.3s ease forwards;
+  }
+
+  .mobile-menu.active{
+    background: linear-gradient(to bottom, #2a2a2a, #111111);
+     height: 100%;
+     width: 100%;
+  }
+
+  .mobile-menu.active .hamburger{
+    margin: 0;
+  }
+
+  .mobile-navigation {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+  
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100%); }
+  to   { transform: translateX(0); }
+}

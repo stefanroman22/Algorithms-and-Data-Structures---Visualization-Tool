@@ -30,8 +30,7 @@
 
   /* Show only the go-back button */
   .navbar-visualizer-tool .go-back-button {
-    display: inline-block;
-    align-self: flex-start;
+    display: none;
   }
 }
 

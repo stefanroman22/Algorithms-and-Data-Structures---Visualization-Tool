@@ -1,6 +1,6 @@
 
 body{
-  background-image: url('/images/pexels-cottonbro-9665178.jpg');
+  background-color: black;
 
 }
 
@@ -103,7 +103,7 @@ body{
    }
 
    .visualizer-label{
-     top: 50px;
+     top: 25px;
      font-size: 20px;
    }
 

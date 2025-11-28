@@ -7,6 +7,7 @@ import remarkGfm from "remark-gfm";
 import { useState } from "react";
 import { createGraph, createPropertiesGraph } from "../scripts/CreateGraph/createGraph";
 import AdjacencyMatrixAnimation from "../scripts/GraphRepresentationsAnimation/AdacencyMatrixAnimation";
+import NavbarVisualizerToolPage from "../components/VisualizerToolPage/NavBar/NavBarVisualizerToolPage";
 
 function TheoryPage() {
   const navigate = useNavigate();
@@ -707,6 +708,9 @@ Using the button below, you can access the Prim's and Kruskal's MST visualizatio
 
   return (
     <div className="theory-page">
+<div className="navbar-visualization-page" >
+        <NavbarVisualizerToolPage memberTheoryPage = {true}/>
+      </div>
 
 
       <SideNavBarTheoryPage />

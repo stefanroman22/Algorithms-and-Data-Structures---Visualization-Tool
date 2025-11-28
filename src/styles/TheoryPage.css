@@ -7,6 +7,11 @@ body {
   position: sticky;
 }
 
+.navbar-visualizer-tool {
+  margin-left: 190px;
+  
+}
+
 /* Sidebar */
 .sidebar-theory-page {
   height: 100vh;
@@ -95,7 +100,7 @@ body {
 }
 
 /* Optional: responsive adjustments for smaller screens */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .markdown-content {
     width: 100vw;
     left: 50vw;
@@ -106,6 +111,12 @@ body {
 
   .markdown-content img {
     max-height: 40vh;
+  }
+  .navbar-visualizer-tool{
+    display: none;
+  }
+  .navbar-visualizer-tool {
+    padding-top: 0;
   }
 }
 
